@@ -1,6 +1,6 @@
 <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
 <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!isLoading">
-  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let opening of openings">
+  <div fxFlex="25%" fxFlex.sm="33%" fxFlex.xs="100%" *ngFor="let opening of openings">
     <app-opening [opening]="opening"></app-opening>
   </div>
 </div>

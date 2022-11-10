@@ -5,5 +5,6 @@ export interface Opening {
   date: Date;
   from: string;
   to: string;
+  special: string;
   reservations: Reservation[];
 }

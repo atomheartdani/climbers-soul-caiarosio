@@ -33,4 +33,8 @@ export class OpeningComponent implements OnInit {
   get spaceFull(): boolean {
     return this.opening.reservations.length >= 8;
   }
+
+  get isSpecialEvent(): boolean {
+    return !!this.opening.special;
+  }
 }
