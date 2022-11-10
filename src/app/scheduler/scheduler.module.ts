@@ -7,9 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { SchedulerComponent } from './scheduler.component';
 import { OpeningComponent } from './opening/opening.component';
+import { InsertReservationDialogComponent } from './opening/insert-reservation-dialog/insert-reservation-dialog.component';
 
 @NgModule({
-  declarations: [SchedulerComponent, OpeningComponent],
+  declarations: [SchedulerComponent, OpeningComponent, InsertReservationDialogComponent],
   imports: [CommonModule, TranslateModule, SharedModule, FlexLayoutModule, MaterialModule, SchedulerRoutingModule],
 })
 export class SchedulerModule {}

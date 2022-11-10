@@ -1,0 +1,9 @@
+<h1>Prenota posto</h1>
+<mat-dialog-content>
+  <p>Stai per prenotarti per questo slot:</p>
+  <p>{{ opening.date }} dalle {{ opening.from }} alle {{ opening.to }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" tabindex="-1" (click)="save()">Ok</button>
+  <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
+</mat-dialog-actions>
