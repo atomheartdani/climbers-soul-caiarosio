@@ -2,7 +2,7 @@ import { Reservation } from './reservation.model';
 
 export interface Opening {
   id: number;
-  date: Date;
+  date: string;
   from: string;
   to: string;
   special: string;

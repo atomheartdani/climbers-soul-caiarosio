@@ -1,0 +1,10 @@
+@import "src/theme/theme-variables";
+
+.mat-divider {
+  border-top-color: mat-color($app-primary);
+  border-top-width: 2px;
+}
+
+.mat-h2 {
+  line-height: unset;
+}
