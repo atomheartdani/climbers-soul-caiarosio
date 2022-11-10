@@ -3,7 +3,10 @@
   <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let opening of openings">
     <mat-card>
       <mat-card-title> {{ opening.date }} </mat-card-title>
-      <mat-card-content> {{ opening.from }} - {{ opening.to }} </mat-card-content>
+      <mat-card-content>
+        <p>{{ opening.from }} - {{ opening.to }}</p>
+        <p>{{ reservationsMap.get(opening.id) }}</p>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>
