@@ -7,6 +7,15 @@
     { "id": 5, "date": "2022-11-24", "from": "19:00", "to": "21:00" },
     { "id": 6, "date": "2022-11-26", "from": "09:00", "to": "12:00" }
   ],
-  "reservations": [{ "id": 1, "opening_id": 1, "user_id": 1 }],
+  "reservations": [
+    { "id": 1, "openingId": 1, "userId": 1 },
+    { "id": 2, "openingId": 1, "userId": 1 },
+    { "id": 3, "openingId": 2, "userId": 1 },
+    { "id": 4, "openingId": 2, "userId": 1 },
+    { "id": 5, "openingId": 2, "userId": 1 },
+    { "id": 6, "openingId": 4, "userId": 1 },
+    { "id": 7, "openingId": 5, "userId": 1 },
+    { "id": 8, "openingId": 5, "userId": 1 }
+  ],
   "users": [{ "id": 1, "firstname": "Daniele", "lastname": "Meregalli" }]
 }

@@ -1,12 +1,6 @@
 <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
 <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!isLoading">
   <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let opening of openings">
-    <mat-card>
-      <mat-card-title> {{ opening.date }} </mat-card-title>
-      <mat-card-content>
-        <p>{{ opening.from }} - {{ opening.to }}</p>
-        <p>{{ reservationsMap.get(opening.id) }}</p>
-      </mat-card-content>
-    </mat-card>
+    <app-opening [opening]="opening"></app-opening>
   </div>
 </div>
