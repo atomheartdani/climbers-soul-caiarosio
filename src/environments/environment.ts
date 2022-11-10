@@ -16,6 +16,7 @@ export const environment = {
   serverUrl: '/api',
   defaultLanguage: 'it-IT',
   supportedLanguages: ['it-IT'],
+  backendUrl: 'http://localhost:3000',
 };
 
 /*

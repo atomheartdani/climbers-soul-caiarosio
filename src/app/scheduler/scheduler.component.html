@@ -1,3 +1,9 @@
-<mat-card>
-  <mat-card-content> Test </mat-card-content>
-</mat-card>
+<app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
+<div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!isLoading">
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let opening of openings">
+    <mat-card>
+      <mat-card-title> {{ opening.date }} </mat-card-title>
+      <mat-card-content> {{ opening.from }} - {{ opening.to }} </mat-card-content>
+    </mat-card>
+  </div>
+</div>

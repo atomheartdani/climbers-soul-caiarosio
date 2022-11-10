@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Opening } from '@app/@shared/models/opening.model';
+import { OpeningService } from '@app/@shared/services/opening.service';
 
 @Component({
   selector: 'app-scheduler',
@@ -6,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scheduler.component.scss'],
 })
 export class SchedulerComponent implements OnInit {
-  constructor() {}
+  openings: Opening[] = [];
+  isLoading: boolean = true;
 
-  ngOnInit(): void {}
+  constructor(private openingService: OpeningService) {}
+
+  ngOnInit(): void {
+    this.openingService.getOpenings().subscribe((result) => {
+      this.openings = result;
+      this.isLoading = false;
+    });
+  }
 }

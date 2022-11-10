@@ -12,4 +12,5 @@ export const environment = {
   serverUrl: 'https://api.chucknorris.io',
   defaultLanguage: 'it-IT',
   supportedLanguages: ['it-IT'],
+  backendUrl: 'http://localhost:3000',
 };
