@@ -8,14 +8,8 @@
   "start_url": "./",
   "icons": [
     {
-      "src": "assets/ngx-rocket-logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "assets/ngx-rocket-logo@192.png",
-      "sizes": "192x192",
+      "src": "assets/logo-caiarosio.png",
+      "sizes": "277x300",
       "type": "image/png",
       "purpose": "maskable any"
     }
