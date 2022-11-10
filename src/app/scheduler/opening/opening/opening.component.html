@@ -1,5 +1,10 @@
 <mat-card>
-  <mat-card-title> {{ opening.date }} </mat-card-title>
+  <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-card-title> {{ opening.date }} </mat-card-title>
+    <mat-icon aria-label="avaiable" fontIcon="check_circle" class="avaiable" *ngIf="spaceAvaiable"></mat-icon>
+    <mat-icon aria-label="almost full" fontIcon="warning" class="almost-full" *ngIf="spaceAlmostFull"></mat-icon>
+    <mat-icon aria-label="full" fontIcon="dangerous" class="full" *ngIf="spaceFull"></mat-icon>
+  </mat-card-header>
   <mat-card-content>
     <span> {{ opening.from }} - {{ opening.to }} </span>
     <br />

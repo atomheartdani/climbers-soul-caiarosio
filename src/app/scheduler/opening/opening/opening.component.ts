@@ -12,4 +12,16 @@ export class OpeningComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  get spaceAvaiable(): boolean {
+    return this.opening.reservations.length < 4;
+  }
+
+  get spaceAlmostFull(): boolean {
+    return this.opening.reservations.length >= 4 && this.opening.reservations.length < 8;
+  }
+
+  get spaceFull(): boolean {
+    return this.opening.reservations.length >= 8;
+  }
 }
