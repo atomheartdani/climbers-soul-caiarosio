@@ -1,5 +1,13 @@
 @import "src/theme/theme-variables";
 
+.container {
+  padding: 16px;
+}
+
+.group {
+  padding-bottom: 20px;
+}
+
 .mat-divider {
   border-top-color: mat-color($app-primary);
   border-top-width: 2px;

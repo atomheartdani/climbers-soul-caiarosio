@@ -1,13 +1,13 @@
 <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
-<div *ngIf="!isLoading">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngFor="let group of openingsMap | keyvalue">
+<div class="container" *ngIf="!isLoading">
+  <div class="group" fxLayout="row wrap" fxLayoutGap="16px grid" *ngFor="let group of openingsMap | keyvalue">
     <div fxFlex="100%">
       <h2 class="mat-h2">{{ group.key }}</h2>
       <mat-divider></mat-divider>
     </div>
     <div fxFlex="100%">
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="25%" fxFlex.sm="33%" fxFlex.xs="100%" *ngFor="let opening of group.value">
+        <div fxFlex="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="100%" *ngFor="let opening of group.value">
           <app-opening [opening]="opening"></app-opening>
         </div>
       </div>

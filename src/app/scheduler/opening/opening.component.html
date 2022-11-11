@@ -16,11 +16,8 @@
     <mat-icon aria-label="full" fontIcon="dangerous" class="full" *ngIf="spaceFull && !isSpecialEvent"></mat-icon>
   </mat-card-header>
   <mat-card-content>
-    <span> {{ opening.from }} - {{ opening.to }} </span>
-    <br />
-    <span>
-      {{ opening.special }}
-    </span>
+    <p class="mat-body">Orari: {{ opening.from }} - {{ opening.to }}</p>
+    <p class="mat-body">{{ opening.special }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" [disabled]="spaceFull || isSpecialEvent" (click)="insertReservation()">
