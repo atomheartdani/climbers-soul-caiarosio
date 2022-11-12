@@ -21,8 +21,17 @@
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" (click)="manage()">Gestisci</button>
-    <button mat-raised-button color="primary" [disabled]="spaceFull || isSpecialEvent" (click)="insertReservation()">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="spaceFull || isSpecialEvent"
+      (click)="insertReservation()"
+      *ngIf="!isLoggeduserAlreadyReserved"
+    >
       Prenotati
+    </button>
+    <button mat-raised-button color="primary" (click)="removeReservation()" *ngIf="isLoggeduserAlreadyReserved">
+      Annulla prenotazione
     </button>
   </mat-card-actions>
 </mat-card>

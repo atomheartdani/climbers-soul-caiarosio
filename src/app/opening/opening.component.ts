@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Opening } from '@app/@shared/models/opening.model';
-import { AuthenticationGuard } from '@app/auth';
+import { AuthenticationGuard, CredentialsService } from '@app/auth';
 import { InsertReservationDialogComponent } from './insert-reservation-dialog/insert-reservation-dialog.component';
 import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-detail-dialog.component';
 
@@ -17,6 +17,7 @@ export class OpeningComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private authGuard: AuthenticationGuard,
+    private credentialsService: CredentialsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -30,6 +31,10 @@ export class OpeningComponent implements OnInit {
         // TODO reload all openings
       });
     }
+  }
+
+  removeReservation(): void {
+    // TODO
   }
 
   manage(): void {
@@ -55,5 +60,13 @@ export class OpeningComponent implements OnInit {
 
   get isSpecialEvent(): boolean {
     return !!this.opening.special;
+  }
+
+  get isLoggeduserAlreadyReserved(): boolean {
+    if (this.credentialsService.isAuthenticated()) {
+      let loggedUserid = this.credentialsService.credentials?.userId;
+      return this.opening.reservations.some((r) => r.userId === loggedUserid);
+    }
+    return false;
   }
 }
