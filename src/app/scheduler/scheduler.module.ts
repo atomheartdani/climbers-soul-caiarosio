@@ -6,11 +6,18 @@ import { MaterialModule } from '@app/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { SchedulerComponent } from './scheduler.component';
-import { OpeningComponent } from './opening/opening.component';
-import { InsertReservationDialogComponent } from './opening/insert-reservation-dialog/insert-reservation-dialog.component';
+import { OpeningModule } from '@app/opening/opening.module';
 
 @NgModule({
-  declarations: [SchedulerComponent, OpeningComponent, InsertReservationDialogComponent],
-  imports: [CommonModule, TranslateModule, SharedModule, FlexLayoutModule, MaterialModule, SchedulerRoutingModule],
+  declarations: [SchedulerComponent],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    SharedModule,
+    FlexLayoutModule,
+    MaterialModule,
+    SchedulerRoutingModule,
+    OpeningModule,
+  ],
 })
 export class SchedulerModule {}
