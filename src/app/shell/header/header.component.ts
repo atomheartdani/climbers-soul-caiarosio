@@ -1,9 +1,9 @@
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { AuthenticationService, CredentialsService } from '@app/auth';
+import { AuthenticationGuard, AuthenticationService, CredentialsService } from '@app/auth';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +17,16 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
+    private authGuard: AuthenticationGuard,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {}
+
+  login() {
+    this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot);
+  }
 
   logout() {
     this.authenticationService.logout().subscribe(() => this.router.navigate(['/'], { replaceUrl: true }));
