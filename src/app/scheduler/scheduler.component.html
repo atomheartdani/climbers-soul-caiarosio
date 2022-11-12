@@ -2,7 +2,7 @@
 <div class="container" *ngIf="!isLoading">
   <div class="group" fxLayout="row wrap" fxLayoutGap="16px grid" *ngFor="let group of openingsMap | keyvalue">
     <div fxFlex="100%">
-      <h2 class="mat-h2">{{ group.key }}</h2>
+      <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
       <mat-divider></mat-divider>
     </div>
     <div fxFlex="100%">
