@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "climbers-soul-cai-arosio"
+  "defaultProject": "climbers-soul-cai-arosio",
+  "cli": {
+    "analytics": false
+  }
 }
