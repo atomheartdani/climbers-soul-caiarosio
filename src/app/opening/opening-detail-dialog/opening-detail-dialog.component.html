@@ -1,19 +1,33 @@
 <h1 class="mat-h1">Dettaglio del {{ opening.date }}</h1>
 <mat-dialog-content>
   <form [formGroup]="detailForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Orario apertura</mat-label>
-      <input matInput id="from" formControlName="from" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Orario chiusura</mat-label>
-      <input matInput id="to" formControlName="to" />
-    </mat-form-field>
-    <mat-list>
-      <mat-list-item *ngFor="let reservation of opening.reservations">
-        {{ reservation.userId }}
-      </mat-list-item>
-    </mat-list>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Orario apertura</mat-label>
+        <input matInput id="from" formControlName="from" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Orario chiusura</mat-label>
+        <input matInput id="to" formControlName="to" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" fxFlex="100%">
+        <mat-label>Evento speciale</mat-label>
+        <input matInput id="special" formControlName="special" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" fxFlex="100%">
+        <mat-label>Prenotati</mat-label>
+        <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
+        <mat-chip-list class="mat-chip-list-stacked">
+          <mat-chip *ngFor="let reservation of opening.reservations">
+            {{ reservation.userId }}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">

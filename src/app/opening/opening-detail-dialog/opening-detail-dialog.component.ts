@@ -22,10 +22,13 @@ export class OpeningDetailDialogComponent implements OnInit {
     this.detailForm = fb.group({
       from: [this.data.from, [Validators.required]],
       to: [this.data.to, [Validators.required]],
+      special: [this.data.special],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dialogRef.updateSize('50vw', '');
+  }
 
   close(): void {
     this.dialogRef.close(1);
