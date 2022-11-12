@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
 import { Opening } from '@app/@shared/models/opening.model';
 import { AuthenticationGuard, CredentialsService } from '@app/auth';
 import { InsertReservationDialogComponent } from './insert-reservation-dialog/insert-reservation-dialog.component';
@@ -34,7 +35,17 @@ export class OpeningComponent implements OnInit {
   }
 
   removeReservation(): void {
-    // TODO
+    let action = 'Sei sicuro di voler annullare la tua prenotazione?';
+    let detail = this.opening.date + ' ' + this.opening.from + '-' + this.opening.to;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { confirmAction: action, confirmDetail: detail },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 0) {
+        // TODO delete reservation
+        // TODO reload all openings
+      }
+    });
   }
 
   manage(): void {
