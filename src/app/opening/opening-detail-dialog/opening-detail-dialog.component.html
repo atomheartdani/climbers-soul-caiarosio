@@ -22,9 +22,7 @@
         <mat-label>Prenotati</mat-label>
         <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
         <mat-chip-list class="mat-chip-list-stacked">
-          <mat-chip *ngFor="let reservation of opening.reservations">
-            {{ reservation.userId }}
-          </mat-chip>
+          <mat-chip *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip>
         </mat-chip-list>
       </mat-form-field>
     </div>

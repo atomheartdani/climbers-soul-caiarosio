@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Opening } from '@app/@shared/models/opening.model';
+import { User } from '@app/@shared/models/user.model';
+import { UserService } from '@app/@shared/services/user.service';
 import { InsertReservationDialogComponent } from '../insert-reservation-dialog/insert-reservation-dialog.component';
 
 @Component({
@@ -12,8 +14,10 @@ import { InsertReservationDialogComponent } from '../insert-reservation-dialog/i
 export class OpeningDetailDialogComponent implements OnInit {
   detailForm: FormGroup;
   opening: Opening;
+  userList: User[] = [];
 
   constructor(
+    private userService: UserService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<InsertReservationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Opening
@@ -28,6 +32,16 @@ export class OpeningDetailDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dialogRef.updateSize('50vw', '');
+
+    let userIds = this.opening.reservations.map((r) => r.userId);
+    this.userService.getUsersFromIds(userIds).subscribe((result) => {
+      userIds.forEach((uid) => {
+        let user = result.find((u) => u.id === uid);
+        if (user !== undefined) {
+          this.userList.push(user);
+        }
+      });
+    });
   }
 
   close(): void {
