@@ -3,9 +3,32 @@
     <h1>
       <mat-card-title translate>APP_NAME</mat-card-title>
     </h1>
-    <mat-card-content>
-      <mat-icon>code</mat-icon>
-      <span translate>Version</span> {{ version }}
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px grid">
+      <div>
+        <mat-icon color="primary" fontIcon="location_on"></mat-icon>
+      </div>
+      <div>
+        <p>Palazzetto dello Sport</p>
+        <p>Via Michelangelo Buonarroti, 6, 22060 Arosio CO</p>
+      </div>
+      <div>
+        <mat-icon color="primary" fontIcon="schedule"></mat-icon>
+      </div>
+      <div>
+        <p>Martedì: dalle 19:00 alle 21:00</p>
+        <p>Giovedì: dalle 19:00 alle 21:00</p>
+        <p>Sabato: dalle 09:00 alle 12:00</p>
+        <p>Verificare e prenotarsi sul <a color="primary" href="/scheduler">Calendario</a></p>
+      </div>
+      <div>
+        <mat-icon color="primary" fontIcon="call"></mat-icon>
+        /
+        <mat-icon color="primary" fontIcon="alternate_email"></mat-icon>
+      </div>
+      <div>
+        <p>031 123456</p>
+        <a href="mailto:info@climberssoul.com?Subject=Climber's Soul info" target="_top">info@climberssoul.com</a>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
