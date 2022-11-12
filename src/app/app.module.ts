@@ -16,6 +16,7 @@ import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SchedulerModule } from './scheduler/scheduler.module';
+import { RulesModule } from './rules/rules.module';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { SchedulerModule } from './scheduler/scheduler.module';
     HomeModule,
     AuthModule,
     SchedulerModule,
+    RulesModule,
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

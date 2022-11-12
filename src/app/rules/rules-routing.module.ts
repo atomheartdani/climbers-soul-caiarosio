@@ -3,15 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 
 import { Shell } from '@app/shell/shell.service';
-import { SchedulerComponent } from './scheduler.component';
+import { RulesComponent } from './rules.component';
 
-const routes: Routes = [
-  Shell.childRoutes([{ path: '', component: SchedulerComponent, data: { title: marker('Scheduler') } }]),
-];
+const routes: Routes = [Shell.childRoutes([{ path: '', component: RulesComponent, data: { title: marker('Rules') } }])];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [],
 })
-export class SchedulerRoutingModule {}
+export class RulesRoutingModule {}
