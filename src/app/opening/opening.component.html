@@ -1,4 +1,4 @@
-<mat-card [ngClass]="{ 'special-event': isSpecialEvent }">
+<mat-card [ngClass]="{ 'special-event': isSpecialEvent }" [matTooltip]="tooltip">
   <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between">
     <mat-card-title> {{ opening.date }} </mat-card-title>
     <mat-icon

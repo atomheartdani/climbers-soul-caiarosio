@@ -69,4 +69,14 @@ export class OpeningComponent implements OnInit {
     }
     return false;
   }
+
+  get tooltip(): string {
+    if (this.spaceFull || this.isSpecialEvent) {
+      return 'Non sono disponibili posti per questo giorno';
+    } else if (this.spaceAlmostFull) {
+      return 'Posti quasi esauriti';
+    } else {
+      return '';
+    }
+  }
 }
