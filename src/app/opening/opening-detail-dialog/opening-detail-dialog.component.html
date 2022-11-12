@@ -1,0 +1,22 @@
+<h1 class="mat-h1">Dettaglio del {{ opening.date }}</h1>
+<mat-dialog-content>
+  <form [formGroup]="detailForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Orario apertura</mat-label>
+      <input matInput id="from" formControlName="from" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Orario chiusura</mat-label>
+      <input matInput id="to" formControlName="to" />
+    </mat-form-field>
+    <mat-list>
+      <mat-list-item *ngFor="let reservation of opening.reservations">
+        {{ reservation.userId }}
+      </mat-list-item>
+    </mat-list>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" tabindex="-1" (click)="save()">Ok</button>
+  <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
+</mat-dialog-actions>

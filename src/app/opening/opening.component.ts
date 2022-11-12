@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Opening } from '@app/@shared/models/opening.model';
 import { InsertReservationDialogComponent } from './insert-reservation-dialog/insert-reservation-dialog.component';
+import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-detail-dialog.component';
 
 @Component({
   selector: 'app-opening',
@@ -17,6 +18,13 @@ export class OpeningComponent implements OnInit {
 
   insertReservation(): void {
     const dialogRef = this.dialog.open(InsertReservationDialogComponent, { data: this.opening });
+    dialogRef.afterClosed().subscribe((result) => {
+      // TODO reload all openings
+    });
+  }
+
+  manage(): void {
+    const dialogRef = this.dialog.open(OpeningDetailDialogComponent, { data: this.opening });
     dialogRef.afterClosed().subscribe((result) => {
       // TODO reload all openings
     });
