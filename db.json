@@ -36,5 +36,61 @@
     { "id": 21, "openingId": 10, "userId": 1 },
     { "id": 22, "openingId": 10, "userId": 1 }
   ],
-  "users": [{ "id": 1, "firstname": "Daniele", "lastname": "Meregalli" }]
+  "users": [{ "id": 1, "firstname": "Daniele", "lastname": "Meregalli" }],
+  "rules": [
+    {
+      "id": 1,
+      "order": 1,
+      "content": "Il presente regolamento disciplina l’utilizzo da parte del Praticante l’arrampicata sportiva (di seguito “Praticante”) della palestra di arrampicata sportiva (di seguito “Palestra”), di proprietà del Comune di Arosio e affidata alla gestione del CAI di Arosio (di seguito “CAI”), sita in Via Buonarroti - Arosio , presso il Palazzetto dello Sport.",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "order": 2,
+      "content": "La pratica dell’arrampicata sportiva negli spazi del Palazzetto dello Sport è consentita dopo la presa visione e l’accettazione firmata del presente regolamento. Accettando il presente regolamento il Praticante dichiara di essere in buona salute e di non essere affetto da alcuna patologia incompatibile con la pratica dell’arrampicata sportiva.",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "order": 3,
+      "content": "L’accesso alla Palestra è consentito, negli orari che verranno stabiliti, ai soci del Club Alpino Italiano, in regola con il tesseramento per l’anno in corso, previo il pagamento della quota d’uso deliberata dal Consiglio Direttivo della Sezione a titolo di rimborso spese.",
+      "parentId": null
+    },
+    {
+      "id": 4,
+      "order": 4,
+      "content": "Il “Praticante” si impegna all’osservanza delle seguenti norme comportamentali:",
+      "parentId": null
+    },
+    {
+      "id": 5,
+      "order": 5,
+      "content": "l’ingresso della “Palestra” è consentito unicamente previa esibizione della tessera CAI in corso di validità unitamente a documento di identità e  tessera di accesso personale e non cedibile. Il personale del “CAI” che venga a conoscenza della violazione dell’obbligo di non cedere la tessera a terzi è autorizzato a chiedere la restituzione della tessera stessa, senza che ciò derivi per il “CAI” l’obbligo di restituire al ”Praticante” il corrispettivo già versato.",
+      "parentId": 4
+    },
+    {
+      "id": 6,
+      "order": 6,
+      "content": "Il “Praticante” durante l’attività all’interno della “Palestra” deve adottare un comportamento educato, diligente e igienico.",
+      "parentId": 4
+    },
+    {
+      "id": 7,
+      "order": 7,
+      "content": "All’interno della “Palestra” è vietato fumare, introdurre animali e in generale, svolgere qualunque attività incompatibile con l’arrampicata.",
+      "parentId": 4
+    },
+    {
+      "id": 8,
+      "order": 8,
+      "content": "Il “Praticante” si impegna all’osservanza delle seguenti norme tecniche:",
+      "parentId": null
+    },
+    {
+      "id": 9,
+      "order": 9,
+      "content": "l’accesso alla struttura è consentito solo utilizzando scarpe da ginnastica pulite ed asciutte, mentre alla “Palestra di arrampicata” è consentito solo utilizzando scarpe da arrampicata anche esse pulite ed asciutte.",
+      "parentId": 8
+    }
+  ]
 }
