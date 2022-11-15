@@ -19,9 +19,9 @@ export class UserService {
 
     let params = new HttpParams();
     userIds.forEach((id) => {
-      params = params.append('id', id);
+      params = params.append('id[]', id);
     });
 
-    return this.httpClient.get<User[]>(`${this.API_URL}/`, { headers, params });
+    return this.httpClient.get<User[]>(`/users/getAllById.php`, { headers, params });
   }
 }
