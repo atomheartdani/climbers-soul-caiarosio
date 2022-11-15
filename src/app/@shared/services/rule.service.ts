@@ -17,6 +17,6 @@ export class RuleService {
   getRules(): Observable<Rule[]> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.httpClient.get<Rule[]>(`${this.API_URL}/`, { headers });
+    return this.httpClient.get<Rule[]>(`/rules/getAll.php`, { headers });
   }
 }

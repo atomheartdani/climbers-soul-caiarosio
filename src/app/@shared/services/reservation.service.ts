@@ -26,6 +26,7 @@ export class ReservationService {
     return this.httpClient.get<Page<Evento>>(`${this.API_URL}/Paginated/`, { headers, params });
     */
 
-    return this.httpClient.get<Reservation[]>(`${this.API_URL}/`, { headers });
+    //return this.httpClient.get<Reservation[]>(`${this.API_URL}/`, { headers });
+    return this.httpClient.get<Reservation[]>(`/reservations/getAll.php`, { headers });
   }
 }

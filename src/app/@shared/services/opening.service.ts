@@ -26,6 +26,7 @@ export class OpeningService {
     return this.httpClient.get<Page<Evento>>(`${this.API_URL}/Paginated/`, { headers, params });
     */
 
-    return this.httpClient.get<Opening[]>(`${this.API_URL}/?_embed=reservations`, { headers });
+    //return this.httpClient.get<Opening[]>(`${this.API_URL}/?_embed=reservations`, { headers });
+    return this.httpClient.get<Opening[]>(`/openings/getAll.php`, { headers });
   }
 }
