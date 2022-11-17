@@ -12,5 +12,4 @@ export const environment = {
   serverUrl: 'https://www.danielemeregalli.com/climberssoul/php',
   defaultLanguage: 'it-IT',
   supportedLanguages: ['it-IT'],
-  backendUrl: 'http://localhost:3000',
 };
