@@ -8,7 +8,7 @@
     <div fxFlex="100%">
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
         <div fxFlex="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="100%" *ngFor="let opening of group.value">
-          <app-opening [opening]="opening"></app-opening>
+          <app-opening [opening]="opening" (refreshEvent)="refresh()"></app-opening>
         </div>
       </div>
     </div>

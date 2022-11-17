@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
@@ -14,6 +14,7 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
 })
 export class OpeningComponent implements OnInit {
   @Input() opening: Opening;
+  @Output() refreshEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private dialog: MatDialog,
@@ -29,7 +30,7 @@ export class OpeningComponent implements OnInit {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
       const dialogRef = this.dialog.open(InsertReservationDialogComponent, { data: this.opening });
       dialogRef.afterClosed().subscribe((result) => {
-        // TODO reload all openings
+        this.refreshEvent.emit('refresh');
       });
     }
   }
@@ -43,7 +44,7 @@ export class OpeningComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 0) {
         // TODO delete reservation
-        // TODO reload all openings
+        this.refreshEvent.emit('refresh');
       }
     });
   }
@@ -52,7 +53,7 @@ export class OpeningComponent implements OnInit {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
       const dialogRef = this.dialog.open(OpeningDetailDialogComponent, { data: this.opening });
       dialogRef.afterClosed().subscribe((result) => {
-        // TODO reload all openings
+        this.refreshEvent.emit('refresh');
       });
     }
   }

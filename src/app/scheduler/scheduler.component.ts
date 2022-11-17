@@ -14,6 +14,13 @@ export class SchedulerComponent implements OnInit {
   constructor(private openingService: OpeningService) {}
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh(): void {
+    this.isLoading = true;
+    this.openingsMap = new Map();
+
     this.openingService.getOpenings().subscribe((result) => {
       result.forEach((o) => {
         let group = o.date.substring(0, 7);
