@@ -15,7 +15,6 @@ export class RulesComponent implements OnInit {
   ngOnInit(): void {
     this.ruleService.getRules().subscribe((result) => {
       this.rulesTree = arrayToTree(result);
-      console.log(this.rulesTree);
     });
   }
 }
