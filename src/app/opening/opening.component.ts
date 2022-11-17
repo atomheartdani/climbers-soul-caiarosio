@@ -73,9 +73,16 @@ export class OpeningComponent implements OnInit {
     return !!this.opening.special;
   }
 
-  get isLoggeduserAlreadyReserved(): boolean {
+  get isLoggedUserAdmin(): boolean {
     if (this.credentialsService.isAuthenticated()) {
-      let loggedUserid = this.credentialsService.credentials?.userId;
+      return this.credentialsService.credentials?.isAdmin!;
+    }
+    return false;
+  }
+
+  get isLoggedUserAlreadyReserved(): boolean {
+    if (this.credentialsService.isAuthenticated()) {
+      let loggedUserid = this.credentialsService.credentials?.id;
       return this.opening.reservations.some((r) => r.userId == loggedUserid);
     }
     return false;

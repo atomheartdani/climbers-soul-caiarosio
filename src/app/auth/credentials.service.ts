@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 
 export interface Credentials {
-  // Customize received credentials here
+  id: number;
   username: string;
-  userId: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  isAdmin: boolean;
   token: string;
 }
 
-const credentialsKey = 'credentials';
+const credentialsKey = 'climbers-soul-caiarosio-credentials';
 
 /**
  * Provides storage for authentication credentials.

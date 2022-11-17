@@ -20,17 +20,17 @@
     <p class="mat-body">{{ opening.special }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="manage()">Gestisci</button>
+    <button mat-raised-button color="primary" (click)="manage()" *ngIf="isLoggedUserAdmin">Gestisci</button>
     <button
       mat-raised-button
       color="primary"
       [disabled]="spaceFull || isSpecialEvent"
       (click)="insertReservation()"
-      *ngIf="!isLoggeduserAlreadyReserved"
+      *ngIf="!isLoggedUserAlreadyReserved"
     >
       Prenotati
     </button>
-    <button mat-raised-button color="primary" (click)="removeReservation()" *ngIf="isLoggeduserAlreadyReserved">
+    <button mat-raised-button color="primary" (click)="removeReservation()" *ngIf="isLoggedUserAlreadyReserved">
       Annulla prenotazione
     </button>
   </mat-card-actions>

@@ -27,8 +27,12 @@ export class AuthenticationService {
   login(context: LoginContext): Observable<Credentials> {
     // Replace by proper authentication call
     const data = {
+      id: 1,
       username: context.username,
-      userId: 1,
+      firstname: '',
+      lastname: '',
+      email: '',
+      isAdmin: true,
       token: '123456',
     };
     this.credentialsService.setCredentials(data, context.remember);
