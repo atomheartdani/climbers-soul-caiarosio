@@ -13,6 +13,7 @@ import { OpeningDetailDialogComponent } from '@app/opening/opening-detail-dialog
 export class SchedulerComponent implements OnInit {
   openingsMap: Map<string, Opening[]> = new Map();
   isLoading: boolean = true;
+  loadAll: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -40,11 +41,16 @@ export class SchedulerComponent implements OnInit {
     });
   }
 
+  loadAllOpenings(): void {
+    this.loadAll = true;
+    this.refresh();
+  }
+
   refresh(): void {
     this.isLoading = true;
     this.openingsMap = new Map();
 
-    this.openingService.getOpenings().subscribe((result) => {
+    this.openingService.getNextOpenings(this.loadAll).subscribe((result) => {
       result.forEach((o) => {
         let group = o.date.substring(0, 7);
         if (this.openingsMap.has(group)) {
