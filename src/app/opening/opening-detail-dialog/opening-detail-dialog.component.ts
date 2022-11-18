@@ -12,6 +12,8 @@ import { InsertReservationDialogComponent } from '../insert-reservation-dialog/i
   styleUrls: ['./opening-detail-dialog.component.scss'],
 })
 export class OpeningDetailDialogComponent implements OnInit {
+  readonly TIME_PATTERN: string = '([01]?[0-9]|2[0-3]):[0-5][0-9]';
+
   detailForm: FormGroup;
   opening: Opening;
   userList: User[] = [];
@@ -25,8 +27,8 @@ export class OpeningDetailDialogComponent implements OnInit {
     this.opening = data;
     this.detailForm = fb.group({
       date: [this.data.date, [Validators.required]],
-      from: [this.data.from, [Validators.required]],
-      to: [this.data.to, [Validators.required]],
+      from: [this.data.from, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],
+      to: [this.data.to, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],
       special: [this.data.special],
     });
   }
