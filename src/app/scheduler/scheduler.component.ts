@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Opening } from '@app/@shared/models/opening.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
+import { CredentialsService } from '@app/auth';
+import { OpeningDetailDialogComponent } from '@app/opening/opening-detail-dialog/opening-detail-dialog.component';
 
 @Component({
   selector: 'app-scheduler',
@@ -11,10 +14,30 @@ export class SchedulerComponent implements OnInit {
   openingsMap: Map<string, Opening[]> = new Map();
   isLoading: boolean = true;
 
-  constructor(private openingService: OpeningService) {}
+  constructor(
+    private dialog: MatDialog,
+    private openingService: OpeningService,
+    private credentialsService: CredentialsService
+  ) {}
 
   ngOnInit(): void {
     this.refresh();
+  }
+
+  insertOpening(): void {
+    let newOpening: Opening = {
+      id: 0,
+      date: '',
+      from: '',
+      to: '',
+      special: '',
+      reservations: [],
+    };
+
+    const dialogRef = this.dialog.open(OpeningDetailDialogComponent, { data: newOpening });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.refresh();
+    });
   }
 
   refresh(): void {
@@ -35,5 +58,12 @@ export class SchedulerComponent implements OnInit {
 
       this.isLoading = false;
     });
+  }
+
+  get isLoggedUserAdmin(): boolean {
+    if (this.credentialsService.isAuthenticated()) {
+      return this.credentialsService.credentials?.isAdmin!;
+    }
+    return false;
   }
 }

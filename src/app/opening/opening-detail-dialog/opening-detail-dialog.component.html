@@ -1,7 +1,12 @@
-<h1 class="mat-h1">Dettaglio del {{ opening.date }}</h1>
+<h1 class="mat-h1" *ngIf="opening.id === 0">Nuova apertura</h1>
+<h1 class="mat-h1" *ngIf="opening.id !== 0">Dettaglio del {{ opening.date }}</h1>
 <mat-dialog-content>
   <form [formGroup]="detailForm">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <mat-form-field appearance="outline" *ngIf="opening.id === 0">
+        <mat-label>Giorno apertura</mat-label>
+        <input matInput id="date" formControlName="date" />
+      </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Orario apertura</mat-label>
         <input matInput id="from" formControlName="from" />

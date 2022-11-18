@@ -24,6 +24,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   ) {
     this.opening = data;
     this.detailForm = fb.group({
+      date: [this.data.date, [Validators.required]],
       from: [this.data.from, [Validators.required]],
       to: [this.data.to, [Validators.required]],
       special: [this.data.special],
