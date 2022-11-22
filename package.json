@@ -32,6 +32,7 @@
     "@angular/platform-browser-dynamic": "~14.2.9",
     "@angular/router": "~14.2.9",
     "@angular/service-worker": "~14.2.9",
+    "@auth0/angular-jwt": "^5.1.0",
     "@ngx-translate/core": "^14.0.0",
     "lodash": "^4.17.20",
     "material-design-icons-iconfont": "^6.1.0",

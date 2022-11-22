@@ -19,4 +19,9 @@ export class UserService {
 
     return this.httpClient.get<User[]>(`/users/getAllById.php`, { headers, params });
   }
+
+  login(username: string, password: string): Observable<string> {
+    let body = { username: username, password: password };
+    return this.httpClient.post<string>(`/users/login.php`, body);
+  }
 }

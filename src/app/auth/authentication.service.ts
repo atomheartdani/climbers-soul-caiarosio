@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { UserService } from '@app/@shared/services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, of, map } from 'rxjs';
 
 import { Credentials, CredentialsService } from './credentials.service';
 
@@ -17,7 +19,9 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private credentialsService: CredentialsService) {}
+  helper = new JwtHelperService();
+
+  constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
   /**
    * Authenticates the user.
@@ -25,18 +29,23 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      id: 1,
-      username: context.username,
-      firstname: '',
-      lastname: '',
-      email: '',
-      isAdmin: true,
-      token: '123456',
-    };
-    this.credentialsService.setCredentials(data, context.remember);
-    return of(data);
+    return this.userService.login(context.username, context.password).pipe(
+      map((result: any) => {
+        let token = this.helper.decodeToken(result.access_token);
+
+        const data: Credentials = {
+          id: token.data.id,
+          username: token.data.username,
+          firstname: token.data.firstname,
+          lastname: token.data.lastname,
+          email: token.data.email,
+          isAdmin: token.data.isAdmin,
+          token: result.access_token,
+        };
+        this.credentialsService.setCredentials(data, context.remember);
+        return data;
+      })
+    );
   }
 
   /**
