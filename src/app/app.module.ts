@@ -10,13 +10,14 @@ import { MaterialModule } from './material.module';
 
 import { environment } from '@env/environment';
 import { RouteReusableStrategy, ApiPrefixInterceptor, ErrorHandlerInterceptor, SharedModule } from '@shared';
-import { AuthModule } from '@app/auth';
+import { AuthModule, CredentialsService } from '@app/auth';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SchedulerModule } from './scheduler/scheduler.module';
 import { RulesModule } from './rules/rules.module';
+import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
 
 @NgModule({
   imports: [
@@ -42,6 +43,12 @@ import { RulesModule } from './rules/rules.module';
       provide: HTTP_INTERCEPTORS,
       useClass: ApiPrefixInterceptor,
       multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHeaderInterceptor,
+      multi: true,
+      deps: [CredentialsService],
     },
     {
       provide: HTTP_INTERCEPTORS,
