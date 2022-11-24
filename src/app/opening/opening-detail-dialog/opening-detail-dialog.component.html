@@ -5,7 +5,13 @@
     <div>
       <mat-form-field appearance="outline" *ngIf="opening.id === 0">
         <mat-label>Giorno apertura</mat-label>
-        <input matInput id="date" formControlName="date" [matDatepicker]="openingDatePicker" />
+        <input
+          matInput
+          id="date"
+          formControlName="date"
+          [matDatepicker]="openingDatePicker"
+          (dateChange)="changeData($event)"
+        />
         <mat-datepicker-toggle matSuffix [for]="openingDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #openingDatePicker></mat-datepicker>
       </mat-form-field>

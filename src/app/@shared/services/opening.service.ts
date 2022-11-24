@@ -17,4 +17,8 @@ export class OpeningService {
 
     return this.httpClient.get<Opening[]>(`/openings/getNext.php`, { headers, params });
   }
+
+  saveOpening(opening: Opening): Observable<void> {
+    return this.httpClient.post<void>(`/openings/save.php`, opening);
+  }
 }
