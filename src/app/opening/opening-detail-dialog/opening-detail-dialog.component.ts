@@ -83,7 +83,7 @@ export class OpeningDetailDialogComponent implements OnInit {
       },
       error: () => {
         this.isSaving = false;
-        this.snackBar.open("C'è stato un durante il salvataggio", 'Chiudi', { duration: 10000 });
+        this.snackBar.open("C'è stato un errore durante il salvataggio", 'Chiudi', { duration: 10000 });
       },
     });
   }

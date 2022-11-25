@@ -9,6 +9,10 @@ import { Reservation } from '../models/reservation.model';
 export class ReservationService {
   constructor(private httpClient: HttpClient) {}
 
+  deleteReservation(reservation: Reservation): Observable<void> {
+    return this.httpClient.post<void>(`/reservations/delete.php`, reservation);
+  }
+
   getReservations(): Observable<Reservation[]> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     /*
@@ -22,5 +26,9 @@ export class ReservationService {
     */
 
     return this.httpClient.get<Reservation[]>(`/reservations/getAll.php`, { headers });
+  }
+
+  saveReservation(reservation: Reservation): Observable<void> {
+    return this.httpClient.post<void>(`/reservations/save.php`, reservation);
   }
 }
