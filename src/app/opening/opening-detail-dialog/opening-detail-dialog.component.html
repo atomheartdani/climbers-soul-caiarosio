@@ -44,6 +44,14 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" tabindex="-1" (click)="save()">Ok</button>
+  <button
+    mat-raised-button
+    color="primary"
+    tabindex="-1"
+    (click)="save()"
+    [disabled]="detailForm.invalid || detailForm.pristine"
+  >
+    Ok
+  </button>
   <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
 </mat-dialog-actions>
