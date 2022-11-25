@@ -11,7 +11,7 @@ import { ReservationService } from '@app/@shared/services/reservation.service';
   styleUrls: ['./insert-reservation-dialog.component.scss'],
 })
 export class InsertReservationDialogComponent implements OnInit {
-  isSaving: boolean = false;
+  isProgressing: boolean = false;
   opening: Opening;
   userId: number;
 
@@ -32,7 +32,7 @@ export class InsertReservationDialogComponent implements OnInit {
   }
 
   save(): void {
-    this.isSaving = true;
+    this.isProgressing = true;
     const toSave: Reservation = {
       id: 0,
       openingId: this.opening.id,
@@ -41,12 +41,12 @@ export class InsertReservationDialogComponent implements OnInit {
 
     this.reservationService.saveReservation(toSave).subscribe({
       next: () => {
-        this.isSaving = false;
+        this.isProgressing = false;
         this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
         this.dialogRef.close(0);
       },
       error: () => {
-        this.isSaving = false;
+        this.isProgressing = false;
         this.snackBar.open("C'è stato un errore durante il salvataggio", 'Chiudi', { duration: 10000 });
       },
     });

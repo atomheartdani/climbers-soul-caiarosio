@@ -49,9 +49,10 @@
     color="primary"
     tabindex="-1"
     (click)="save()"
-    [disabled]="detailForm.invalid || detailForm.pristine"
+    [disabled]="detailForm.invalid || detailForm.pristine || isProgressing"
   >
     Ok
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
   </button>
   <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
 </mat-dialog-actions>

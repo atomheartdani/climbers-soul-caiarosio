@@ -18,7 +18,7 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
 export class OpeningComponent implements OnInit {
   @Input() opening: Opening;
   @Output() refreshEvent: EventEmitter<string> = new EventEmitter<string>();
-  isSaving: boolean = false;
+  isProgressing: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -44,6 +44,7 @@ export class OpeningComponent implements OnInit {
   }
 
   removeReservation(): void {
+    this.isProgressing = true;
     let action = 'Sei sicuro di voler annullare la tua prenotazione?';
     let detail = this.opening.date + ' ' + this.opening.from + '-' + this.opening.to;
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -58,17 +59,19 @@ export class OpeningComponent implements OnInit {
         };
         this.reservationService.deleteReservation(toDelete).subscribe({
           next: () => {
-            this.isSaving = false;
+            this.isProgressing = false;
             this.snackBar.open('Prenotazione cancellata', 'Chiudi', { duration: 2000 });
             this.refreshEvent.emit('refresh');
           },
           error: () => {
-            this.isSaving = false;
+            this.isProgressing = false;
             this.snackBar.open("C'è stato un errore durante la cancellazione della prenotazione", 'Chiudi', {
               duration: 10000,
             });
           },
         });
+      } else {
+        this.isProgressing = false;
       }
     });
   }

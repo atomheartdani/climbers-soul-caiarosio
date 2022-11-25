@@ -30,8 +30,15 @@
     >
       Prenotati
     </button>
-    <button mat-raised-button color="primary" (click)="removeReservation()" *ngIf="isLoggedUserAlreadyReserved">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="removeReservation()"
+      [disabled]="isProgressing"
+      *ngIf="isLoggedUserAlreadyReserved"
+    >
       Annulla prenotazione
+      <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

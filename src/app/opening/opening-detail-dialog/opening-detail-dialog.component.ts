@@ -19,7 +19,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   readonly TIME_PATTERN: string = '([01]?[0-9]|2[0-3]):[0-5][0-9]';
 
   detailForm: FormGroup;
-  isSaving: boolean = false;
+  isProgressing: boolean = false;
   opening: Opening;
   userList: User[] = [];
 
@@ -64,7 +64,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   }
 
   save(): void {
-    this.isSaving = true;
+    this.isProgressing = true;
     let ctrls = this.detailForm.controls;
     const toSave: Opening = {
       id: this.opening.id,
@@ -77,12 +77,12 @@ export class OpeningDetailDialogComponent implements OnInit {
 
     this.openingService.saveOpening(toSave).subscribe({
       next: () => {
-        this.isSaving = false;
+        this.isProgressing = false;
         this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
         this.dialogRef.close(0);
       },
       error: () => {
-        this.isSaving = false;
+        this.isProgressing = false;
         this.snackBar.open("C'è stato un errore durante il salvataggio", 'Chiudi', { duration: 10000 });
       },
     });
