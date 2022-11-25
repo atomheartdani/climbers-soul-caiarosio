@@ -28,7 +28,7 @@
   <span>{{ firstname }}</span>
   <button mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon *ngIf="username !== null">person</mat-icon>
-    <mat-icon *ngIf="!username === null">person_off</mat-icon>
+    <mat-icon *ngIf="username === null">person_off</mat-icon>
   </button>
   <mat-menu #userMenu="matMenu">
     <mat-list *ngIf="username !== null">
