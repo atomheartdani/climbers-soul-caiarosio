@@ -32,7 +32,7 @@
         <input matInput id="special" formControlName="special" />
       </mat-form-field>
     </div>
-    <div>
+    <div *ngIf="opening.id !== 0">
       <mat-form-field appearance="outline" fxFlex="100%">
         <mat-label>Prenotati</mat-label>
         <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
