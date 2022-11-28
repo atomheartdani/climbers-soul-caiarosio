@@ -1,5 +1,8 @@
 <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
 <div class="container" *ngIf="!isLoading">
+  <div *ngIf="openingsMap.size === 0">
+    <h3 class="mat-h3">Al momento non ci sono aperture in programma</h3>
+  </div>
   <div class="group" fxLayout="row wrap" fxLayoutGap="16px grid" *ngFor="let group of openingsMap | keyvalue">
     <div fxFlex="100%">
       <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
@@ -13,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="load-all">
+  <div class="load-all" *ngIf="openingsMap.size !== 0">
     <button mat-raised-button color="primary" (click)="loadAllOpenings()" *ngIf="!loadAll">
       Carica tutto
       <mat-icon>refresh</mat-icon>
