@@ -17,7 +17,8 @@
   </mat-card-header>
   <mat-card-content>
     <p class="mat-body">Orari: {{ opening.from }} - {{ opening.to }}</p>
-    <p class="mat-body">{{ opening.special }}</p>
+    <p class="mat-body" *ngIf="!isSpecialEvent">Posti disponibili: {{ remainingSpaces }}</p>
+    <p class="mat-body" *ngIf="isSpecialEvent">{{ opening.special }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" (click)="manage()" *ngIf="isLoggedUserAdmin">Gestisci</button>

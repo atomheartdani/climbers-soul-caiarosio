@@ -116,6 +116,10 @@ export class OpeningComponent implements OnInit {
     return false;
   }
 
+  get remainingSpaces(): number {
+    return 8 - this.opening.reservations.length;
+  }
+
   get tooltip(): string {
     if (this.spaceFull || this.isSpecialEvent) {
       return 'Non sono disponibili posti per questo giorno';
