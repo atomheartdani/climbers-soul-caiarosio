@@ -1,0 +1,12 @@
+<h1 class="mat-h1">Annulla prenotazione</h1>
+<mat-dialog-content>
+  <p class="mat-body">Sei sicuro di voler cancellare la tua prenotazione?</p>
+  <p class="mat-body">{{ opening.date }} dalle {{ opening.from }} alle {{ opening.to }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" tabindex="-1" (click)="save()" [disabled]="isProgressing">
+    Ok
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+  </button>
+  <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
+</mat-dialog-actions>
