@@ -32,6 +32,7 @@ export class SchedulerComponent implements OnInit {
       from: '',
       to: '',
       special: '',
+      maxReservations: 8,
       reservations: [],
     };
 

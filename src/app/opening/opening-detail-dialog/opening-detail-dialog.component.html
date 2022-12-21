@@ -25,6 +25,10 @@
         <mat-label>Orario chiusura</mat-label>
         <input matInput id="to" formControlName="to" />
       </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Posti disponibili max</mat-label>
+        <input matInput id="maxReservations" formControlName="maxReservations" type="number" />
+      </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="outline" fxFlex="100%">
@@ -34,7 +38,7 @@
     </div>
     <div *ngIf="opening.id !== 0">
       <mat-form-field appearance="outline" fxFlex="100%">
-        <mat-label>Prenotati</mat-label>
+        <mat-label>Persone prenotate</mat-label>
         <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
         <mat-chip-list class="mat-chip-list-stacked">
           <mat-chip *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip>

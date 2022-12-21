@@ -6,5 +6,6 @@ export interface Opening {
   from: string;
   to: string;
   special: string;
+  maxReservations: number;
   reservations: Reservation[];
 }

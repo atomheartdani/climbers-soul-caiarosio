@@ -37,6 +37,7 @@ export class OpeningDetailDialogComponent implements OnInit {
       from: [this.data.from, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],
       to: [this.data.to, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],
       special: [this.data.special],
+      maxReservations: [this.data.maxReservations, [Validators.required]],
     });
   }
 
@@ -72,6 +73,7 @@ export class OpeningDetailDialogComponent implements OnInit {
       from: ctrls['from'].value,
       to: ctrls['to'].value,
       special: ctrls['special'].value,
+      maxReservations: ctrls['maxReservations'].value,
       reservations: this.opening.reservations,
     };
 

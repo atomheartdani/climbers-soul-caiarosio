@@ -57,16 +57,20 @@ export class OpeningComponent implements OnInit {
     }
   }
 
+  fullnessPercent(): number {
+    return this.opening.reservations.length / this.opening.maxReservations;
+  }
+
   get spaceAvaiable(): boolean {
-    return this.opening.reservations.length < 4;
+    return this.fullnessPercent() < 0.5;
   }
 
   get spaceAlmostFull(): boolean {
-    return this.opening.reservations.length >= 4 && this.opening.reservations.length < 8;
+    return this.fullnessPercent() >= 0.5 && this.fullnessPercent() < 1;
   }
 
   get spaceFull(): boolean {
-    return this.opening.reservations.length >= 8;
+    return this.fullnessPercent() >= 1;
   }
 
   get isSpecialEvent(): boolean {
