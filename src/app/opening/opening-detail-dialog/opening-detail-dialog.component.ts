@@ -49,6 +49,10 @@ export class OpeningDetailDialogComponent implements OnInit {
       userIds.forEach((uid) => {
         let user = result.find((u) => u.id === uid);
         if (user !== undefined) {
+          let reservation = this.opening.reservations.find((r) => r.userId === user?.id);
+          if (reservation?.reservePartner) {
+            user.lastname = user.lastname + ' + 1';
+          }
           this.userList.push(user);
         }
       });

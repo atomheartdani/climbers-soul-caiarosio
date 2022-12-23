@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Opening } from '@app/@shared/models/opening.model';
+import { Reservation } from '@app/@shared/models/reservation.model';
 import { AuthenticationGuard, CredentialsService } from '@app/auth';
 import { DeleteReservationDialogComponent } from './delete-reservation-dialog/delete-reservation-dialog.component';
 import { InsertReservationDialogComponent } from './insert-reservation-dialog/insert-reservation-dialog.component';
@@ -93,7 +94,13 @@ export class OpeningComponent implements OnInit {
   }
 
   get remainingSpaces(): number {
-    return this.opening.maxReservations - this.opening.reservations.length;
+    let reservedSpots: number = this.opening.reservations.length;
+    this.opening.reservations.forEach((r) => {
+      if (r.reservePartner) {
+        reservedSpots++;
+      }
+    });
+    return this.opening.maxReservations - reservedSpots;
   }
 
   get tooltip(): string {
