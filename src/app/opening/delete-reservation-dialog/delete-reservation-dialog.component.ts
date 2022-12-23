@@ -37,6 +37,7 @@ export class DeleteReservationDialogComponent implements OnInit {
       id: 0,
       openingId: this.opening.id,
       userId: this.userId,
+      reservePartner: false,
     };
 
     this.reservationService.deleteReservation(toSave).subscribe({

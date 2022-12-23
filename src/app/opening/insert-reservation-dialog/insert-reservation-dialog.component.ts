@@ -11,6 +11,7 @@ import { ReservationService } from '@app/@shared/services/reservation.service';
   styleUrls: ['./insert-reservation-dialog.component.scss'],
 })
 export class InsertReservationDialogComponent implements OnInit {
+  reservePartner: boolean = false;
   isProgressing: boolean = false;
   opening: Opening;
   userId: number;
@@ -37,6 +38,7 @@ export class InsertReservationDialogComponent implements OnInit {
       id: 0,
       openingId: this.opening.id,
       userId: this.userId,
+      reservePartner: this.reservePartner,
     };
 
     this.reservationService.saveReservation(toSave).subscribe({
