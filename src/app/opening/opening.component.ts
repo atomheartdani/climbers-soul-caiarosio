@@ -93,7 +93,7 @@ export class OpeningComponent implements OnInit {
   }
 
   get remainingSpaces(): number {
-    return 8 - this.opening.reservations.length;
+    return this.opening.maxReservations - this.opening.reservations.length;
   }
 
   get tooltip(): string {
