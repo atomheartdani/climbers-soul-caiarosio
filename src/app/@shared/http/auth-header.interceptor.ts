@@ -18,7 +18,7 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
 
     if (creds != null) {
       request = request.clone({
-        setHeaders: { Authorization: `Bearer ${creds.token}` },
+        setHeaders: { Authorization: `Bearer ${creds.accessToken}` },
       });
     }
     return next.handle(request);

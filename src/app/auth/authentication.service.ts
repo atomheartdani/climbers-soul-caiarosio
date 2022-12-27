@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '@app/@shared/services/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, switchMap } from 'rxjs';
 
 import { Credentials, CredentialsService } from './credentials.service';
 
@@ -40,7 +40,8 @@ export class AuthenticationService {
           lastname: token.data.lastname,
           email: token.data.email,
           isAdmin: token.data.isAdmin,
-          token: result.access_token,
+          accessToken: result.access_token,
+          refreshToken: result.refreshToken,
         };
         this.credentialsService.setCredentials(data, context.remember);
         return data;
@@ -56,5 +57,19 @@ export class AuthenticationService {
     // Customize credentials invalidation here
     this.credentialsService.setCredentials();
     return of(true);
+  }
+
+  refreshToken(accessToken: string, refreshToken: string): Observable<boolean> {
+    return this.userService.refreshToken(accessToken, refreshToken).pipe(
+      switchMap((result: any) => {
+        let token = this.helper.decodeToken(result.access_token);
+
+        let creds = this.credentialsService.credentials!;
+        creds.accessToken = token;
+
+        this.credentialsService.updateCredentials(creds);
+        return of(true);
+      })
+    );
   }
 }

@@ -24,4 +24,11 @@ export class UserService {
     let body = { username: username, password: password };
     return this.httpClient.post<string>(`/users/login.php`, body);
   }
+
+  refreshToken(accessToken: string, refreshToken: string) {
+    return this.httpClient.post<string>(`/users/refreshToken.php`, {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
+  }
 }

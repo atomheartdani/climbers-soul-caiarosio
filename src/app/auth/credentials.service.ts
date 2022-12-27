@@ -7,7 +7,8 @@ export interface Credentials {
   lastname: string;
   email: string;
   isAdmin: boolean;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 const credentialsKey = 'climbers-soul-caiarosio-credentials';
@@ -61,6 +62,16 @@ export class CredentialsService {
     } else {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
+    }
+  }
+
+  updateCredentials(credentials: Credentials) {
+    this._credentials = credentials;
+
+    if (sessionStorage.getItem(credentialsKey)) {
+      sessionStorage.setItem(credentialsKey, JSON.stringify(credentials));
+    } else {
+      localStorage.setItem(credentialsKey, JSON.stringify(credentials));
     }
   }
 }
