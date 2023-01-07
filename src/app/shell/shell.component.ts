@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { filter } from 'rxjs/operators';
 
 import { UntilDestroy, untilDestroyed } from '@shared';
+import { CredentialsService } from '@app/auth';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +15,7 @@ import { UntilDestroy, untilDestroyed } from '@shared';
 export class ShellComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(private breakpoint: BreakpointObserver) {}
+  constructor(private breakpoint: BreakpointObserver, private credentialsService: CredentialsService) {}
 
   ngOnInit() {
     // Automatically close side menu on screens > small breakpoint
@@ -29,5 +30,10 @@ export class ShellComponent implements OnInit {
           this.sidenav.close();
         }
       });
+  }
+
+  get isAdmin(): boolean {
+    const credentials = this.credentialsService.credentials;
+    return credentials ? credentials.isAdmin : false;
   }
 }

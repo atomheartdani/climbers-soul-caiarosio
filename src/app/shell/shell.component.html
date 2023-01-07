@@ -21,6 +21,9 @@
             <span translate>About</span>
           </a>
           <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/users" routerLinkActive="active" (click)="sidenav.close()" *ngIf="isAdmin">
+            <span translate>Utenti</span>
+          </a>
         </mat-list>
       </nav>
     </mat-sidenav>

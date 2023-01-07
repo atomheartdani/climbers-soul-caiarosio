@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SchedulerModule } from './scheduler/scheduler.module';
 import { RulesModule } from './rules/rules.module';
 import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
     AuthModule,
     SchedulerModule,
     RulesModule,
+    UsersModule,
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

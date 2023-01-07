@@ -42,6 +42,11 @@ export class HeaderComponent implements OnInit {
     return credentials ? credentials.username : null;
   }
 
+  get isAdmin(): boolean {
+    const credentials = this.credentialsService.credentials;
+    return credentials ? credentials.isAdmin : false;
+  }
+
   get title(): string {
     return this.titleService.getTitle();
   }
