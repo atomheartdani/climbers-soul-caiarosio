@@ -1,14 +1,28 @@
+@import "src/theme/theme-variables";
+
 .container {
   text-align: center;
   padding: 1em;
 }
 
 .logo {
-  width: 150px;
   margin: 0 auto;
+  max-width: 1000px;
+  width: 50vw;
 }
 
 q {
   font-style: italic;
   quotes: "« " " »";
+}
+
+@media ($mat-xsmall) {
+  .logo {
+    width: 100vw;
+  }
+}
+@media ($mat-small) {
+  .logo {
+    width: 70vw;
+  }
 }
