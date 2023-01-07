@@ -1,1 +1,76 @@
-<p>users works!</p>
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <div class="spinner-container" *ngIf="isLoading || (dataSource.loading | async)">
+        <mat-spinner></mat-spinner>
+      </div>
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-cell users">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>Id</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.id }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>Username</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.username }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstname">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>Nome</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.firstname }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastname">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>Cognome</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.lastname }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>Email</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.email }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isAdmin">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>Admin</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-icon *ngIf="element.isAdmin">done</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label></mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-button color="primary"><mat-icon>edit</mat-icon></button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>

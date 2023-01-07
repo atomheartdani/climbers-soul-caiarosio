@@ -9,6 +9,10 @@ import { User } from '../models/user.model';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
+  getAll(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`/users/getAll.php`);
+  }
+
   getUsersFromIds(userIds: number[]): Observable<User[]> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
