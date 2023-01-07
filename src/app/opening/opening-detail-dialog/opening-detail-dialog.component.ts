@@ -87,9 +87,15 @@ export class OpeningDetailDialogComponent implements OnInit {
         this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
         this.dialogRef.close(0);
       },
-      error: () => {
+      error: (e) => {
         this.isProgressing = false;
-        this.snackBar.open("C'è stato un errore durante il salvataggio", 'Chiudi', { duration: 10000 });
+        let error: string = "C'è stato un errore durante il salvataggio. ";
+        if (e['status'] === 401) {
+          error += "Rieseguire l'accesso";
+        } else {
+          error += 'Riprovare più tardi';
+        }
+        this.snackBar.open(error, 'Chiudi', { duration: 10000 });
       },
     });
   }
