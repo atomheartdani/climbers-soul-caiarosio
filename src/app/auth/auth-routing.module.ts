@@ -3,8 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 
 import { LoginComponent } from './login.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
-const routes: Routes = [{ path: 'login', component: LoginComponent, data: { title: marker('Login') } }];
+const routes: Routes = [
+  { path: 'login', component: LoginComponent, data: { title: marker('Login') } },
+  { path: 'updatePassword', component: UpdatePasswordComponent, data: { title: marker('Update Password') } },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

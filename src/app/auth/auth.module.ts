@@ -9,6 +9,7 @@ import { MaterialModule } from '@app/material.module';
 import { I18nModule } from '@app/i18n';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { LoginComponent } from './login.component';
     I18nModule,
     AuthRoutingModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, UpdatePasswordComponent],
 })
 export class AuthModule {}

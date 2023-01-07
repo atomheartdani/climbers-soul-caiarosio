@@ -46,7 +46,13 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (credentials) => {
           log.debug(`${credentials.username} successfully logged in`);
-          this.router.navigate([this.route.snapshot.queryParams['redirect'] || '/'], { replaceUrl: true });
+          let redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
+          if (credentials.updatePassword) {
+            sessionStorage.setItem('climbers-soul-caiarosio-update-password-username', credentials.username);
+            this.router.navigate(['/updatePassword'], { queryParams: { redirect: redirectUrl }, replaceUrl: true });
+          } else {
+            this.router.navigate([redirectUrl], { replaceUrl: true });
+          }
         },
         (error) => {
           log.debug(`Login error: ${error}`, error);

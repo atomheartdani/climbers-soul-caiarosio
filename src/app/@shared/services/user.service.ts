@@ -24,4 +24,9 @@ export class UserService {
     let body = { username: username, password: password };
     return this.httpClient.post<string>(`/users/login.php`, body);
   }
+
+  updatePassword(username: string, oldPassword: string, newPassword: string): Observable<void> {
+    let body = { username: username, oldPassword: oldPassword, newPassword: newPassword };
+    return this.httpClient.post<void>(`/users/updatePassword.php`, body);
+  }
 }

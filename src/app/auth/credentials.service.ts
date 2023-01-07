@@ -7,6 +7,7 @@ export interface Credentials {
   lastname: string;
   email: string;
   isAdmin: boolean;
+  updatePassword: boolean;
   token: string;
 }
 

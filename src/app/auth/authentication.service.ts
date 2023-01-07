@@ -40,6 +40,7 @@ export class AuthenticationService {
           lastname: token.data.lastname,
           email: token.data.email,
           isAdmin: token.data.isAdmin,
+          updatePassword: token.data.updatePassword,
           token: result.access_token,
         };
         this.credentialsService.setCredentials(data, context.remember);
