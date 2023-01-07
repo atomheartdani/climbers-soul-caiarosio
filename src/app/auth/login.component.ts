@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, UntilDestroy, untilDestroyed } from '@shared';
 import { AuthenticationService } from './authentication.service';
+import { CredentialsService } from './credentials.service';
 
 const log = new Logger('Login');
 
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private credentialsService: CredentialsService
   ) {
     this.createForm();
   }
@@ -47,10 +49,13 @@ export class LoginComponent implements OnInit {
         (credentials) => {
           log.debug(`${credentials.username} successfully logged in`);
           let redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
+          let remember = this.loginForm.controls['remember'].value;
           if (credentials.updatePassword) {
-            sessionStorage.setItem('climbers-soul-caiarosio-update-password-username', credentials.username);
+            sessionStorage.setItem('climbers-soul-caiarosio-temp-credentials', JSON.stringify(credentials));
+            sessionStorage.setItem('climbers-soul-caiarosio-temp-remember', remember);
             this.router.navigate(['/updatePassword'], { queryParams: { redirect: redirectUrl }, replaceUrl: true });
           } else {
+            this.credentialsService.setCredentials(credentials, remember);
             this.router.navigate([redirectUrl], { replaceUrl: true });
           }
         },

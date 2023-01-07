@@ -43,7 +43,6 @@ export class AuthenticationService {
           updatePassword: token.data.updatePassword,
           token: result.access_token,
         };
-        this.credentialsService.setCredentials(data, context.remember);
         return data;
       })
     );

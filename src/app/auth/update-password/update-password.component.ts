@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '@app/@shared/services/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { finalize } from 'rxjs';
+import { Credentials, CredentialsService } from '../credentials.service';
 import { UpdatePasswordValidator } from './update-password.validator';
 
 const passwordMinLength: number = 16;
@@ -24,7 +25,8 @@ export class UpdatePasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private userService: UserService
+    private userService: UserService,
+    private credentialsService: CredentialsService
   ) {
     this.updatePasswordForm = this.formBuilder.group(
       {
@@ -43,9 +45,10 @@ export class UpdatePasswordComponent implements OnInit {
   updatePassword() {
     this.isLoading = true;
     let ctrls = this.updatePasswordForm.controls;
-    let username: string = sessionStorage.getItem('climbers-soul-caiarosio-update-password-username')!;
+    let credentials: Credentials = JSON.parse(sessionStorage.getItem('climbers-soul-caiarosio-temp-credentials')!);
+    let remember: boolean = sessionStorage.getItem('climbers-soul-caiarosio-temp-remember')! == 'true';
     this.userService
-      .updatePassword(username, ctrls['oldPassword'].value, ctrls['newPassword1'].value)
+      .updatePassword(credentials.username, ctrls['oldPassword'].value, ctrls['newPassword1'].value)
       .pipe(
         finalize(() => {
           this.updatePasswordForm.markAsPristine();
@@ -55,6 +58,7 @@ export class UpdatePasswordComponent implements OnInit {
       )
       .subscribe({
         next: () => {
+          this.credentialsService.setCredentials(credentials, remember);
           let redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
           this.router.navigate([redirectUrl], { replaceUrl: true });
         },
