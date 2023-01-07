@@ -1,1 +1,27 @@
-<p>user-detail-dialog works!</p>
+<h1 class="mat-h1">Dettaglio {{ user.username }}</h1>
+<mat-dialog-content>
+  <form [formGroup]="detailForm">
+    <div>
+      <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
+        <mat-label>Username</mat-label>
+        <input matInput id="username" formControlName="username" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Nome</mat-label>
+        <input matInput id="firstname" formControlName="firstname" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex="50">
+        <mat-label>Cognome</mat-label>
+        <input matInput id="lastname" formControlName="lastname" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
+        <mat-label>Email</mat-label>
+        <input matInput id="email" formControlName="email" />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
