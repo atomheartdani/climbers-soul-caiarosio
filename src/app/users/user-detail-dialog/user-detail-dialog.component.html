@@ -25,3 +25,49 @@
     </div>
   </form>
 </mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button
+    mat-raised-button
+    color="primary"
+    tabindex="-1"
+    (click)="save()"
+    [disabled]="detailForm.invalid || detailForm.pristine || isProgressing"
+  >
+    Salva
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    tabindex="-1"
+    (click)="setAdmin(true)"
+    *ngIf="!user.isAdmin"
+    [disabled]="detailForm.invalid || isProgressing"
+  >
+    Imposta come Admin
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    tabindex="-1"
+    (click)="setAdmin(false)"
+    *ngIf="user.isAdmin"
+    [disabled]="detailForm.invalid || isProgressing"
+  >
+    Rimuovi da Admin
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    tabindex="-1"
+    (click)="setUpdatePassword()"
+    *ngIf="!user.updatePassword"
+    [disabled]="detailForm.invalid || isProgressing"
+  >
+    Forza Aggiornamento Password
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+  </button>
+  <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
+</mat-dialog-actions>
