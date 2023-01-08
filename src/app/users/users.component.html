@@ -1,16 +1,28 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div class="spinner-container" *ngIf="isLoading || (dataSource.loading | async)">
+      <div *ngIf="isLoading || (dataSource.loading | async)">
         <mat-spinner></mat-spinner>
       </div>
-      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center">
+      <div class="error-message" *ngIf="dataSource.error | async">
+        <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
+      </div>
+      <div
+        class="operations"
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+        *ngIf="(dataSource.error | async) === false"
+      >
         <button mat-raised-button color="primary" (click)="create()">
           Crea utente
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-cell users">
+      <mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8 mat-cell users"
+        *ngIf="(dataSource.error | async) === false"
+      >
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef>
             <mat-label>Id</mat-label>

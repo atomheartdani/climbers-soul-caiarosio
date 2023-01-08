@@ -8,6 +8,7 @@ export class UsersDataSource extends DataSource<User> {
   private _totalElements: number = 0;
 
   public loading = new BehaviorSubject<boolean>(true);
+  public error = new BehaviorSubject<boolean>(false);
 
   get totalElements(): number {
     return this._totalElements;
@@ -27,11 +28,18 @@ export class UsersDataSource extends DataSource<User> {
 
   public loadResults() {
     this.loading.next(true);
+    this.error.next(false);
 
-    this.service.getAll().subscribe((a: User[]) => {
-      this._RisultatoCaricamentoSubject.next(a);
-      this._totalElements = a.length;
-      this.loading.next(false);
+    this.service.getAll().subscribe({
+      next: (a: User[]) => {
+        this._RisultatoCaricamentoSubject.next(a);
+        this._totalElements = a.length;
+        this.loading.next(false);
+      },
+      error: () => {
+        this.loading.next(false);
+        this.error.next(true);
+      },
     });
   }
 }
