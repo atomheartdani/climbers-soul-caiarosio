@@ -27,12 +27,27 @@ export class UserDetailDialogComponent implements OnInit {
       username: [this.data.username, [Validators.required]],
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
-      email: [this.data.email, [Validators.required]],
+      email: [this.data.email, [Validators.required, Validators.email]],
     });
   }
 
   ngOnInit(): void {
     this.dialogRef.updateSize('50vw', '');
+
+    let firstnameCtrl = this.detailForm.get('firstname');
+    let lastnameCtrl = this.detailForm.get('lastname');
+
+    firstnameCtrl?.valueChanges.subscribe((firstname: string) => {
+      firstnameCtrl?.patchValue(this.capitalize(firstname), { emitEvent: false });
+      let lastname = lastnameCtrl?.value;
+      this.updateUsername(firstname, lastname);
+    });
+
+    lastnameCtrl?.valueChanges.subscribe((lastname) => {
+      lastnameCtrl?.patchValue(this.capitalize(lastname), { emitEvent: false });
+      let firstname = firstnameCtrl?.value;
+      this.updateUsername(firstname, lastname);
+    });
   }
 
   close(): void {
@@ -69,6 +84,29 @@ export class UserDetailDialogComponent implements OnInit {
         this.snackBar.open(error, 'Chiudi', { duration: 10000 });
       },
     });
+  }
+
+  updateUsername(firstname: string, lastname: string): void {
+    // Autocompila username solo se nuovo utente
+    if (this.user.id === 0) {
+      let username: string = firstname + '.' + lastname;
+      if (username.startsWith('.')) {
+        username = username.substring(1);
+      }
+      if (username.endsWith('.')) {
+        username = username.slice(0, -1);
+      }
+      username = username.replaceAll(' ', '').toLowerCase();
+      this.detailForm.get('username')?.setValue(username);
+    }
+  }
+
+  capitalize(value: string): string {
+    let splitted = value.split(' ');
+    for (let i = 0; i < splitted.length; i++) {
+      splitted[i] = splitted[i][0].toUpperCase() + splitted[i].substring(1);
+    }
+    return splitted.join(' ');
   }
 
   setAdmin(isAdmin: boolean): void {

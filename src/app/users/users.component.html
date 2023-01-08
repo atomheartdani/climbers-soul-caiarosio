@@ -4,6 +4,12 @@
       <div class="spinner-container" *ngIf="isLoading || (dataSource.loading | async)">
         <mat-spinner></mat-spinner>
       </div>
+      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-raised-button color="primary" (click)="create()">
+          Crea utente
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
       <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-cell users">
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef>

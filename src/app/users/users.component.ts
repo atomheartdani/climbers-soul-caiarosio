@@ -43,6 +43,23 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
+  create(): void {
+    let newUser: User = {
+      id: 0,
+      username: '',
+      firstname: '',
+      lastname: '',
+      email: '',
+      isAdmin: false,
+      updatePassword: true,
+    };
+
+    const dialogRef = this.dialog.open(UserDetailDialogComponent, { data: newUser });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.refresh();
+    });
+  }
+
   refresh() {
     this.dataSource.loadResults();
   }
