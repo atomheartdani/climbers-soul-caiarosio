@@ -15,31 +15,31 @@ export class DateWithMonthNamePipe implements PipeTransform {
     }
 
     switch (month) {
-      case '1': {
+      case '01': {
         return 'Gennaio' + year;
       }
-      case '2': {
+      case '02': {
         return 'Febbraio' + year;
       }
-      case '3': {
+      case '03': {
         return 'Marzo' + year;
       }
-      case '4': {
+      case '04': {
         return 'Aprile' + year;
       }
-      case '5': {
+      case '05': {
         return 'Maggio' + year;
       }
-      case '6': {
+      case '06': {
         return 'Giugno' + year;
       }
-      case '7': {
+      case '07': {
         return 'Luglio' + year;
       }
-      case '8': {
+      case '08': {
         return 'Agosto' + year;
       }
-      case '9': {
+      case '09': {
         return 'Settembre' + year;
       }
       case '10': {
