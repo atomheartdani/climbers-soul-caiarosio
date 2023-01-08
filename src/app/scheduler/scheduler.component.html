@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="load-all" *ngIf="openingsMap.size !== 0">
+  <div class="load-all" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="openingsMap.size !== 0">
     <button mat-raised-button color="primary" (click)="loadAllOpenings()" *ngIf="!loadAll">
       Carica tutto
       <mat-icon>refresh</mat-icon>
