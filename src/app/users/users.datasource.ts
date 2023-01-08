@@ -29,7 +29,6 @@ export class UsersDataSource extends DataSource<User> {
     this.loading.next(true);
 
     this.service.getAll().subscribe((a: User[]) => {
-      console.log(a);
       this._RisultatoCaricamentoSubject.next(a);
       this._totalElements = a.length;
       this.loading.next(false);

@@ -8,7 +8,6 @@ import { User } from '@app/@shared/models/user.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { UserService } from '@app/@shared/services/user.service';
 import { Moment } from 'moment';
-import { InsertReservationDialogComponent } from '../insert-reservation-dialog/insert-reservation-dialog.component';
 
 @Component({
   selector: 'app-opening-detail-dialog',
@@ -28,7 +27,7 @@ export class OpeningDetailDialogComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<InsertReservationDialogComponent>,
+    private dialogRef: MatDialogRef<OpeningDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Opening
   ) {
     this.opening = data;
