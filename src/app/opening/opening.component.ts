@@ -103,12 +103,24 @@ export class OpeningComponent implements OnInit {
   }
 
   get tooltip(): string {
-    if (this.spaceFull || this.isSpecialEvent) {
-      return 'Non sono disponibili posti per questo giorno';
+    if (this.isSpecialEvent) {
+      return 'Evento speciale. Verificare sul sito del CAI Arosio';
+    } else if (this.spaceFull) {
+      return 'Non ci sono posti disponibili per questo giorno';
     } else if (this.spaceAlmostFull) {
       return 'Posti quasi esauriti';
+    } else if (!this.isReservable) {
+      return 'Iscrizioni non ancora aperte';
     } else {
       return '';
     }
+  }
+
+  get isReservable(): boolean {
+    const openingDate = new Date(this.opening.date);
+    const today = new Date();
+    const msBetweenDates = Math.abs(openingDate.getTime() - today.getTime());
+    const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+    return daysBetweenDates <= 30;
   }
 }
