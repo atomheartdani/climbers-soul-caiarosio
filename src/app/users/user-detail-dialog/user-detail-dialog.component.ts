@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CredentialsService } from '@app/auth';
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 
@@ -16,6 +17,7 @@ export class UserDetailDialogComponent implements OnInit {
   user: User;
 
   constructor(
+    private credentialsService: CredentialsService,
     private userService: UserService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -117,5 +119,10 @@ export class UserDetailDialogComponent implements OnInit {
   setUpdatePassword(): void {
     this.user.updatePassword = true;
     this.save();
+  }
+
+  get isMyself(): boolean {
+    const credentials = this.credentialsService.credentials!;
+    return credentials.id === this.user.id;
   }
 }

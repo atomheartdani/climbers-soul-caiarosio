@@ -54,7 +54,7 @@
     tabindex="-1"
     (click)="setAdmin(false)"
     *ngIf="user.isAdmin"
-    [disabled]="detailForm.invalid || isProgressing"
+    [disabled]="detailForm.invalid || isProgressing || isMyself"
   >
     Rimuovi da Admin
     <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
