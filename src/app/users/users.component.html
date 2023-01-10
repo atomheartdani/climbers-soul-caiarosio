@@ -81,8 +81,11 @@
           <mat-header-cell *matHeaderCellDef>
             <mat-label></mat-label>
           </mat-header-cell>
-          <mat-cell *matCellDef="let element">
+          <mat-cell *matCellDef="let element" class="actions">
             <button mat-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
+            <button mat-button color="primary" (click)="delete(element)" *ngIf="!isMyself(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </mat-cell>
         </ng-container>
 

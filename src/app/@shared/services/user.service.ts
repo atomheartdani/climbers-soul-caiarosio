@@ -28,6 +28,15 @@ export class UserService {
     return this.httpClient.post<void>(`/users/save.php`, user);
   }
 
+  delete(id: number) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    let params = new HttpParams();
+    params = params.append('id', id);
+
+    return this.httpClient.get<void>(`/users/delete.php`, { headers, params });
+  }
+
   login(username: string, password: string): Observable<string> {
     let body = { username: username, password: password };
     return this.httpClient.post<string>(`/users/login.php`, body);
