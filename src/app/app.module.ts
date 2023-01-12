@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouteReuseStrategy, RouterModule } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,6 +19,9 @@ import { SchedulerModule } from './scheduler/scheduler.module';
 import { RulesModule } from './rules/rules.module';
 import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
 import { UsersModule } from './users/users.module';
+import { CacheInterceptor } from './@shared/http/cache.interceptor';
+
+const routes: Routes = [];
 
 @NgModule({
   imports: [
@@ -26,7 +29,7 @@ import { UsersModule } from './users/users.module';
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     HttpClientModule,
-    RouterModule,
+    RouterModule.forRoot(routes, { useHash: true }),
     TranslateModule.forRoot(),
     BrowserAnimationsModule,
     MaterialModule,
