@@ -54,6 +54,11 @@ import { UsersModule } from './users/users.module';
     },
     {
       provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
       multi: true,
     },
