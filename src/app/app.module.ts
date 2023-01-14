@@ -51,14 +51,14 @@ const routes: Routes = [];
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthHeaderInterceptor,
+      useClass: CacheInterceptor,
       multi: true,
-      deps: [CredentialsService],
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: CacheInterceptor,
+      useClass: AuthHeaderInterceptor,
       multi: true,
+      deps: [CredentialsService],
     },
     {
       provide: HTTP_INTERCEPTORS,
