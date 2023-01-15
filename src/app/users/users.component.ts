@@ -71,24 +71,26 @@ export class UsersComponent implements OnInit, AfterViewInit {
         data: { confirmAction: action, confirmDetail: 'Confermi?' },
       });
       dialogRef.afterClosed().subscribe((result) => {
-        this.isLoading = true;
-        this.userService.delete(user.id).subscribe({
-          next: () => {
-            this.isLoading = false;
-            this.snackBar.open("Cancellazione dell'utente completata", 'Chiudi', { duration: 2000 });
-            this.refresh();
-          },
-          error: (e) => {
-            this.isLoading = false;
-            let error: string = "C'è stato un errore durante la cancellazione. ";
-            if (e['status'] === 401) {
-              error += "Rieseguire l'accesso";
-            } else {
-              error += 'Riprovare più tardi';
-            }
-            this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-          },
-        });
+        if (result === 0) {
+          this.isLoading = true;
+          this.userService.delete(user.id).subscribe({
+            next: () => {
+              this.isLoading = false;
+              this.snackBar.open("Cancellazione dell'utente completata", 'Chiudi', { duration: 2000 });
+              this.refresh();
+            },
+            error: (e) => {
+              this.isLoading = false;
+              let error: string = "C'è stato un errore durante la cancellazione. ";
+              if (e['status'] === 401) {
+                error += "Rieseguire l'accesso";
+              } else {
+                error += 'Riprovare più tardi';
+              }
+              this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+            },
+          });
+        }
       });
     }
   }
