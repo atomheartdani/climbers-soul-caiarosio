@@ -9,7 +9,7 @@ import { env } from './.env';
 export const environment = {
   production: true,
   version: env['npm_package_version'],
-  serverUrl: 'https://www.danielemeregalli.com/climberssoul/php',
+  serverUrl: 'https://www.caiarosio.it/climberssoul/php',
   defaultLanguage: 'it-IT',
   supportedLanguages: ['it-IT'],
 };
