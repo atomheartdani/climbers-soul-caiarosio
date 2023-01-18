@@ -23,15 +23,6 @@
         class="mat-elevation-z8 mat-cell users"
         *ngIf="(dataSource.error | async) === false"
       >
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef>
-            <mat-label>Id</mat-label>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            {{ element.id }}
-          </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="username">
           <mat-header-cell *matHeaderCellDef>
             <mat-label>Username</mat-label>
@@ -65,6 +56,15 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.email }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tosConsent">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-label>TOS</mat-label>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-icon *ngIf="element.tosConsent">done</mat-icon>
           </mat-cell>
         </ng-container>
 

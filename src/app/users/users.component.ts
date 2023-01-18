@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   dataSource: UsersDataSource;
   isLoading: boolean = false;
 
-  displayedColumns = ['id', 'username', 'firstname', 'lastname', 'email', 'isAdmin', 'actions'];
+  displayedColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'isAdmin', 'actions'];
 
   constructor(
     private dialog: MatDialog,
@@ -54,6 +54,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       firstname: '',
       lastname: '',
       email: '',
+      tosConsent: false,
       isAdmin: false,
       updatePassword: true,
     };

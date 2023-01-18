@@ -30,6 +30,7 @@ export class UserDetailDialogComponent implements OnInit {
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],
+      tosConsent: [this.data.tosConsent],
     });
   }
 
@@ -65,6 +66,7 @@ export class UserDetailDialogComponent implements OnInit {
       firstname: ctrls['firstname'].value,
       lastname: ctrls['lastname'].value,
       email: ctrls['email'].value,
+      tosConsent: ctrls['tosConsent'].value,
       isAdmin: this.user.isAdmin,
       updatePassword: this.user.updatePassword,
     };
