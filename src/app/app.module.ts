@@ -20,6 +20,8 @@ import { RulesModule } from './rules/rules.module';
 import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
 import { UsersModule } from './users/users.module';
 import { CacheInterceptor } from './@shared/http/cache.interceptor';
+import { MatPaginatorIntlIta } from './@shared/mat-paginator-intl-ita';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 const routes: Routes = [];
 
@@ -68,6 +70,10 @@ const routes: Routes = [];
     {
       provide: RouteReuseStrategy,
       useClass: RouteReusableStrategy,
+    },
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorIntlIta,
     },
   ],
   bootstrap: [AppComponent],
