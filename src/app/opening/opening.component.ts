@@ -58,7 +58,7 @@ export class OpeningComponent implements OnInit {
   }
 
   fullnessPercent(): number {
-    return this.opening.reservations.length / this.opening.maxReservations;
+    return this.occupiedSpaces / this.opening.maxReservations;
   }
 
   get spaceAvaiable(): boolean {
@@ -92,14 +92,18 @@ export class OpeningComponent implements OnInit {
     return false;
   }
 
-  get remainingSpaces(): number {
+  get occupiedSpaces(): number {
     let reservedSpots: number = this.opening.reservations.length;
     this.opening.reservations.forEach((r) => {
       if (r.reservePartner) {
         reservedSpots++;
       }
     });
-    return this.opening.maxReservations - reservedSpots;
+    return reservedSpots;
+  }
+
+  get remainingSpaces(): number {
+    return this.opening.maxReservations - this.occupiedSpaces;
   }
 
   get tooltip(): string {
