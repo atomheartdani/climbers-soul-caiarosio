@@ -24,6 +24,13 @@ export class UserService {
     return this.httpClient.get<User[]>(`/users/getAllById.php`, { headers, params });
   }
 
+  checkUsername(username: string): Observable<boolean> {
+    let params = new HttpParams();
+    params = params.append('username', username);
+
+    return this.httpClient.get<boolean>(`/users/exists.php`, { params });
+  }
+
   saveUser(user: User): Observable<void> {
     return this.httpClient.post<void>(`/users/save.php`, user);
   }

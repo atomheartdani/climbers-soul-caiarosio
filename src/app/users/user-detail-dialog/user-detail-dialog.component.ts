@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CredentialsService } from '@app/auth';
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
+import { debounceTime } from 'rxjs';
+import { UsernameValidator } from './username.validator';
 
 @Component({
   selector: 'app-user-detail-dialog',
@@ -18,6 +20,7 @@ export class UserDetailDialogComponent implements OnInit {
 
   constructor(
     private credentialsService: CredentialsService,
+    private usernameValidator: UsernameValidator,
     private userService: UserService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
@@ -26,7 +29,7 @@ export class UserDetailDialogComponent implements OnInit {
   ) {
     this.user = data;
     this.detailForm = fb.group({
-      username: [this.data.username, [Validators.required]],
+      username: [this.data.username, [Validators.required], [usernameValidator]],
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],
@@ -40,13 +43,13 @@ export class UserDetailDialogComponent implements OnInit {
     let firstnameCtrl = this.detailForm.get('firstname');
     let lastnameCtrl = this.detailForm.get('lastname');
 
-    firstnameCtrl?.valueChanges.subscribe((firstname: string) => {
+    firstnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((firstname: string) => {
       firstnameCtrl?.patchValue(this.capitalize(firstname), { emitEvent: false });
       let lastname = lastnameCtrl?.value;
       this.updateUsername(firstname, lastname);
     });
 
-    lastnameCtrl?.valueChanges.subscribe((lastname) => {
+    lastnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((lastname: string) => {
       lastnameCtrl?.patchValue(this.capitalize(lastname), { emitEvent: false });
       let firstname = firstnameCtrl?.value;
       this.updateUsername(firstname, lastname);
@@ -102,6 +105,7 @@ export class UserDetailDialogComponent implements OnInit {
       }
       username = username.replaceAll(' ', '').toLowerCase();
       this.detailForm.get('username')?.setValue(username);
+      this.detailForm.get('username')?.markAllAsTouched();
     }
   }
 

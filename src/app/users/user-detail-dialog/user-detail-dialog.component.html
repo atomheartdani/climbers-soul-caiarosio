@@ -16,6 +16,9 @@
       <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
         <mat-label>Username</mat-label>
         <input matInput id="username" formControlName="username" />
+        <mat-error *ngIf="detailForm.get('username')?.hasError('usernameAlreadyExists')">
+          Username gia' in uso
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
