@@ -1,93 +1,96 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div *ngIf="isLoading">
+      <div *ngIf="dataSource.loading$ | async">
         <mat-spinner></mat-spinner>
       </div>
-      <div class="error-message" *ngIf="isError">
+      <div class="error-message" *ngIf="dataSource.error$ | async">
         <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
       </div>
-      <div *ngIf="!isError && !isLoading">
-        <div class="operations" fxLayout="row" fxLayoutAlign="space-around center">
-          <button mat-raised-button color="primary" (click)="create()">
-            Crea utente
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-        <div class="mat-elevation-z8">
-          <mat-table [dataSource]="dataSource" class="mat-cell users">
-            <ng-container matColumnDef="username">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label>Username</mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                {{ element.username }}
-              </mat-cell>
-            </ng-container>
+      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!(dataSource.error$ | async)">
+        <button mat-raised-button color="primary" (click)="create()">
+          Crea utente
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" class="mat-cell users">
+          <ng-container matColumnDef="username">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label>Username</mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.username }}
+            </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="firstname">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label>Nome</mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                {{ element.firstname }}
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label>Nome</mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.firstname }}
+            </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="lastname">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label>Cognome</mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                {{ element.lastname }}
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="lastname">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label>Cognome</mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.lastname }}
+            </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="email">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label>Email</mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                {{ element.email }}
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label>Email</mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.email }}
+            </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="tosConsent">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label>TOS</mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <mat-icon *ngIf="element.tosConsent">done</mat-icon>
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="tosConsent">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label>TOS</mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.tosConsent">done</mat-icon>
+            </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="isAdmin">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label>Admin</mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                <mat-icon *ngIf="element.isAdmin">done</mat-icon>
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="isAdmin">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label>Admin</mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.isAdmin">done</mat-icon>
+            </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="actions">
-              <mat-header-cell *matHeaderCellDef>
-                <mat-label></mat-label>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="actions">
-                <button mat-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
-                <button mat-button color="primary" (click)="delete(element)" *ngIf="!isMyself(element)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-label></mat-label>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="actions">
+              <button mat-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
+              <button mat-button color="primary" (click)="delete(element)" *ngIf="!isMyself(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-          </mat-table>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
 
-          <mat-paginator [pageSize]="25" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
-        </div>
+        <mat-paginator
+          [length]="dataSource.totalElements"
+          [pageSize]="25"
+          [pageSizeOptions]="[10, 25, 50, 100]"
+          showFirstLastButtons
+        ></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>

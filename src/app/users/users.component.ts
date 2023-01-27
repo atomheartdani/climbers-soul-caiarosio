@@ -2,27 +2,27 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { AuthenticationGuard, CredentialsService } from '@app/auth';
+import { tap } from 'rxjs';
 import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
+import { UsersDataSource } from './users.datasource';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
-  dataSource: MatTableDataSource<User>;
+export class UsersComponent implements OnInit, AfterViewInit {
+  dataSource: UsersDataSource;
   isLoading: boolean = false;
-  isError: boolean = false;
 
   displayedColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'isAdmin', 'actions'];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private dialog: MatDialog,
@@ -35,7 +35,12 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.dataSource = new UsersDataSource(this.userService);
     this.refresh();
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.pipe(tap(() => this.refresh())).subscribe();
   }
 
   edit(user: User): void {
@@ -98,19 +103,7 @@ export class UsersComponent implements OnInit {
   }
 
   refresh() {
-    this.isLoading = true;
-    this.isError = false;
-    this.userService.getAll().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource<User>(res);
-        this.dataSource.paginator = this.paginator;
-        this.isLoading = false;
-      },
-      error: (e) => {
-        this.isLoading = false;
-        this.isError = true;
-      },
-    });
+    this.dataSource.loadUsers(this.paginator.pageIndex, this.paginator.pageSize);
   }
 
   isMyself(user: User): boolean {

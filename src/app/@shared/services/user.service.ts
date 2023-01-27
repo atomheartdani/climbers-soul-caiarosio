@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Page } from '../models/page.model';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -9,8 +10,14 @@ import { User } from '../models/user.model';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`/users/getAll.php`);
+  getAll(pageIndex: number, pageSize: number): Observable<Page<User>> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    let params = new HttpParams();
+    params = params.append('pageIndex', pageIndex);
+    params = params.append('pageSize', pageSize);
+
+    return this.httpClient.get<Page<User>>(`/users/getAll.php`, { headers, params });
   }
 
   getUsersFromIds(userIds: number[]): Observable<User[]> {
