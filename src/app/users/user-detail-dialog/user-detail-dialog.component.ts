@@ -102,8 +102,8 @@ export class UserDetailDialogComponent implements OnInit {
         username = username.slice(0, -1);
       }
       username = username.replaceAll(' ', '').toLowerCase();
+      this.detailForm.get('username')?.markAsTouched();
       this.detailForm.get('username')?.setValue(username);
-      this.detailForm.get('username')?.markAllAsTouched();
     }
   }
 

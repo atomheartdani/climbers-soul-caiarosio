@@ -8,9 +8,12 @@ export class UsernameValidator implements AsyncValidator {
   constructor(private userService: UserService) {}
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
-    return this.userService.checkUsername(control.value).pipe(
-      map((isTaken: boolean) => (isTaken ? { usernameAlreadyExists: true } : null)),
-      catchError(() => of(null))
-    );
+    if (control.touched) {
+      return this.userService.checkUsername(control.value).pipe(
+        map((isTaken: boolean) => (isTaken ? { usernameAlreadyExists: true } : null)),
+        catchError(() => of(null))
+      );
+    }
+    return of(null);
   }
 }
