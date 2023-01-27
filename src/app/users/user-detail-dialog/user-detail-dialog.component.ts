@@ -38,8 +38,6 @@ export class UserDetailDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('50vw', '');
-
     let firstnameCtrl = this.detailForm.get('firstname');
     let lastnameCtrl = this.detailForm.get('lastname');
 

@@ -22,6 +22,7 @@ import { UsersModule } from './users/users.module';
 import { CacheInterceptor } from './@shared/http/cache.interceptor';
 import { MatPaginatorIntlIta } from './@shared/mat-paginator-intl-ita';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 const routes: Routes = [];
 
@@ -74,6 +75,13 @@ const routes: Routes = [];
     {
       provide: MatPaginatorIntl,
       useClass: MatPaginatorIntlIta,
+    },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        ...new MatDialogConfig(),
+        panelClass: 'mat-dialog-responsive',
+      } as MatDialogConfig,
     },
   ],
   bootstrap: [AppComponent],

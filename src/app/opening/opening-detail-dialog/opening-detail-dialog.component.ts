@@ -41,8 +41,6 @@ export class OpeningDetailDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('50vw', '');
-
     let userIds = this.opening.reservations.map((r) => r.userId);
     this.userService.getUsersFromIds(userIds).subscribe((result) => {
       userIds.forEach((uid) => {

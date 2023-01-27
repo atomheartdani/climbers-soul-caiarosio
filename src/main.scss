@@ -41,3 +41,21 @@
     transform: rotate(359deg);
   }
 }
+
+// Customize dialog width by screen size
+.mat-dialog-responsive {
+  max-width: 95% !important;
+  width: 60%;
+
+  @media (max-width: 992px) {
+    width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+}
