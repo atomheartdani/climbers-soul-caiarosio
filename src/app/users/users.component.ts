@@ -56,6 +56,7 @@ export class UsersComponent implements OnInit {
       email: '',
       tosConsent: false,
       isAdmin: false,
+      isCaiArosio: false,
       updatePassword: true,
     };
 

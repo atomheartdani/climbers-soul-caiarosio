@@ -6,5 +6,6 @@ export interface User {
   email: string;
   tosConsent: boolean;
   isAdmin: boolean;
+  isCaiArosio: boolean;
   updatePassword: boolean;
 }

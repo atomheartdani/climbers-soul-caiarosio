@@ -33,6 +33,7 @@ export class UserDetailDialogComponent implements OnInit {
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],
+      isCaiArosio: [this.data.isCaiArosio],
       tosConsent: [this.data.tosConsent],
     });
   }
@@ -69,6 +70,7 @@ export class UserDetailDialogComponent implements OnInit {
       email: ctrls['email'].value,
       tosConsent: ctrls['tosConsent'].value,
       isAdmin: this.user.isAdmin,
+      isCaiArosio: ctrls['isCaiArosio'].value,
       updatePassword: this.user.updatePassword,
     };
 
