@@ -6,11 +6,26 @@
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutAlign="space-between center">
       <div fxFill *ngFor="let rule of rulesTree; let i = index">
-        <p>{{ i + 1 }} - {{ rule['data'].content }}</p>
+        <p>
+          <strong>{{ i + 1 }}</strong> - {{ rule['data'].content }}
+        </p>
         <div class="child-rule" *ngFor="let ruleChild of rule['children']; let j = index">
-          <p>{{ i + 1 }}.{{ j + 1 }} - {{ ruleChild['data'].content }}</p>
+          <p>
+            <strong>{{ i + 1 }}.{{ j + 1 }}</strong> - {{ ruleChild['data'].content }}
+          </p>
         </div>
       </div>
     </mat-card-content>
+    <mat-card-footer>
+      <a
+        mat-raised-button
+        color="primary"
+        href="assets/regolamento.pdf"
+        target="_blank"
+        download="ClimbersSoul-Regolamento.pdf"
+      >
+        <mat-icon fontIcon="download"></mat-icon> Scarica regolamento
+      </a>
+    </mat-card-footer>
   </mat-card>
 </div>

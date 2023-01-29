@@ -13,3 +13,11 @@
 .mat-card-content {
   text-align: justify;
 }
+
+.mat-card-footer {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0 10px 0;
+}
