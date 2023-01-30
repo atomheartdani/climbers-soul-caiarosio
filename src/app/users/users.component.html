@@ -65,8 +65,7 @@
               <mat-label>Admin</mat-label>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <mat-icon *ngIf="element.canManageOpenings">done</mat-icon>
-              <mat-icon *ngIf="element.canManageUsers">done</mat-icon>
+              {{ element | userRbacAcronym }}
             </mat-cell>
           </ng-container>
 
