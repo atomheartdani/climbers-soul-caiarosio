@@ -7,7 +7,7 @@
       <div class="error-message" *ngIf="dataSource.error$ | async">
         <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
       </div>
-      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!(dataSource.error$ | async)">
+      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="(dataSource.error$ | async) === false">
         <button mat-raised-button color="primary" (click)="create()">
           Crea utente
           <mat-icon>add</mat-icon>
@@ -60,12 +60,13 @@
             </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="isAdmin">
+          <ng-container matColumnDef="admin">
             <mat-header-cell *matHeaderCellDef>
               <mat-label>Admin</mat-label>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <mat-icon *ngIf="element.isAdmin">done</mat-icon>
+              <mat-icon *ngIf="element.canManageOpenings">done</mat-icon>
+              <mat-icon *ngIf="element.canManageUsers">done</mat-icon>
             </mat-cell>
           </ng-container>
 

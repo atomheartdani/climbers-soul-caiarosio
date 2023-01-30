@@ -37,6 +37,19 @@
         Regolamento accettato
       </mat-slide-toggle>
     </div>
+    <div>
+      <h2 class="mat-h2">Amministrazione</h2>
+      <div class="fake-form-field">
+        <mat-slide-toggle color="primary" labelPosition="before" formControlName="canManageOpenings">
+          Può gestire le aperture
+        </mat-slide-toggle>
+      </div>
+      <div class="fake-form-field">
+        <mat-slide-toggle color="primary" labelPosition="before" formControlName="canManageUsers">
+          Può gestire gli utenti
+        </mat-slide-toggle>
+      </div>
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
@@ -48,28 +61,6 @@
     [disabled]="detailForm.invalid || detailForm.pristine || isProgressing"
   >
     Salva
-    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    tabindex="-1"
-    (click)="setAdmin(true)"
-    *ngIf="!user.isAdmin && user.id !== 0"
-    [disabled]="detailForm.invalid || isProgressing"
-  >
-    Imposta come Admin
-    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    tabindex="-1"
-    (click)="setAdmin(false)"
-    *ngIf="user.isAdmin"
-    [disabled]="detailForm.invalid || isProgressing || isMyself"
-  >
-    Rimuovi da Admin
     <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
   </button>
   <button

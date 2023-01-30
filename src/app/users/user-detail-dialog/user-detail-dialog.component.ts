@@ -33,8 +33,10 @@ export class UserDetailDialogComponent implements OnInit {
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],
-      isCaiArosio: [this.data.isCaiArosio],
       tosConsent: [this.data.tosConsent],
+      isCaiArosio: [this.data.isCaiArosio],
+      canManageOpenings: [{ value: this.data.canManageOpenings, disabled: this.isMyself }],
+      canManageUsers: [{ value: this.data.canManageUsers, disabled: this.isMyself }],
     });
   }
 
@@ -69,9 +71,10 @@ export class UserDetailDialogComponent implements OnInit {
       lastname: ctrls['lastname'].value,
       email: ctrls['email'].value,
       tosConsent: ctrls['tosConsent'].value,
-      isAdmin: this.user.isAdmin,
       isCaiArosio: ctrls['isCaiArosio'].value,
       updatePassword: this.user.updatePassword,
+      canManageOpenings: ctrls['canManageOpenings'].value,
+      canManageUsers: ctrls['canManageUsers'].value,
     };
 
     this.userService.saveUser(toSave).subscribe({
@@ -115,11 +118,6 @@ export class UserDetailDialogComponent implements OnInit {
       splitted[i] = splitted[i][0].toUpperCase() + splitted[i].substring(1);
     }
     return splitted.join(' ');
-  }
-
-  setAdmin(isAdmin: boolean): void {
-    this.user.isAdmin = isAdmin;
-    this.save();
   }
 
   setUpdatePassword(): void {

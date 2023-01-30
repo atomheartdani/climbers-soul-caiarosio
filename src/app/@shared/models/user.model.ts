@@ -5,7 +5,8 @@ export interface User {
   lastname: string;
   email: string;
   tosConsent: boolean;
-  isAdmin: boolean;
   isCaiArosio: boolean;
   updatePassword: boolean;
+  canManageOpenings: boolean;
+  canManageUsers: boolean;
 }

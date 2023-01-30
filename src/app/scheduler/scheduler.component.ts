@@ -67,9 +67,9 @@ export class SchedulerComponent implements OnInit {
     });
   }
 
-  get isLoggedUserAdmin(): boolean {
+  get canManageOpenings(): boolean {
     if (this.credentialsService.isAuthenticated()) {
-      return this.credentialsService.credentials?.isAdmin!;
+      return this.credentialsService.credentials?.canManageOpenings!;
     }
     return false;
   }

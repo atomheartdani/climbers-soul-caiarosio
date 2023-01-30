@@ -32,8 +32,8 @@ export class ShellComponent implements OnInit {
       });
   }
 
-  get isAdmin(): boolean {
+  get canManageUsers(): boolean {
     const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.isAdmin : false;
+    return credentials ? credentials.canManageUsers : false;
   }
 }

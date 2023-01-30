@@ -42,9 +42,9 @@ export class HeaderComponent implements OnInit {
     return credentials ? credentials.username : null;
   }
 
-  get isAdmin(): boolean {
+  get canManageUsers(): boolean {
     const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.isAdmin : false;
+    return credentials ? credentials.canManageUsers : false;
   }
 
   get title(): string {

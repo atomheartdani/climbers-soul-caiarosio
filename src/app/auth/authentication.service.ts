@@ -39,8 +39,9 @@ export class AuthenticationService {
           firstname: token.data.firstname,
           lastname: token.data.lastname,
           email: token.data.email,
-          isAdmin: token.data.isAdmin,
           updatePassword: token.data.updatePassword,
+          canManageOpenings: token.data.canManageOpenings,
+          canManageUsers: token.data.canManageUsers,
           token: result.access_token,
         };
         return data;

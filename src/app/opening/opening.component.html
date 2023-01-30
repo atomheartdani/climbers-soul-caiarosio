@@ -21,7 +21,7 @@
     <p class="mat-body" *ngIf="isSpecialEvent">{{ opening.special }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="manage()" *ngIf="isLoggedUserAdmin">Gestisci</button>
+    <button mat-raised-button color="primary" (click)="manage()" *ngIf="canManageOpenings">Gestisci</button>
     <button
       mat-raised-button
       color="primary"

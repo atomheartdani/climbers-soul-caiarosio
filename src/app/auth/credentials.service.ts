@@ -6,8 +6,9 @@ export interface Credentials {
   firstname: string;
   lastname: string;
   email: string;
-  isAdmin: boolean;
   updatePassword: boolean;
+  canManageOpenings: boolean;
+  canManageUsers: boolean;
   token: string;
 }
 

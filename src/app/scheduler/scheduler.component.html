@@ -22,7 +22,7 @@
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
-  <button mat-fab color="primary" (click)="insertOpening()" *ngIf="isLoggedUserAdmin">
+  <button mat-fab color="primary" (click)="insertOpening()" *ngIf="canManageOpenings">
     <mat-icon>add</mat-icon>
   </button>
 </div>

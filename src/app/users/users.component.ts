@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   dataSource: UsersDataSource;
   isLoading: boolean = false;
 
-  displayedColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'isAdmin', 'actions'];
+  displayedColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -60,9 +60,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       lastname: '',
       email: '',
       tosConsent: false,
-      isAdmin: false,
       isCaiArosio: false,
       updatePassword: true,
+      canManageOpenings: false,
+      canManageUsers: false,
     };
 
     const dialogRef = this.dialog.open(UserDetailDialogComponent, { data: newUser });

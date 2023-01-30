@@ -77,9 +77,9 @@ export class OpeningComponent implements OnInit {
     return !!this.opening.special;
   }
 
-  get isLoggedUserAdmin(): boolean {
+  get canManageOpenings(): boolean {
     if (this.credentialsService.isAuthenticated()) {
-      return this.credentialsService.credentials?.isAdmin!;
+      return this.credentialsService.credentials?.canManageOpenings!;
     }
     return false;
   }
