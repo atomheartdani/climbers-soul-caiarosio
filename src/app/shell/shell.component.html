@@ -20,10 +20,16 @@
           <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">
             <span translate>About</span>
           </a>
-          <!--<mat-divider></mat-divider>
-          <a mat-list-item routerLink="/users" routerLinkActive="active" (click)="sidenav.close()" *ngIf="canManageUsers">
+          <mat-divider></mat-divider>
+          <a
+            mat-list-item
+            routerLink="/users"
+            routerLinkActive="active"
+            (click)="sidenav.close()"
+            *ngIf="canManageUsers"
+          >
             <span translate>Utenti</span>
-          </a>-->
+          </a>
         </mat-list>
       </nav>
     </mat-sidenav>
