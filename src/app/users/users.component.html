@@ -7,7 +7,12 @@
       <div class="error-message" *ngIf="dataSource.error$ | async">
         <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
       </div>
-      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="(dataSource.error$ | async) === false">
+      <div
+        class="operations"
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+        *ngIf="(dataSource.error$ | async) === false"
+      >
         <button mat-raised-button color="primary" (click)="create()">
           Crea utente
           <mat-icon>add</mat-icon>
@@ -18,6 +23,9 @@
           <ng-container matColumnDef="username">
             <mat-header-cell *matHeaderCellDef>
               <mat-label>Username</mat-label>
+              <mat-form-field>
+                <input matInput placeholder="Filtro..." #filterUsername />
+              </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.username }}
@@ -27,6 +35,9 @@
           <ng-container matColumnDef="firstname">
             <mat-header-cell *matHeaderCellDef>
               <mat-label>Nome</mat-label>
+              <mat-form-field>
+                <input matInput placeholder="Filtro..." #filterFirstname />
+              </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.firstname }}
@@ -36,6 +47,9 @@
           <ng-container matColumnDef="lastname">
             <mat-header-cell *matHeaderCellDef>
               <mat-label>Cognome</mat-label>
+              <mat-form-field>
+                <input matInput placeholder="Filtro..." #filterLastname />
+              </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.lastname }}
@@ -45,6 +59,9 @@
           <ng-container matColumnDef="email">
             <mat-header-cell *matHeaderCellDef>
               <mat-label>Email</mat-label>
+              <mat-form-field>
+                <input matInput placeholder="Filtro..." #filterEmail />
+              </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.email }}
@@ -63,6 +80,13 @@
           <ng-container matColumnDef="admin">
             <mat-header-cell *matHeaderCellDef>
               <mat-label>Admin</mat-label>
+              <mat-form-field>
+                <mat-select multiple [formControl]="filterAdmin">
+                  <mat-option *ngFor="let adminOption of adminOptions" [value]="adminOption.value">
+                    {{ adminOption.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element | userRbacAcronym }}

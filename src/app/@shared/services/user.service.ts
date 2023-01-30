@@ -10,10 +10,11 @@ import { User } from '../models/user.model';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  getAll(pageIndex: number, pageSize: number): Observable<Page<User>> {
+  getAll(filter: string, pageIndex: number, pageSize: number): Observable<Page<User>> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let params = new HttpParams();
+    params = params.append('filter', filter);
     params = params.append('pageIndex', pageIndex);
     params = params.append('pageSize', pageSize);
 

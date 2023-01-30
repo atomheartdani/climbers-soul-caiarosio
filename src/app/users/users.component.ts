@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,7 +8,7 @@ import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dial
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { AuthenticationGuard, CredentialsService } from '@app/auth';
-import { tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, tap } from 'rxjs';
 import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
 import { UsersDataSource } from './users.datasource';
 
@@ -17,12 +18,22 @@ import { UsersDataSource } from './users.datasource';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit, AfterViewInit {
+  private filter = {};
   dataSource: UsersDataSource;
   isLoading: boolean = false;
 
+  adminOptions = [
+    { label: 'Calendario', value: 'canManageOpenings' },
+    { label: 'Utenti', value: 'canManageUsers' },
+  ];
   displayedColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild('filterUsername') filterUsername: ElementRef;
+  @ViewChild('filterFirstname') filterFirstname: ElementRef;
+  @ViewChild('filterLastname') filterLastname: ElementRef;
+  @ViewChild('filterEmail') filterEmail: ElementRef;
+  filterAdmin: FormControl = new FormControl();
 
   constructor(
     private dialog: MatDialog,
@@ -41,6 +52,27 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.paginator.page.pipe(tap(() => this.refresh())).subscribe();
+
+    const filtersList = [this.filterUsername, this.filterFirstname, this.filterLastname, this.filterEmail];
+    const filtersNameList = ['username', 'firstname', 'lastname', 'email'];
+
+    for (let i = 0; i < filtersList.length; i++) {
+      fromEvent(filtersList[i].nativeElement, 'keyup')
+        .pipe(
+          debounceTime(250),
+          distinctUntilChanged(),
+          tap(() => this.applyFilter(filtersList[i].nativeElement.value, filtersNameList[i]))
+        )
+        .subscribe();
+    }
+
+    this.filterAdmin.valueChanges
+      .pipe(
+        debounceTime(250),
+        distinctUntilChanged(),
+        tap(() => this.applyFilterAdmin(this.filterAdmin.value))
+      )
+      .subscribe();
   }
 
   edit(user: User): void {
@@ -103,8 +135,37 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
+  applyFilter(value: any, name: string): void {
+    this.filter = {
+      ...this.filter,
+      [name]: value,
+    };
+
+    if (!value) {
+      delete this.filter[name];
+    }
+
+    this.paginator.pageIndex = 0;
+    this.refresh();
+  }
+
+  applyFilterAdmin(value: string[]): void {
+    delete this.filter['canManageOpenings'];
+    delete this.filter['canManageUsers'];
+
+    value.forEach((val) => {
+      this.filter = {
+        ...this.filter,
+        [val]: '1',
+      };
+    });
+
+    this.paginator.pageIndex = 0;
+    this.refresh();
+  }
+
   refresh() {
-    this.dataSource.loadUsers(this.paginator.pageIndex, this.paginator.pageSize);
+    this.dataSource.loadUsers(JSON.stringify(this.filter), this.paginator.pageIndex, this.paginator.pageSize);
   }
 
   isMyself(user: User): boolean {

@@ -24,6 +24,17 @@
 .mat-table {
   .mat-header-cell {
     display: block;
+
+    mat-label {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  .mat-form-field {
+    display: block;
+    padding: 0 30px 0 0;
   }
 
   .mat-row:hover {

@@ -26,12 +26,12 @@ export class UsersDataSource extends DataSource<User> {
     this.errorSubject.complete();
   }
 
-  loadUsers(pageIndex: number = 0, pageSize: number = 25): void {
+  loadUsers(filter: string = '', pageIndex: number = 0, pageSize: number = 25): void {
     this.loadingSubject.next(true);
     this.errorSubject.next(false);
 
     this.userService
-      .getAll(pageIndex, pageSize)
+      .getAll(filter, pageIndex, pageSize)
       .pipe(
         catchError(() => {
           this.errorSubject.next(true);
