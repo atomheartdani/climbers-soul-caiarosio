@@ -106,20 +106,6 @@ export class OpeningComponent implements OnInit {
     return this.opening.maxReservations - this.occupiedSpaces;
   }
 
-  get tooltip(): string {
-    if (this.isSpecialEvent) {
-      return 'Evento speciale. Verificare sul sito del CAI Arosio';
-    } else if (this.spaceFull) {
-      return 'Non ci sono posti disponibili per questo giorno';
-    } else if (this.spaceAlmostFull) {
-      return 'Posti quasi esauriti';
-    } else if (!this.isReservable) {
-      return 'Iscrizioni non ancora aperte';
-    } else {
-      return '';
-    }
-  }
-
   get isReservable(): boolean {
     const openingDate = new Date(this.opening.date);
     const today = new Date();

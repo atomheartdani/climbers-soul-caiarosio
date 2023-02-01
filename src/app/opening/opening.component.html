@@ -1,23 +1,30 @@
-<mat-card [ngClass]="{ 'special-event': isSpecialEvent }" [matTooltip]="tooltip">
+<mat-card [ngClass]="{ 'special-event': isSpecialEvent }">
   <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between">
     <mat-card-title> {{ opening.date }} </mat-card-title>
     <mat-icon
       aria-label="avaiable"
       fontIcon="check_circle"
       class="avaiable"
-      *ngIf="spaceAvaiable && !isSpecialEvent"
+      *ngIf="isReservable && spaceAvaiable && !isSpecialEvent"
     ></mat-icon>
     <mat-icon
       aria-label="almost full"
       fontIcon="warning"
       class="almost-full"
-      *ngIf="spaceAlmostFull && !isSpecialEvent"
+      *ngIf="isReservable && spaceAlmostFull && !isSpecialEvent"
     ></mat-icon>
-    <mat-icon aria-label="full" fontIcon="dangerous" class="full" *ngIf="spaceFull && !isSpecialEvent"></mat-icon>
+    <mat-icon
+      aria-label="full"
+      fontIcon="dangerous"
+      class="full"
+      *ngIf="isReservable && spaceFull && !isSpecialEvent"
+    ></mat-icon>
   </mat-card-header>
   <mat-card-content>
-    <p class="mat-body">Orari: {{ opening.from }} - {{ opening.to }}</p>
-    <p class="mat-body" *ngIf="!isSpecialEvent">Posti disponibili: {{ remainingSpaces }}</p>
+    <p class="mat-body" *ngIf="!isSpecialEvent">Orari: {{ opening.from }} - {{ opening.to }}</p>
+    <p class="mat-body" *ngIf="!isReservable">Prenotazioni non ancora aperte</p>
+    <p class="mat-body" *ngIf="isReservable && !isSpecialEvent">Posti disponibili: {{ remainingSpaces }}</p>
+    <p class="mat-body" *ngIf="isSpecialEvent">Evento speciale</p>
     <p class="mat-body" *ngIf="isSpecialEvent">{{ opening.special }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
