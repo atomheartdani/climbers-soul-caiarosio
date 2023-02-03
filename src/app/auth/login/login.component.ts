@@ -67,10 +67,11 @@ export class LoginComponent implements OnInit {
   }
 
   private createForm() {
+    let remember = this.credentialsService.isRemeberActive();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      remember: false,
+      remember: remember,
     });
   }
 }

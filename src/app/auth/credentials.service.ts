@@ -40,6 +40,17 @@ export class CredentialsService {
   }
 
   /**
+   * Check for user credentials persistence across sessions
+   * @returns True if the user wanted to be remembered across sessions
+   */
+  isRemeberActive(): boolean {
+    if (localStorage.getItem(credentialsKey)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Gets the user credentials.
    * @return The user credentials or null if the user is not authenticated.
    */
