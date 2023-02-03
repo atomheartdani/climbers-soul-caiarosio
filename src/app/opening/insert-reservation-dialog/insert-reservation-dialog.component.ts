@@ -52,6 +52,7 @@ export class InsertReservationDialogComponent implements OnInit {
         let error: string = "C'è stato un errore durante il salvataggio. ";
         if (e['status'] === 401) {
           error += "Rieseguire l'accesso";
+          this.dialogRef.close(0);
         } else if (e['status'] === 409) {
           error += 'Numero massimo di prenotazioni raggiunto';
         } else {

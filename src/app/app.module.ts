@@ -23,6 +23,7 @@ import { CacheInterceptor } from './@shared/http/cache.interceptor';
 import { MatPaginatorIntlIta } from './@shared/mat-paginator-intl-ita';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { AuthExpiredInterceptor } from './@shared/http/auth-expired.interceptor';
 
 const routes: Routes = [];
 
@@ -62,6 +63,11 @@ const routes: Routes = [];
       useClass: AuthHeaderInterceptor,
       multi: true,
       deps: [CredentialsService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,

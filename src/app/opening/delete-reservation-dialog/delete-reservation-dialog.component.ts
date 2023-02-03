@@ -51,6 +51,7 @@ export class DeleteReservationDialogComponent implements OnInit {
         let error: string = "C'è stato un errore durante la cancellazione della prenotazione. ";
         if (e['status'] === 401) {
           error += "Rieseguire l'accesso";
+          this.dialogRef.close(0);
         } else {
           error += 'Riprovare più tardi';
         }

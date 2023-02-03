@@ -88,6 +88,7 @@ export class UserDetailDialogComponent implements OnInit {
         let error: string = "C'è stato un errore durante il salvataggio. ";
         if (e['status'] === 401) {
           error += "Rieseguire l'accesso";
+          this.dialogRef.close(0);
         } else {
           error += 'Riprovare più tardi';
         }
