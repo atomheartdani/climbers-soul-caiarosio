@@ -1,10 +1,9 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
-import { filter } from 'rxjs/operators';
-
-import { UntilDestroy, untilDestroyed } from '@shared';
 import { CredentialsService } from '@app/auth';
+import { UntilDestroy, untilDestroyed } from '@shared';
+import { filter } from 'rxjs/operators';
 
 @UntilDestroy()
 @Component({

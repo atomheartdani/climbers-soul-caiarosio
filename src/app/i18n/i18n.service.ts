@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
-
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Logger } from '@shared';
+import { Subscription } from 'rxjs';
 import itIT from '../../translations/it-IT.json';
 
 const log = new Logger('I18nService');

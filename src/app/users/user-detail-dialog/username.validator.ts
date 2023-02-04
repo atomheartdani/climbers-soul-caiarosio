@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AsyncValidator, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
 import { UserService } from '@app/@shared/services/user.service';
-import { Observable, map, catchError, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsernameValidator implements AsyncValidator {

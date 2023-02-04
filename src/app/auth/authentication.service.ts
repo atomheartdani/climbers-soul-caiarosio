@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '@app/@shared/services/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of, map } from 'rxjs';
-
+import { map, Observable, of } from 'rxjs';
 import { Credentials, CredentialsService } from './credentials.service';
 
 export interface LoginContext {

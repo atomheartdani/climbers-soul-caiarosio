@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
+import { OpeningModule } from '@app/opening/opening.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { SchedulerComponent } from './scheduler.component';
-import { OpeningModule } from '@app/opening/opening.module';
 
 @NgModule({
   declarations: [SchedulerComponent],

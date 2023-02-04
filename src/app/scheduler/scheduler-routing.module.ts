@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-
 import { SchedulerComponent } from './scheduler.component';
 
 const routes: Routes = [{ path: '', component: SchedulerComponent, data: { title: marker('Scheduler') } }];

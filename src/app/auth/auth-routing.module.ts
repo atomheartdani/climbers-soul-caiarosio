@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-
 import { LoginComponent } from './login/login.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 
