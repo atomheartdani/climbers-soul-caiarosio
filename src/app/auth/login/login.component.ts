@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
         }),
         untilDestroyed(this)
       )
-      .subscribe(
-        (credentials) => {
+      .subscribe({
+        next: (credentials) => {
           log.debug(`${credentials.username} successfully logged in`);
           let redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
           let remember = this.loginForm.controls['remember'].value;
@@ -58,11 +58,11 @@ export class LoginComponent implements OnInit {
             this.router.navigate([redirectUrl], { replaceUrl: true });
           }
         },
-        (error) => {
-          log.debug(`Login error: ${error}`, error);
-          this.error = error;
-        }
-      );
+        error: (e) => {
+          log.debug(`Login error: ${e}`, e);
+          this.error = e;
+        },
+      });
   }
 
   private createForm() {
