@@ -1,13 +1,17 @@
 <div class="container">
   <mat-card>
     <mat-card-content>
-      <div class="operations" fxLayout="row" fxLayoutAlign="space-around center">
+      <div class="operations">
         <button mat-raised-button color="primary" (click)="create()">
           Crea utente
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <app-user-list></app-user-list>
+      <h2 class="mat-h2">Utenti</h2>
+      <app-user-list [toVerify]="false"></app-user-list>
+      <div class="spacer"></div>
+      <h2 class="mat-h2">Utenti da verificare</h2>
+      <app-user-list [toVerify]="true"></app-user-list>
     </mat-card-content>
   </mat-card>
 </div>

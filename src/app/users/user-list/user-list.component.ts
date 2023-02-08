@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,6 +18,7 @@ import { UsersDataSource } from '../users.datasource';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit, AfterViewInit {
+  @Input() toVerify: boolean;
   private filter = {};
   dataSource: UsersDataSource;
   isLoading: boolean = false;
@@ -46,6 +47,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.filter = { toVerify: this.toVerify };
     this.dataSource = new UsersDataSource(this.userService);
     this.refresh();
   }
