@@ -11,6 +11,9 @@ import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dial
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  usersColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
+  usersToVerifyColumns = ['username', 'firstname', 'lastname', 'email', 'actions'];
+
   constructor(
     private dialog: MatDialog,
     private authGuard: AuthenticationGuard,

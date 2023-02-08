@@ -18,6 +18,7 @@ import { UsersDataSource } from '../users.datasource';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit, AfterViewInit {
+  @Input() columns = {};
   @Input() toVerify: boolean;
   private filter = {};
   dataSource: UsersDataSource;
@@ -27,7 +28,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
     { label: 'Calendario', value: 'canManageOpenings' },
     { label: 'Utenti', value: 'canManageUsers' },
   ];
-  displayedColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('filterUsername') filterUsername: ElementRef;
