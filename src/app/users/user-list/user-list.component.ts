@@ -8,10 +8,12 @@ import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dial
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { AuthenticationGuard, CredentialsService } from '@app/auth';
-import { debounceTime, distinctUntilChanged, fromEvent, tap } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime, distinctUntilChanged, fromEvent, Observable, tap } from 'rxjs';
 import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
 import { UsersDataSource } from '../users.datasource';
 
+@UntilDestroy()
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -20,6 +22,7 @@ import { UsersDataSource } from '../users.datasource';
 export class UserListComponent implements OnInit, AfterViewInit {
   @Input() columns = {};
   @Input() toVerify: boolean;
+  @Input() event: Observable<void>;
   private filter = {};
   dataSource: UsersDataSource;
   isLoading: boolean = false;
@@ -49,6 +52,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.filter = { toVerify: this.toVerify };
     this.dataSource = new UsersDataSource(this.userService);
+    this.event.pipe(untilDestroyed(this)).subscribe(() => this.refresh());
     this.refresh();
   }
 

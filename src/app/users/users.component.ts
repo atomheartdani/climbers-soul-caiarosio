@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@app/@shared/models/user.model';
 import { AuthenticationGuard } from '@app/auth';
+import { Observable, Subject } from 'rxjs';
 import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
 
 @Component({
@@ -13,6 +14,7 @@ import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dial
 export class UsersComponent implements OnInit {
   usersColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
   usersToVerifyColumns = ['username', 'firstname', 'lastname', 'email', 'actions'];
+  refreshSubject: Subject<void> = new Subject<void>();
 
   constructor(
     private dialog: MatDialog,
@@ -40,8 +42,12 @@ export class UsersComponent implements OnInit {
 
       const dialogRef = this.dialog.open(UserDetailDialogComponent, { data: newUser });
       dialogRef.afterClosed().subscribe((result) => {
-        // TODO refresh datasource
+        this.refreshSubject.next();
       });
     }
+  }
+
+  get event(): Observable<void> {
+    return this.refreshSubject.asObservable();
   }
 }
