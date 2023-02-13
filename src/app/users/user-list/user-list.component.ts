@@ -21,7 +21,7 @@ import { UsersDataSource } from '../users.datasource';
 })
 export class UserListComponent implements OnInit, AfterViewInit {
   @Input() columns = {};
-  @Input() toVerify: boolean;
+  @Input() isVerified: boolean;
   @Input() event: Observable<void>;
   private filter = {};
   dataSource: UsersDataSource;
@@ -50,7 +50,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.filter = { toVerify: this.toVerify };
+    this.filter = { isVerified: this.isVerified };
     this.dataSource = new UsersDataSource(this.userService);
     this.event.pipe(untilDestroyed(this)).subscribe(() => this.refresh());
     this.refresh();

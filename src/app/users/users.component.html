@@ -8,10 +8,10 @@
         </button>
       </div>
       <h2 class="mat-h2">Utenti</h2>
-      <app-user-list [columns]="usersColumns" [toVerify]="false" [event]="event"></app-user-list>
+      <app-user-list [columns]="usersColumns" [isVerified]="true" [event]="event"></app-user-list>
       <div class="spacer"></div>
       <h2 class="mat-h2">Utenti da verificare</h2>
-      <app-user-list [columns]="usersToVerifyColumns" [toVerify]="true" [event]="event"></app-user-list>
+      <app-user-list [columns]="usersToVerifyColumns" [isVerified]="false" [event]="event"></app-user-list>
     </mat-card-content>
   </mat-card>
 </div>
