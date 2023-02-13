@@ -9,4 +9,5 @@ export interface User {
   updatePassword: boolean;
   canManageOpenings: boolean;
   canManageUsers: boolean;
+  isVerified: boolean;
 }

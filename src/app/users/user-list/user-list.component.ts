@@ -90,26 +90,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  create(): void {
-    let newUser: User = {
-      id: 0,
-      username: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      tosConsent: false,
-      isCaiArosio: false,
-      updatePassword: true,
-      canManageOpenings: false,
-      canManageUsers: false,
-    };
-
-    const dialogRef = this.dialog.open(UserDetailDialogComponent, { data: newUser });
-    dialogRef.afterClosed().subscribe((result) => {
-      this.refresh();
-    });
-  }
-
   delete(user: User): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
       const action = "Stai per cancellare l'utente " + user.username;

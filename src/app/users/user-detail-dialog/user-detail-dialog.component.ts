@@ -35,6 +35,7 @@ export class UserDetailDialogComponent implements OnInit {
       email: [this.data.email, [Validators.required, Validators.email]],
       tosConsent: [this.data.tosConsent],
       isCaiArosio: [this.data.isCaiArosio],
+      isVerified: [this.data.isVerified],
       canManageOpenings: [{ value: this.data.canManageOpenings, disabled: this.isMyself }],
       canManageUsers: [{ value: this.data.canManageUsers, disabled: this.isMyself }],
     });
@@ -75,6 +76,7 @@ export class UserDetailDialogComponent implements OnInit {
       updatePassword: this.user.updatePassword,
       canManageOpenings: ctrls['canManageOpenings'].value,
       canManageUsers: ctrls['canManageUsers'].value,
+      isVerified: ctrls['isVerified'].value,
     };
 
     this.userService.saveUser(toSave).subscribe({

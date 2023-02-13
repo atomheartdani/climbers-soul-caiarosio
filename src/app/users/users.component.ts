@@ -38,6 +38,7 @@ export class UsersComponent implements OnInit {
         updatePassword: true,
         canManageOpenings: false,
         canManageUsers: false,
+        isVerified: true,
       };
 
       const dialogRef = this.dialog.open(UserDetailDialogComponent, { data: newUser });
