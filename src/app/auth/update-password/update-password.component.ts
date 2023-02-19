@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@app/@shared/services/user.service';
+import { UpdatePasswordValidator } from '@app/@shared/validators/update-password.validator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { finalize } from 'rxjs';
 import { Credentials, CredentialsService } from '../credentials.service';
-import { UpdatePasswordValidator } from './update-password.validator';
 
 const passwordMinLength: number = 16;
 

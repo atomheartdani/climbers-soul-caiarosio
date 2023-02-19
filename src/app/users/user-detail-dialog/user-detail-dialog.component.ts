@@ -4,9 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
+import { UsernameValidator } from '@app/@shared/validators/username.validator';
 import { CredentialsService } from '@app/auth';
 import { debounceTime } from 'rxjs';
-import { UsernameValidator } from './username.validator';
 
 @Component({
   selector: 'app-user-detail-dialog',
