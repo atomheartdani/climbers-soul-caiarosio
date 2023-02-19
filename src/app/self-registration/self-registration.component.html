@@ -1,0 +1,95 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      <h1 class="mat-h1">Crea il tuo account</h1>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-stepper linear #stepper>
+        <mat-step [stepControl]="selfRegistrationForm" label="Inserisci i dati">
+          <form [formGroup]="selfRegistrationForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput id="firstname" formControlName="firstname" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Cognome</mat-label>
+              <input matInput id="lastname" formControlName="lastname" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput id="username" formControlName="username" />
+              <mat-error *ngIf="selfRegistrationForm.get('username')?.hasError('usernameAlreadyExists')">
+                Username gia' in uso
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput id="email" formControlName="email" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Sezione CAI</mat-label>
+              <input matInput id="caiSection" formControlName="caiSection" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput id="newPassword1" formControlName="newPassword1" type="password" />
+              <mat-error
+                *ngIf="
+                  selfRegistrationForm.controls['newPassword1'].invalid &&
+                  selfRegistrationForm.controls['newPassword1'].touched
+                "
+              >
+                <span>La nuova password è obbligatoria e deve essere lunga almeno {{ pwdMinLength }} caratteri </span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Conferma Password</mat-label>
+              <input matInput id="newPassword2" formControlName="newPassword2" type="password" />
+              <mat-error
+                *ngIf="
+                  selfRegistrationForm.controls['newPassword2'].invalid &&
+                  selfRegistrationForm.controls['newPassword2'].touched
+                "
+              >
+                <span>La nuova password è obbligatoria e deve essere lunga almeno {{ pwdMinLength }} caratteri </span>
+              </mat-error>
+            </mat-form-field>
+
+            <div class="password-error" *ngIf="selfRegistrationForm.errors?.['passwordsDontMatch']">
+              <span>La nuova password e la password di conferma non corrispondono</span>
+            </div>
+
+            <button
+              mat-raised-button
+              matStepperNext
+              color="primary"
+              [disabled]="selfRegistrationForm.invalid || isProgressing"
+              (click)="save(stepper)"
+            >
+              Avanti
+            </button>
+          </form>
+        </mat-step>
+
+        <mat-step label="Fine" state="done">
+          <h2 class="mat-h2">Finito!</h2>
+          <p class="mat-body">Il tuo account è stato creato con successo</p>
+          <p class="mat-body">
+            Potrai inserire le tue prenotazioni non appena riceverai l'email che conferma l'attivazione del tuo profilo
+          </p>
+          <p class="mat-body">
+            Ricordati di leggere il <a color="primary" href="./#/rules">regolamento</a> e di consegnarlo compilato la
+            prima volta che verrai a trovarci
+          </p>
+          <p class="mat-body">Per qualsiasi problema non esitare a contattarci!</p>
+        </mat-step>
+      </mat-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

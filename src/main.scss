@@ -59,3 +59,8 @@
     width: 100%;
   }
 }
+
+// Disable stepper navigation from headers
+.mat-step-header {
+  pointer-events: none !important;
+}

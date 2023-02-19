@@ -1,0 +1,70 @@
+@import "src/theme/theme-variables";
+
+.container {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2em 1em;
+}
+
+.mat-card {
+  flex-basis: 40%;
+  max-width: 700px;
+
+  @media (max-width: 1201px) {
+    flex-basis: 50%;
+  }
+
+  @media (max-width: 992px) {
+    flex-basis: 60%;
+  }
+
+  @media (max-width: 768px) {
+    flex-basis: 80%;
+  }
+
+  @media (max-width: 576px) {
+    flex-basis: 100%;
+  }
+}
+
+.mat-card-title {
+  text-align: center;
+}
+
+.mat-card-content {
+  text-align: justify;
+}
+
+.mat-h2 {
+  text-align: center;
+}
+
+form {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-form-field {
+  flex-basis: 100%;
+}
+
+.mat-stepper-next {
+  margin-top: 30px;
+}
+
+.password-error {
+  color: mat-color($app-warn);
+}
+
+a {
+  color: mat-color($app-primary);
+  text-decoration: none;
+}
