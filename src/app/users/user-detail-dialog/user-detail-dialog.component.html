@@ -27,10 +27,11 @@
         <input matInput id="email" formControlName="email" />
       </mat-form-field>
     </div>
-    <div class="fake-form-field">
-      <mat-slide-toggle color="primary" labelPosition="before" formControlName="isCaiArosio">
-        CAI Arosio
-      </mat-slide-toggle>
+    <div>
+      <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
+        <mat-label>Sezione CAI</mat-label>
+        <input matInput id="caiSection" formControlName="caiSection" />
+      </mat-form-field>
     </div>
     <div class="fake-form-field">
       <mat-slide-toggle color="primary" labelPosition="before" formControlName="tosConsent">

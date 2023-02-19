@@ -33,8 +33,8 @@ export class UserDetailDialogComponent implements OnInit {
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],
+      caiSection: [this.data.caiSection, [Validators.required]],
       tosConsent: [this.data.tosConsent],
-      isCaiArosio: [this.data.isCaiArosio],
       isVerified: [this.data.isVerified],
       canManageOpenings: [{ value: this.data.canManageOpenings, disabled: this.isMyself }],
       canManageUsers: [{ value: this.data.canManageUsers, disabled: this.isMyself }],
@@ -44,6 +44,7 @@ export class UserDetailDialogComponent implements OnInit {
   ngOnInit(): void {
     let firstnameCtrl = this.detailForm.get('firstname');
     let lastnameCtrl = this.detailForm.get('lastname');
+    let caiSectionCtrl = this.detailForm.get('caiSection');
 
     firstnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((firstname: string) => {
       firstnameCtrl?.patchValue(this.capitalize(firstname), { emitEvent: false });
@@ -55,6 +56,10 @@ export class UserDetailDialogComponent implements OnInit {
       lastnameCtrl?.patchValue(this.capitalize(lastname), { emitEvent: false });
       let firstname = firstnameCtrl?.value;
       this.updateUsername(firstname, lastname);
+    });
+
+    caiSectionCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((caiSection: string) => {
+      caiSectionCtrl?.patchValue(this.capitalize(caiSection), { emitEvent: false });
     });
   }
 
@@ -71,8 +76,8 @@ export class UserDetailDialogComponent implements OnInit {
       firstname: ctrls['firstname'].value,
       lastname: ctrls['lastname'].value,
       email: ctrls['email'].value,
+      caiSection: ctrls['caiSection'].value,
       tosConsent: ctrls['tosConsent'].value,
-      isCaiArosio: ctrls['isCaiArosio'].value,
       updatePassword: this.user.updatePassword,
       canManageOpenings: ctrls['canManageOpenings'].value,
       canManageUsers: ctrls['canManageUsers'].value,
