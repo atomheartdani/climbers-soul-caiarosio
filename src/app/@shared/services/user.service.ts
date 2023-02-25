@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from '../models/page.model';
-import { User } from '../models/user.model';
+import { User, UserRegistration } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +41,10 @@ export class UserService {
 
   saveUser(user: User): Observable<void> {
     return this.httpClient.post<void>(`/users/save.php`, user);
+  }
+
+  registerUser(user: UserRegistration): Observable<void> {
+    return this.httpClient.post<void>(`/users/register.php`, user);
   }
 
   delete(id: number) {

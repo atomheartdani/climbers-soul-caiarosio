@@ -67,12 +67,12 @@
 
             <button
               mat-raised-button
-              matStepperNext
               color="primary"
               [disabled]="selfRegistrationForm.invalid || isProgressing"
               (click)="save(stepper)"
             >
               Avanti
+              <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
             </button>
           </form>
         </mat-step>

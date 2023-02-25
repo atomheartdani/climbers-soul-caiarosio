@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
-import { User } from '@app/@shared/models/user.model';
+import { UserRegistration } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { UpdatePasswordValidator } from '@app/@shared/validators/update-password.validator';
 import { UsernameValidator } from '@app/@shared/validators/username.validator';
@@ -66,22 +66,16 @@ export class SelfRegistrationComponent implements OnInit {
   save(stepper: MatStepper): void {
     this.isProgressing = true;
     let ctrls = this.selfRegistrationForm.controls;
-    const toSave: User = {
-      id: 0,
+    const toSave: UserRegistration = {
       username: ctrls['username'].value,
       firstname: ctrls['firstname'].value,
       lastname: ctrls['lastname'].value,
       email: ctrls['email'].value,
       caiSection: ctrls['caiSection'].value,
-      tosConsent: false,
-      updatePassword: false,
-      canManageOpenings: false,
-      canManageUsers: false,
-      isVerified: false,
-      // TODO la password! magari fare metodo dedicato su userservice
+      password: ctrls['newPassword1'].value,
     };
 
-    this.userService.saveUser(toSave).subscribe({
+    this.userService.registerUser(toSave).subscribe({
       next: () => {
         this.isProgressing = false;
         this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });

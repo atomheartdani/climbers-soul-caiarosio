@@ -11,3 +11,12 @@ export interface User {
   canManageUsers: boolean;
   isVerified: boolean;
 }
+
+export interface UserRegistration {
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  caiSection: string;
+  password: string;
+}
