@@ -38,7 +38,7 @@
         Regolamento accettato
       </mat-slide-toggle>
     </div>
-    <div class="fake-form-field">
+    <div class="fake-form-field" *ngIf="!this.user.isVerified">
       <mat-slide-toggle color="primary" labelPosition="before" formControlName="isVerified">
         Verificato
       </mat-slide-toggle>
