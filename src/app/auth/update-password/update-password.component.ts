@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { finalize } from 'rxjs';
 import { Credentials, CredentialsService } from '../credentials.service';
 
-const passwordMinLength: number = 16;
+const passwordMinLength: number = 12;
 
 @UntilDestroy()
 @Component({

@@ -8,7 +8,7 @@ import { UpdatePasswordValidator } from '@app/@shared/validators/update-password
 import { UsernameValidator } from '@app/@shared/validators/username.validator';
 import { debounceTime } from 'rxjs';
 
-const passwordMinLength: number = 16;
+const passwordMinLength: number = 12;
 const mainCaiSection: string = 'arosio';
 
 @Component({
