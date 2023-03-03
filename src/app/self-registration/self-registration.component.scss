@@ -52,7 +52,8 @@ form {
   justify-content: center;
 }
 
-mat-form-field {
+mat-form-field,
+.full-width {
   flex-basis: 100%;
 }
 
@@ -67,4 +68,8 @@ mat-form-field {
 a {
   color: mat-color($app-primary);
   text-decoration: none;
+}
+
+.fake-form-field {
+  padding-bottom: 1.34375em;
 }

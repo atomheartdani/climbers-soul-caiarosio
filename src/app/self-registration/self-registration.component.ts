@@ -9,6 +9,7 @@ import { UsernameValidator } from '@app/@shared/validators/username.validator';
 import { debounceTime } from 'rxjs';
 
 const passwordMinLength: number = 16;
+const mainCaiSection: string = 'arosio';
 
 @Component({
   selector: 'app-self-registration',
@@ -18,6 +19,7 @@ const passwordMinLength: number = 16;
 export class SelfRegistrationComponent implements OnInit {
   selfRegistrationForm: FormGroup;
   isProgressing: boolean = false;
+  showSectionHint: boolean = false;
 
   constructor(
     private usernameValidator: UsernameValidator,
@@ -60,6 +62,7 @@ export class SelfRegistrationComponent implements OnInit {
 
     caiSectionCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((caiSection: string) => {
       caiSectionCtrl?.patchValue(this.capitalize(caiSection), { emitEvent: false });
+      this.sectionCheck(caiSection);
     });
   }
 
@@ -108,6 +111,19 @@ export class SelfRegistrationComponent implements OnInit {
       splitted[i] = splitted[i][0].toUpperCase() + splitted[i].substring(1);
     }
     return splitted.join(' ');
+  }
+
+  sectionCheck(caiSection: string) {
+    const lowerCaiSection = caiSection.toLowerCase();
+    if (
+      lowerCaiSection === mainCaiSection ||
+      lowerCaiSection.includes(' ' + mainCaiSection) ||
+      lowerCaiSection.includes(mainCaiSection + ' ')
+    ) {
+      this.showSectionHint = true;
+    } else {
+      this.showSectionHint = false;
+    }
   }
 
   get pwdMinLength(): number {
