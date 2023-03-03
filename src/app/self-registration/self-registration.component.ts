@@ -49,20 +49,23 @@ export class SelfRegistrationComponent implements OnInit {
     let caiSectionCtrl = this.selfRegistrationForm.get('caiSection');
 
     firstnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((firstname: string) => {
-      firstnameCtrl?.patchValue(this.capitalize(firstname), { emitEvent: false });
+      let trimmed = firstname.trim();
+      firstnameCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
       let lastname = lastnameCtrl?.value;
-      this.updateUsername(firstname, lastname);
+      this.updateUsername(trimmed, lastname);
     });
 
     lastnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((lastname: string) => {
-      lastnameCtrl?.patchValue(this.capitalize(lastname), { emitEvent: false });
+      let trimmed = lastname.trim();
+      lastnameCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
       let firstname = firstnameCtrl?.value;
-      this.updateUsername(firstname, lastname);
+      this.updateUsername(firstname, trimmed);
     });
 
     caiSectionCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((caiSection: string) => {
-      caiSectionCtrl?.patchValue(this.capitalize(caiSection), { emitEvent: false });
-      this.sectionCheck(caiSection);
+      let trimmed = caiSection.trim();
+      caiSectionCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
+      this.sectionCheck(trimmed);
     });
   }
 
