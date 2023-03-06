@@ -1,0 +1,13 @@
+@import "src/theme/theme-variables";
+
+img {
+  max-width: 375px;
+
+  @media ($mat-small) {
+    width: 80%;
+  }
+
+  @media ($mat-xsmall) {
+    width: 100%;
+  }
+}

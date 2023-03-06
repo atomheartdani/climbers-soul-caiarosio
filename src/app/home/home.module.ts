@@ -6,9 +6,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { WallComponent } from './wall/wall.component';
 
 @NgModule({
   imports: [CommonModule, TranslateModule, SharedModule, FlexLayoutModule, MaterialModule, HomeRoutingModule],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, WallComponent],
 })
 export class HomeModule {}
