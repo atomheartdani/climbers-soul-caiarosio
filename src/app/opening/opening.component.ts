@@ -106,11 +106,39 @@ export class OpeningComponent implements OnInit {
     return this.opening.maxReservations - this.occupiedSpaces;
   }
 
+  get isAfterCutoff(): boolean {
+    const openingDate = new Date(this.opening.date);
+    const today = new Date();
+
+    // Se ci sono gia' altre prenotazioni, ci si puo' prenotare
+    if (this.opening.reservations.length > 0) {
+      return false;
+    }
+
+    if (openingDate.getMonth() === today.getMonth()) {
+      if (openingDate.getDay() === 6) {
+        // Apertura di sabato
+        if (openingDate.getDate() === today.getDate()) {
+          // "oggi" e' il sabato dell'apertura
+          return true;
+        }
+        if (openingDate.getDate() === today.getDate() + 1) {
+          // "oggi" e' il venerdi' precedente l'apertura
+          if (today.getHours() >= 21) {
+            // Siamo oltre le 21 del venerdi'
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   get isReservable(): boolean {
     const openingDate = new Date(this.opening.date);
     const today = new Date();
     const msBetweenDates = Math.abs(openingDate.getTime() - today.getTime());
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-    return daysBetweenDates <= 30;
+    return daysBetweenDates <= 30 && !this.isAfterCutoff;
   }
 }

@@ -22,8 +22,11 @@
   </mat-card-header>
   <mat-card-content>
     <p class="mat-body" *ngIf="!isSpecialEvent">Orari: {{ opening.from }} - {{ opening.to }}</p>
-    <p class="mat-body" *ngIf="!isReservable">Prenotazioni non ancora aperte</p>
-    <p class="mat-body" *ngIf="isReservable && !isSpecialEvent">Posti disponibili: {{ remainingSpaces }}</p>
+    <p class="mat-body" *ngIf="!isReservable && !isAfterCutoff">Prenotazioni non ancora aperte</p>
+    <p class="mat-body" *ngIf="isAfterCutoff">Prenotazioni chiuse</p>
+    <p class="mat-body" *ngIf="isReservable && !isSpecialEvent">
+      Posti disponibili: {{ remainingSpaces }}/{{ opening.maxReservations }}
+    </p>
     <p class="mat-body" *ngIf="isSpecialEvent">Evento speciale</p>
     <p class="mat-body" *ngIf="isSpecialEvent">{{ opening.special }}</p>
   </mat-card-content>
