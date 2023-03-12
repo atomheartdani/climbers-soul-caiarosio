@@ -13,3 +13,23 @@ a {
   color: mat-color($app-primary);
   text-decoration: none;
 }
+
+b {
+  color: mat-color($app-primary);
+}
+
+.mat-card-wrapper {
+  align-content: stretch;
+  align-items: stretch;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  padding-bottom: 16px;
+
+  mat-card {
+    flex: 1 1 300px;
+  }
+}
