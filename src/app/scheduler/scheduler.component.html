@@ -3,20 +3,16 @@
   <div *ngIf="openingsMap.size === 0">
     <h3 class="mat-h3">Al momento non ci sono aperture in programma</h3>
   </div>
-  <div class="group" fxLayout="row wrap" fxLayoutGap="16px grid" *ngFor="let group of openingsMap | keyvalue">
-    <div fxFlex="100%">
-      <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
-      <mat-divider></mat-divider>
-    </div>
-    <div fxFlex="100%">
-      <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="100%" *ngFor="let opening of group.value">
-          <app-opening [opening]="opening" (refreshEvent)="refresh()"></app-opening>
-        </div>
+  <div class="group" *ngFor="let group of openingsMap | keyvalue">
+    <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
+    <mat-divider></mat-divider>
+    <div class="openings">
+      <div class="opening-wrapper" *ngFor="let opening of group.value">
+        <app-opening [opening]="opening" (refreshEvent)="refresh()"></app-opening>
       </div>
     </div>
   </div>
-  <div class="load-all" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="openingsMap.size !== 0">
+  <div class="load-all" *ngIf="openingsMap.size !== 0">
     <button mat-raised-button color="primary" (click)="loadAllOpenings()" *ngIf="!loadAll">
       Carica tutto
       <mat-icon>refresh</mat-icon>
