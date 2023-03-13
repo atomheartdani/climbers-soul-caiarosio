@@ -16,7 +16,7 @@
         <mat-datepicker #openingDatePicker></mat-datepicker>
       </mat-form-field>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div class="multi-field-row">
       <mat-form-field appearance="outline">
         <mat-label>Orario apertura</mat-label>
         <input matInput id="from" formControlName="from" />
@@ -30,21 +30,17 @@
         <input matInput id="maxReservations" formControlName="maxReservations" type="number" />
       </mat-form-field>
     </div>
-    <div>
-      <mat-form-field appearance="outline" fxFlex="100%">
-        <mat-label>Evento speciale</mat-label>
-        <input matInput id="special" formControlName="special" />
-      </mat-form-field>
-    </div>
-    <div *ngIf="opening.id !== 0">
-      <mat-form-field appearance="outline" fxFlex="100%">
-        <mat-label>Persone prenotate</mat-label>
-        <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
-        <mat-chip-list class="mat-chip-list-stacked">
-          <mat-chip *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip>
-        </mat-chip-list>
-      </mat-form-field>
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Evento speciale</mat-label>
+      <input matInput id="special" formControlName="special" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="opening.id !== 0">
+      <mat-label>Persone prenotate</mat-label>
+      <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
+      <mat-chip-list class="mat-chip-list-stacked">
+        <mat-chip *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">

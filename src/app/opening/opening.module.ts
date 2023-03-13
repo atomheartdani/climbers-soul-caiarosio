@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
@@ -11,15 +10,7 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
 import { OpeningComponent } from './opening.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TranslateModule,
-    SharedModule,
-    FlexLayoutModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, TranslateModule, SharedModule, MaterialModule, FormsModule, ReactiveFormsModule],
   declarations: [
     OpeningComponent,
     OpeningDetailDialogComponent,

@@ -1,15 +1,15 @@
 <h1 class="mat-h1">Prenota posto</h1>
-<mat-dialog-content fxLayout="column" fxLayoutAlign="space-around center">
+<mat-dialog-content>
   <p class="mat-body">Stai per prenotarti per questo slot:</p>
   <p class="mat-body">{{ opening.date }} dalle {{ opening.from }} alle {{ opening.to }}</p>
   <p class="mat-body">Vuoi prenotare anche per il tuo socio di arrampicata?</p>
   <mat-radio-group [(ngModel)]="reservePartner">
-    <mat-radio-button class="mat-body" color="primary" labelPosition="before" tabindex="-1" [value]="true"
-      >Si</mat-radio-button
-    >
-    <mat-radio-button class="mat-body" color="primary" labelPosition="before" tabindex="-1" [value]="false"
-      >No</mat-radio-button
-    >
+    <mat-radio-button class="mat-body" color="primary" labelPosition="before" tabindex="-1" [value]="true">
+      Si
+    </mat-radio-button>
+    <mat-radio-button class="mat-body" color="primary" labelPosition="before" tabindex="-1" [value]="false">
+      No
+    </mat-radio-button>
   </mat-radio-group>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
