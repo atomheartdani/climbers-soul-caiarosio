@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
@@ -14,7 +13,6 @@ import { SelfRegistrationComponent } from './self-registration.component';
     CommonModule,
     TranslateModule,
     SharedModule,
-    FlexLayoutModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
