@@ -57,8 +57,25 @@ export class OpeningComponent implements OnInit {
     }
   }
 
-  fullnessPercent(): number {
-    return this.occupiedSpaces / this.opening.maxReservations;
+  private fullnessPercent(): number {
+    return this.getOccupiedSpaces() / this.opening.maxReservations;
+  }
+
+  private getOccupiedSpaces(): number {
+    let reservedSpots: number = this.opening.reservations.length;
+    this.opening.reservations.forEach((r) => {
+      if (r.reservePartner) {
+        reservedSpots++;
+      }
+    });
+    return reservedSpots;
+  }
+
+  private daysUntilOpening(): number {
+    const openingDate = new Date(this.opening.date);
+    const today = new Date();
+    const msBetweenDates = openingDate.getTime() - today.getTime();
+    return msBetweenDates / (24 * 60 * 60 * 1000);
   }
 
   get spaceAlmostFull(): boolean {
@@ -88,16 +105,6 @@ export class OpeningComponent implements OnInit {
     return false;
   }
 
-  get occupiedSpaces(): number {
-    let reservedSpots: number = this.opening.reservations.length;
-    this.opening.reservations.forEach((r) => {
-      if (r.reservePartner) {
-        reservedSpots++;
-      }
-    });
-    return reservedSpots;
-  }
-
   get isAfterCutoff(): boolean {
     const openingDate = new Date(this.opening.date);
     const today = new Date();
@@ -124,13 +131,6 @@ export class OpeningComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  private daysUntilOpening(): number {
-    const openingDate = new Date(this.opening.date);
-    const today = new Date();
-    const msBetweenDates = openingDate.getTime() - today.getTime();
-    return msBetweenDates / (24 * 60 * 60 * 1000);
   }
 
   get isReservable(): boolean {
@@ -165,7 +165,7 @@ export class OpeningComponent implements OnInit {
     } else if (this.isAfterCutoff) {
       return 'La palestra rimarrà chiusa';
     } else {
-      const remainingSpaces = this.opening.maxReservations - this.occupiedSpaces;
+      const remainingSpaces = this.opening.maxReservations - this.getOccupiedSpaces();
       return 'Posti disponibili: ' + remainingSpaces + '/' + this.opening.maxReservations;
     }
   }
