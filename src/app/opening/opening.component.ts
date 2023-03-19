@@ -98,10 +98,6 @@ export class OpeningComponent implements OnInit {
     return reservedSpots;
   }
 
-  get remainingSpaces(): number {
-    return this.opening.maxReservations - this.occupiedSpaces;
-  }
-
   get isAfterCutoff(): boolean {
     const openingDate = new Date(this.opening.date);
     const today = new Date();
@@ -130,12 +126,15 @@ export class OpeningComponent implements OnInit {
     return false;
   }
 
-  get isReservable(): boolean {
+  private daysUntilOpening(): number {
     const openingDate = new Date(this.opening.date);
     const today = new Date();
-    const msBetweenDates = Math.abs(openingDate.getTime() - today.getTime());
-    const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
-    return daysBetweenDates <= 30 && !this.isAfterCutoff;
+    const msBetweenDates = openingDate.getTime() - today.getTime();
+    return msBetweenDates / (24 * 60 * 60 * 1000);
+  }
+
+  get isReservable(): boolean {
+    return this.daysUntilOpening() <= 30 && !this.isAfterCutoff;
   }
 
   get icon(): string {
@@ -145,6 +144,29 @@ export class OpeningComponent implements OnInit {
       return 'warning';
     } else {
       return 'check_circle';
+    }
+  }
+
+  get description1(): string {
+    if (!!this.opening.special) {
+      return 'Evento speciale';
+    } else if (this.daysUntilOpening() >= 30) {
+      return 'Prenotazioni non ancora aperte';
+    } else if (this.isAfterCutoff) {
+      return 'Prenotazioni chiuse';
+    } else {
+      return 'Orari: ' + this.opening.from + ' - ' + this.opening.to;
+    }
+  }
+
+  get description2(): string {
+    if (!!this.opening.special) {
+      return this.opening.special;
+    } else if (this.isAfterCutoff) {
+      return 'La palestra rimarrà chiusa';
+    } else {
+      const remainingSpaces = this.opening.maxReservations - this.occupiedSpaces;
+      return 'Posti disponibili: ' + remainingSpaces + '/' + this.opening.maxReservations;
     }
   }
 }

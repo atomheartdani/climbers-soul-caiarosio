@@ -4,14 +4,8 @@
     <mat-icon [fontIcon]="icon" [class]="icon" *ngIf="!isAfterCutoff && !isSpecialEvent"></mat-icon>
   </mat-card-header>
   <mat-card-content>
-    <p class="mat-body" *ngIf="!isSpecialEvent">Orari: {{ opening.from }} - {{ opening.to }}</p>
-    <p class="mat-body" *ngIf="!isReservable && !isAfterCutoff">Prenotazioni non ancora aperte</p>
-    <p class="mat-body" *ngIf="isAfterCutoff">Prenotazioni chiuse</p>
-    <p class="mat-body" *ngIf="isReservable && !isSpecialEvent">
-      Posti disponibili: {{ remainingSpaces }}/{{ opening.maxReservations }}
-    </p>
-    <p class="mat-body" *ngIf="isSpecialEvent">Evento speciale</p>
-    <p class="mat-body" *ngIf="isSpecialEvent">{{ opening.special }}</p>
+    <p class="mat-body">{{ description1 }}</p>
+    <p class="mat-body">{{ description2 }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" (click)="manage()" *ngIf="canManageOpenings">Gestisci</button>
