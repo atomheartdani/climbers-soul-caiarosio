@@ -30,6 +30,9 @@ b {
   padding-bottom: 16px;
 
   mat-card {
+    align-items: center;
+    display: flex;
     flex: 1 1 300px;
+    justify-content: center;
   }
 }
