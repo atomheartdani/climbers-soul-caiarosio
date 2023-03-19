@@ -2,58 +2,62 @@
 <h1 class="mat-h1" *ngIf="user.id !== 0">Dettaglio {{ user.username }}</h1>
 <mat-dialog-content>
   <form [formGroup]="detailForm">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <mat-form-field appearance="outline" fxFlex="50">
-        <mat-label>Nome</mat-label>
-        <input matInput id="firstname" formControlName="firstname" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" fxFlex="50">
-        <mat-label>Cognome</mat-label>
-        <input matInput id="lastname" formControlName="lastname" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
-        <mat-label>Username</mat-label>
-        <input matInput id="username" formControlName="username" />
-        <mat-error *ngIf="detailForm.get('username')?.hasError('usernameAlreadyExists')">
-          Username gia' in uso
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
-        <mat-label>Email</mat-label>
-        <input matInput id="email" formControlName="email" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" fxFlex="60" fxFlex.sm="80" fxFlex.md="70">
-        <mat-label>Sezione CAI</mat-label>
-        <input matInput id="caiSection" formControlName="caiSection" />
-      </mat-form-field>
-    </div>
-    <div class="fake-form-field">
-      <mat-slide-toggle color="primary" labelPosition="before" formControlName="tosConsent">
-        Regolamento accettato
-      </mat-slide-toggle>
-    </div>
-    <div class="fake-form-field" *ngIf="!this.user.isVerified">
-      <mat-slide-toggle color="primary" labelPosition="before" formControlName="isVerified">
-        Verificato
-      </mat-slide-toggle>
-    </div>
-    <div>
-      <h2 class="mat-h2">Amministrazione</h2>
-      <div class="fake-form-field">
-        <mat-slide-toggle color="primary" labelPosition="before" formControlName="canManageOpenings">
-          Può gestire le aperture
-        </mat-slide-toggle>
+    <div class="column-layout">
+      <div class="row-layout">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput id="firstname" formControlName="firstname" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Cognome</mat-label>
+          <input matInput id="lastname" formControlName="lastname" />
+        </mat-form-field>
       </div>
-      <div class="fake-form-field">
-        <mat-slide-toggle color="primary" labelPosition="before" formControlName="canManageUsers">
-          Può gestire gli utenti
-        </mat-slide-toggle>
+      <div class="row-layout">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput id="username" formControlName="username" />
+          <mat-error *ngIf="detailForm.get('username')?.hasError('usernameAlreadyExists')">
+            Username gia' in uso
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" formControlName="email" />
+        </mat-form-field>
+      </div>
+      <div class="row-layout">
+        <mat-form-field appearance="outline">
+          <mat-label>Sezione CAI</mat-label>
+          <input matInput id="caiSection" formControlName="caiSection" />
+        </mat-form-field>
+      </div>
+      <div class="row-layout">
+        <div class="fake-form-field">
+          <mat-slide-toggle color="primary" labelPosition="before" formControlName="tosConsent">
+            Regolamento accettato
+          </mat-slide-toggle>
+        </div>
+        <div class="fake-form-field" *ngIf="!this.user.isVerified">
+          <mat-slide-toggle color="primary" labelPosition="before" formControlName="isVerified">
+            Verificato
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div>
+        <h2 class="mat-h2">Amministrazione</h2>
+      </div>
+      <div class="row-layout">
+        <div class="fake-form-field">
+          <mat-slide-toggle color="primary" labelPosition="before" formControlName="canManageOpenings">
+            Può gestire le aperture
+          </mat-slide-toggle>
+        </div>
+        <div class="fake-form-field">
+          <mat-slide-toggle color="primary" labelPosition="before" formControlName="canManageUsers">
+            Può gestire gli utenti
+          </mat-slide-toggle>
+        </div>
       </div>
     </div>
   </form>

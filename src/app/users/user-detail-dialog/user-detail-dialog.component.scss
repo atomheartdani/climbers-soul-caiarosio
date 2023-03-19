@@ -1,3 +1,32 @@
+.column-layout {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.row-layout {
+  align-items: stretch;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+
+  .mat-form-field {
+    flex-basis: 50%;
+    max-width: 50%;
+    padding: 0 8px;
+
+    @media (max-width: 768px) {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
 .fake-form-field {
   margin: 0.25em 0;
   padding: 0 0.75em 1.34375em 0.75em;
