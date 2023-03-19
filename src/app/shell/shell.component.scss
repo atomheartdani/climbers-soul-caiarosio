@@ -50,3 +50,14 @@
     top: 56px;
   }
 }
+
+.flex-fill {
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+}
+
+.flex-flex {
+  flex: 1 1 0%;
+}

@@ -21,3 +21,27 @@
 .menu-button {
   margin-right: 1rem;
 }
+
+.start-center {
+  align-items: center;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-flex {
+  flex: 1 1 0%;
+}
+
+.flex-hide-gt-sm {
+  @media (min-width: 992px) {
+    display: none;
+  }
+}
+
+.flex-hide-lt-sm {
+  @media (max-width: 992px) {
+    display: none;
+  }
+}

@@ -1,11 +1,11 @@
 <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
-  <div fxHide.gt-sm fxLayoutAlign="start center">
+  <div class="flex-hide-gt-sm start-center">
     <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span class="title">{{ title }}</span>
   </div>
-  <div fxHide.lt-md>
+  <div class="flex-hide-lt-sm">
     <a class="brand" href="https://www.caiarosio.it/" translate>APP_NAME</a>
     <button mat-button routerLink="/home" routerLinkActive="active">
       <mat-icon>home</mat-icon>
@@ -28,7 +28,7 @@
       <span translate>Utenti</span>
     </button>
   </div>
-  <span fxFlex></span>
+  <span class="flex-flex"></span>
   <span>{{ firstname }}</span>
   <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="username !== null">
     <mat-icon>person</mat-icon>
