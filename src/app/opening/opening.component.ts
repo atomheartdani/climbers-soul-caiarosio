@@ -61,10 +61,6 @@ export class OpeningComponent implements OnInit {
     return this.occupiedSpaces / this.opening.maxReservations;
   }
 
-  get spaceAvaiable(): boolean {
-    return this.fullnessPercent() < 0.5;
-  }
-
   get spaceAlmostFull(): boolean {
     return this.fullnessPercent() >= 0.5 && this.fullnessPercent() < 1;
   }
@@ -140,5 +136,15 @@ export class OpeningComponent implements OnInit {
     const msBetweenDates = Math.abs(openingDate.getTime() - today.getTime());
     const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
     return daysBetweenDates <= 30 && !this.isAfterCutoff;
+  }
+
+  get icon(): string {
+    if (this.spaceFull) {
+      return 'dangerous';
+    } else if (this.spaceAlmostFull) {
+      return 'warning';
+    } else {
+      return 'check_circle';
+    }
   }
 }

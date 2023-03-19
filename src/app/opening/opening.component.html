@@ -1,24 +1,7 @@
 <mat-card [ngClass]="{ 'special-event': isSpecialEvent }">
   <mat-card-header>
     <mat-card-title> {{ opening.date }} </mat-card-title>
-    <mat-icon
-      aria-label="avaiable"
-      fontIcon="check_circle"
-      class="avaiable"
-      *ngIf="isReservable && spaceAvaiable && !isSpecialEvent"
-    ></mat-icon>
-    <mat-icon
-      aria-label="almost full"
-      fontIcon="warning"
-      class="almost-full"
-      *ngIf="isReservable && spaceAlmostFull && !isSpecialEvent"
-    ></mat-icon>
-    <mat-icon
-      aria-label="full"
-      fontIcon="dangerous"
-      class="full"
-      *ngIf="isReservable && spaceFull && !isSpecialEvent"
-    ></mat-icon>
+    <mat-icon [fontIcon]="icon" [class]="icon" *ngIf="!isAfterCutoff && !isSpecialEvent"></mat-icon>
   </mat-card-header>
   <mat-card-content>
     <p class="mat-body" *ngIf="!isSpecialEvent">Orari: {{ opening.from }} - {{ opening.to }}</p>
