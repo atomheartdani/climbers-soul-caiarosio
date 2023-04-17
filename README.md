@@ -1,7 +1,8 @@
 # Climber's Soul CAI Arosio
 
-This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
-version 11.0.0
+This is the frontend code for [CAI Arosio](https://www.caiarosio.it/)'s climbing gym "[Climber's Soul](https://caiarosio.it/climberssoul/)"
+
+This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/) version 11.0.0 and uses Angular 14
 
 # Getting started
 
