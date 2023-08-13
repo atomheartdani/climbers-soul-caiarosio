@@ -14,7 +14,7 @@ export class ReservationService {
   }
 
   getReservations(): Observable<Reservation[]> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient.get<Reservation[]>(`/reservations/getAll.php`, { headers });
   }
 

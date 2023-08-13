@@ -1,11 +1,11 @@
 <div class="container mat-typography">
   <div>
-    <h1 translate>APP_NAME</h1>
+    <h1>Climber's Soul CAI Arosio</h1>
   </div>
   <div class="login-container">
     <mat-card class="login-box">
       <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-        <div class="login-error" [hidden]="!error || isLoading" translate>Username or password incorrect.</div>
+        <div class="login-error" [hidden]="!error || isLoading">Username o password errati.</div>
         <br />
         <div class="login-fields">
           <mat-form-field [hideRequiredMarker]="true">
@@ -14,11 +14,11 @@
               matInput
               formControlName="username"
               autocomplete="username"
-              [placeholder]="'Username' | translate"
+              [placeholder]="'Username'"
               required
             />
             <mat-error *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
-              <span translate>Username is required</span>
+              <span>L'username è obbligatorio</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
@@ -27,15 +27,15 @@
               matInput
               formControlName="password"
               autocomplete="current-password"
-              [placeholder]="'Password' | translate"
+              [placeholder]="'Password'"
               required
             />
             <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
-              <span translate>Password is required</span>
+              <span>La password è obbligatori</span>
             </mat-error>
           </mat-form-field>
           <div class="fake-form-field">
-            <mat-slide-toggle color="primary" formControlName="remember" translate>Ricordami</mat-slide-toggle>
+            <mat-slide-toggle color="primary" formControlName="remember">Ricordami</mat-slide-toggle>
           </div>
           <div>
             <p class="mat-body">Non hai un account? <a href="./#/register">Registrati!</a></p>
@@ -43,7 +43,7 @@
           <br />
           <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
-            <span translate>Login</span>
+            <span>Entrare</span>
           </button>
         </div>
       </form>

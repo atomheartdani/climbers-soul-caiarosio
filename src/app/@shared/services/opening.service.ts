@@ -10,7 +10,7 @@ export class OpeningService {
   constructor(private httpClient: HttpClient) {}
 
   getNextOpenings(loadAll: boolean): Observable<Opening[]> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let params = new HttpParams();
     params = params.append('loadAll', loadAll);

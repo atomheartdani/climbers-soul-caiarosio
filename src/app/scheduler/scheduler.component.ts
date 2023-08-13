@@ -18,7 +18,7 @@ export class SchedulerComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private openingService: OpeningService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class SchedulerComponent implements OnInit {
   }
 
   insertOpening(): void {
-    let newOpening: Opening = {
+    const newOpening: Opening = {
       id: 0,
       date: '',
       from: '',
@@ -53,9 +53,9 @@ export class SchedulerComponent implements OnInit {
 
     this.openingService.getNextOpenings(this.loadAll).subscribe((result) => {
       result.forEach((o) => {
-        let group = o.date.substring(0, 7);
+        const group = o.date.substring(0, 7);
         if (this.openingsMap.has(group)) {
-          let old = this.openingsMap.get(group)!;
+          const old = this.openingsMap.get(group)!;
           old.push(o);
           this.openingsMap.set(group, old);
         } else {

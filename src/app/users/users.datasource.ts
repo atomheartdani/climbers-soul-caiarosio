@@ -37,7 +37,7 @@ export class UsersDataSource extends DataSource<User> {
           this.errorSubject.next(true);
           return of([]);
         }),
-        finalize(() => this.loadingSubject.next(false))
+        finalize(() => this.loadingSubject.next(false)),
       )
       .subscribe((ret: any) => {
         this.usersSubject.next(ret.content);

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Opening } from '@app/@shared/models/opening.model';
@@ -10,7 +10,7 @@ import { ReservationService } from '@app/@shared/services/reservation.service';
   templateUrl: './insert-reservation-dialog.component.html',
   styleUrls: ['./insert-reservation-dialog.component.scss'],
 })
-export class InsertReservationDialogComponent implements OnInit {
+export class InsertReservationDialogComponent {
   reservePartner: boolean = false;
   isProgressing: boolean = false;
   opening: Opening;
@@ -20,13 +20,11 @@ export class InsertReservationDialogComponent implements OnInit {
     private reservationService: ReservationService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<InsertReservationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { opening: Opening; userId: number }
+    @Inject(MAT_DIALOG_DATA) private data: { opening: Opening; userId: number },
   ) {
     this.opening = data.opening;
     this.userId = data.userId;
   }
-
-  ngOnInit(): void {}
 
   close(): void {
     this.dialogRef.close(1);

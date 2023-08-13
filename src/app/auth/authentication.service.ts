@@ -20,7 +20,10 @@ export interface LoginContext {
 export class AuthenticationService {
   helper = new JwtHelperService();
 
-  constructor(private credentialsService: CredentialsService, private userService: UserService) {}
+  constructor(
+    private credentialsService: CredentialsService,
+    private userService: UserService,
+  ) {}
 
   /**
    * Authenticates the user.
@@ -30,7 +33,7 @@ export class AuthenticationService {
   login(context: LoginContext): Observable<Credentials> {
     return this.userService.login(context.username, context.password).pipe(
       map((result: any) => {
-        let token = this.helper.decodeToken(result.access_token);
+        const token = this.helper.decodeToken(result.access_token);
 
         const data: Credentials = {
           id: token.data.id,
@@ -44,7 +47,7 @@ export class AuthenticationService {
           token: result.access_token,
         };
         return data;
-      })
+      }),
     );
   }
 

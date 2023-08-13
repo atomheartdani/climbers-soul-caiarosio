@@ -25,7 +25,7 @@ export class UserDetailDialogComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<UserDetailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: User
+    @Inject(MAT_DIALOG_DATA) private data: User,
   ) {
     this.user = data;
     this.detailForm = fb.group({
@@ -42,26 +42,26 @@ export class UserDetailDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let firstnameCtrl = this.detailForm.get('firstname');
-    let lastnameCtrl = this.detailForm.get('lastname');
-    let caiSectionCtrl = this.detailForm.get('caiSection');
+    const firstnameCtrl = this.detailForm.get('firstname');
+    const lastnameCtrl = this.detailForm.get('lastname');
+    const caiSectionCtrl = this.detailForm.get('caiSection');
 
     firstnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((firstname: string) => {
-      let trimmed = firstname.trim();
+      const trimmed = firstname.trim();
       firstnameCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
-      let lastname = lastnameCtrl?.value;
+      const lastname = lastnameCtrl?.value;
       this.updateUsername(trimmed, lastname);
     });
 
     lastnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((lastname: string) => {
-      let trimmed = lastname.trim();
+      const trimmed = lastname.trim();
       lastnameCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
-      let firstname = firstnameCtrl?.value;
+      const firstname = firstnameCtrl?.value;
       this.updateUsername(firstname, trimmed);
     });
 
     caiSectionCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((caiSection: string) => {
-      let trimmed = caiSection.trim();
+      const trimmed = caiSection.trim();
       caiSectionCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
     });
   }
@@ -72,7 +72,7 @@ export class UserDetailDialogComponent implements OnInit {
 
   save(): void {
     this.isProgressing = true;
-    let ctrls = this.detailForm.controls;
+    const ctrls = this.detailForm.controls;
     const toSave: User = {
       id: this.user.id,
       username: ctrls['username'].value,
@@ -124,7 +124,7 @@ export class UserDetailDialogComponent implements OnInit {
   }
 
   capitalize(value: string): string {
-    let splitted = value.split(' ');
+    const splitted = value.split(' ');
     for (let i = 0; i < splitted.length; i++) {
       splitted[i] = splitted[i][0].toUpperCase() + splitted[i].substring(1);
     }

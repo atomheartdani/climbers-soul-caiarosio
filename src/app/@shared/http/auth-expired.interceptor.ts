@@ -15,17 +15,19 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       tap({
-        next: () => {},
+        next: () => {
+          console.debug('Auth ok');
+        },
         error: (e) => {
           if (e instanceof HttpErrorResponse) {
             if (e.status !== 401) {
               return;
             }
-            let redirectUrl: string = this.router.routerState.snapshot.url;
+            const redirectUrl: string = this.router.routerState.snapshot.url;
             this.router.navigate(['/login'], { queryParams: { redirect: redirectUrl }, replaceUrl: true });
           }
         },
-      })
+      }),
     );
   }
 }

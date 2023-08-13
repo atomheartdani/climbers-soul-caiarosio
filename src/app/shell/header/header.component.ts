@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { AuthenticationGuard, AuthenticationService, CredentialsService } from '
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Input() sidenav!: MatSidenav;
 
   constructor(
@@ -18,10 +18,8 @@ export class HeaderComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private credentialsService: CredentialsService,
     private authGuard: AuthenticationGuard,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
-
-  ngOnInit() {}
 
   login() {
     this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot);

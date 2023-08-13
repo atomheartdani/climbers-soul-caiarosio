@@ -25,7 +25,7 @@ export class SelfRegistrationComponent implements OnInit {
     private usernameValidator: UsernameValidator,
     private userService: UserService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
     this.selfRegistrationForm = fb.group(
       {
@@ -39,31 +39,31 @@ export class SelfRegistrationComponent implements OnInit {
       },
       {
         validator: UpdatePasswordValidator.matchNewPasswords,
-      }
+      },
     );
   }
 
   ngOnInit(): void {
-    let firstnameCtrl = this.selfRegistrationForm.get('firstname');
-    let lastnameCtrl = this.selfRegistrationForm.get('lastname');
-    let caiSectionCtrl = this.selfRegistrationForm.get('caiSection');
+    const firstnameCtrl = this.selfRegistrationForm.get('firstname');
+    const lastnameCtrl = this.selfRegistrationForm.get('lastname');
+    const caiSectionCtrl = this.selfRegistrationForm.get('caiSection');
 
     firstnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((firstname: string) => {
-      let trimmed = firstname.trim();
+      const trimmed = firstname.trim();
       firstnameCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
-      let lastname = lastnameCtrl?.value;
+      const lastname = lastnameCtrl?.value;
       this.updateUsername(trimmed, lastname);
     });
 
     lastnameCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((lastname: string) => {
-      let trimmed = lastname.trim();
+      const trimmed = lastname.trim();
       lastnameCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
-      let firstname = firstnameCtrl?.value;
+      const firstname = firstnameCtrl?.value;
       this.updateUsername(firstname, trimmed);
     });
 
     caiSectionCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((caiSection: string) => {
-      let trimmed = caiSection.trim();
+      const trimmed = caiSection.trim();
       caiSectionCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
       this.sectionCheck(trimmed);
     });
@@ -71,7 +71,7 @@ export class SelfRegistrationComponent implements OnInit {
 
   save(stepper: MatStepper): void {
     this.isProgressing = true;
-    let ctrls = this.selfRegistrationForm.controls;
+    const ctrls = this.selfRegistrationForm.controls;
     const toSave: UserRegistration = {
       username: ctrls['username'].value,
       firstname: ctrls['firstname'].value,
@@ -89,7 +89,7 @@ export class SelfRegistrationComponent implements OnInit {
       },
       error: (e) => {
         this.isProgressing = false;
-        let error: string = "C'è stato un errore durante il salvataggio. Riprovare più tardi";
+        const error: string = "C'è stato un errore durante il salvataggio. Riprovare più tardi";
         this.snackBar.open(error, 'Chiudi', { duration: 10000 });
       },
     });
@@ -109,7 +109,7 @@ export class SelfRegistrationComponent implements OnInit {
   }
 
   capitalize(value: string): string {
-    let splitted = value.split(' ');
+    const splitted = value.split(' ');
     for (let i = 0; i < splitted.length; i++) {
       splitted[i] = splitted[i][0].toUpperCase() + splitted[i].substring(1);
     }

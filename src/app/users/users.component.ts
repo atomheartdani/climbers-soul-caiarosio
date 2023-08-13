@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@app/@shared/models/user.model';
@@ -11,7 +11,7 @@ import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dial
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent {
   usersColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
   usersToVerifyColumns = ['username', 'firstname', 'lastname', 'email', 'actions'];
   refreshSubject: Subject<void> = new Subject<void>();
@@ -20,14 +20,12 @@ export class UsersComponent implements OnInit {
     private dialog: MatDialog,
     private authGuard: AuthenticationGuard,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
-
-  ngOnInit(): void {}
 
   create(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
-      let newUser: User = {
+      const newUser: User = {
         id: 0,
         username: '',
         firstname: '',

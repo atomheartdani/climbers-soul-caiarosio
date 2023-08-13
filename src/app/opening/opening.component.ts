@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Opening } from '@app/@shared/models/opening.model';
@@ -12,7 +12,7 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
   templateUrl: './opening.component.html',
   styleUrls: ['./opening.component.scss'],
 })
-export class OpeningComponent implements OnInit {
+export class OpeningComponent {
   @Input() opening: Opening;
   @Output() refreshEvent: EventEmitter<string> = new EventEmitter<string>();
 
@@ -21,10 +21,8 @@ export class OpeningComponent implements OnInit {
     private authGuard: AuthenticationGuard,
     private credentialsService: CredentialsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
-
-  ngOnInit(): void {}
 
   insertReservation(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
@@ -99,7 +97,7 @@ export class OpeningComponent implements OnInit {
 
   get isLoggedUserAlreadyReserved(): boolean {
     if (this.credentialsService.isAuthenticated()) {
-      let loggedUserid = this.credentialsService.credentials?.id;
+      const loggedUserid = this.credentialsService.credentials?.id;
       return this.opening.reservations.some((r) => r.userId == loggedUserid);
     }
     return false;

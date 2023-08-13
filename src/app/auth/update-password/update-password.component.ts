@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ const passwordMinLength: number = 12;
   templateUrl: './update-password.component.html',
   styleUrls: ['./update-password.component.scss'],
 })
-export class UpdatePasswordComponent implements OnInit {
+export class UpdatePasswordComponent {
   updatePasswordForm: FormGroup;
   isLoading = false;
 
@@ -26,7 +26,7 @@ export class UpdatePasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private userService: UserService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
   ) {
     this.updatePasswordForm = this.formBuilder.group(
       {
@@ -36,17 +36,15 @@ export class UpdatePasswordComponent implements OnInit {
       },
       {
         validator: UpdatePasswordValidator.matchNewPasswords,
-      }
+      },
     );
   }
 
-  ngOnInit(): void {}
-
   updatePassword() {
     this.isLoading = true;
-    let ctrls = this.updatePasswordForm.controls;
-    let credentials: Credentials = JSON.parse(sessionStorage.getItem('climbers-soul-caiarosio-temp-credentials')!);
-    let remember: boolean = sessionStorage.getItem('climbers-soul-caiarosio-temp-remember')! == 'true';
+    const ctrls = this.updatePasswordForm.controls;
+    const credentials: Credentials = JSON.parse(sessionStorage.getItem('climbers-soul-caiarosio-temp-credentials')!);
+    const remember: boolean = sessionStorage.getItem('climbers-soul-caiarosio-temp-remember')! == 'true';
     this.userService
       .updatePassword(credentials.username, ctrls['oldPassword'].value, ctrls['newPassword1'].value)
       .pipe(
@@ -54,12 +52,12 @@ export class UpdatePasswordComponent implements OnInit {
           this.updatePasswordForm.markAsPristine();
           this.isLoading = false;
         }),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe({
         next: () => {
           this.credentialsService.setCredentials(credentials, remember);
-          let redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
+          const redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
           this.router.navigate([redirectUrl], { replaceUrl: true });
         },
         error: () => {

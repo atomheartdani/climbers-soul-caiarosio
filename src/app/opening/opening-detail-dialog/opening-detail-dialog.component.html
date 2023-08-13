@@ -37,9 +37,9 @@
     <mat-form-field appearance="outline" *ngIf="opening.id !== 0">
       <mat-label>Persone prenotate</mat-label>
       <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
-      <mat-chip-list class="mat-chip-list-stacked">
-        <mat-chip *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip>
-      </mat-chip-list>
+      <mat-chip-listbox class="mat-mdc-chip-set-stacked">
+        <mat-chip-option *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip-option>
+      </mat-chip-listbox>
     </mat-form-field>
   </form>
 </mat-dialog-content>

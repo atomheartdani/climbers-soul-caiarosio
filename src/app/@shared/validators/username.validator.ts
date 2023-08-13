@@ -11,7 +11,7 @@ export class UsernameValidator implements AsyncValidator {
     if (control.touched) {
       return this.userService.checkUsername(control.value).pipe(
         map((isTaken: boolean) => (isTaken ? { usernameAlreadyExists: true } : null)),
-        catchError(() => of(null))
+        catchError(() => of(null)),
       );
     }
     return of(null);

@@ -11,7 +11,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getAll(filter: string, pageIndex: number, pageSize: number): Observable<Page<User>> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let params = new HttpParams();
     params = params.append('filter', filter);
@@ -22,7 +22,7 @@ export class UserService {
   }
 
   getUsersFromIds(userIds: number[]): Observable<User[]> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let params = new HttpParams();
     userIds.forEach((id) => {
@@ -48,7 +48,7 @@ export class UserService {
   }
 
   delete(id: number) {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let params = new HttpParams();
     params = params.append('id', id);
@@ -57,12 +57,12 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<string> {
-    let body = { username: username, password: password };
+    const body = { username: username, password: password };
     return this.httpClient.post<string>(`/users/login.php`, body);
   }
 
   updatePassword(username: string, oldPassword: string, newPassword: string): Observable<void> {
-    let body = { username: username, oldPassword: oldPassword, newPassword: newPassword };
+    const body = { username: username, oldPassword: oldPassword, newPassword: newPassword };
     return this.httpClient.post<void>(`/users/updatePassword.php`, body);
   }
 }

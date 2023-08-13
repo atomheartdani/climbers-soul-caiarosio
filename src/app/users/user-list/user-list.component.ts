@@ -46,7 +46,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private credentialsService: CredentialsService,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +67,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         .pipe(
           debounceTime(250),
           distinctUntilChanged(),
-          tap(() => this.applyFilter(filtersList[i].nativeElement.value, filtersNameList[i]))
+          tap(() => this.applyFilter(filtersList[i].nativeElement.value, filtersNameList[i])),
         )
         .subscribe();
     }
@@ -76,7 +76,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
       .pipe(
         debounceTime(250),
         distinctUntilChanged(),
-        tap(() => this.applyFilterAdmin(this.filterAdmin.value))
+        tap(() => this.applyFilterAdmin(this.filterAdmin.value)),
       )
       .subscribe();
   }

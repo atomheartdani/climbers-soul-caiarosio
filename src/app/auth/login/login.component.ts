@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
-import { Logger, UntilDestroy, untilDestroyed } from '@shared';
+import { UntilDestroy, untilDestroyed } from '@shared';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { CredentialsService } from '../credentials.service';
-
-const log = new Logger('Login');
 
 @UntilDestroy()
 @Component({
@@ -15,7 +13,7 @@ const log = new Logger('Login');
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   version: string | null = environment.version;
   error: string | undefined;
   loginForm!: FormGroup;
@@ -26,12 +24,10 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
   ) {
     this.createForm();
   }
-
-  ngOnInit() {}
 
   login() {
     this.isLoading = true;
@@ -42,13 +38,13 @@ export class LoginComponent implements OnInit {
           this.loginForm.markAsPristine();
           this.isLoading = false;
         }),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe({
         next: (credentials) => {
-          log.debug(`${credentials.username} successfully logged in`);
-          let redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
-          let remember = this.loginForm.controls['remember'].value;
+          console.debug(`${credentials.username} successfully logged in`);
+          const redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
+          const remember = this.loginForm.controls['remember'].value;
           if (credentials.updatePassword) {
             sessionStorage.setItem('climbers-soul-caiarosio-temp-credentials', JSON.stringify(credentials));
             sessionStorage.setItem('climbers-soul-caiarosio-temp-remember', remember);
@@ -59,14 +55,14 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (e) => {
-          log.debug(`Login error: ${e}`, e);
+          console.debug(`Login error: ${e}`, e);
           this.error = e;
         },
       });
   }
 
   private createForm() {
-    let remember = this.credentialsService.isRemeberActive();
+    const remember = this.credentialsService.isRemeberActive();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],

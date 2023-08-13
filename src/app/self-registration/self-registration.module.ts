@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { SelfRegistrationRoutingModule } from './self-registration-routing.module';
 import { SelfRegistrationComponent } from './self-registration.component';
 
@@ -11,7 +10,6 @@ import { SelfRegistrationComponent } from './self-registration.component';
   declarations: [SelfRegistrationComponent],
   imports: [
     CommonModule,
-    TranslateModule,
     SharedModule,
     MaterialModule,
     FormsModule,

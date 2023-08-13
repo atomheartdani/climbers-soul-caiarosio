@@ -6,19 +6,19 @@
         <mat-list>
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Home</span>
+            <span>Home</span>
           </a>
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/scheduler" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Scheduler</span>
+            <span>Calendario</span>
           </a>
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/rules" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>Rules</span>
+            <span>Regolamento</span>
           </a>
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">
-            <span translate>About</span>
+            <span>Informazioni</span>
           </a>
           <mat-divider></mat-divider>
           <a
@@ -28,7 +28,7 @@
             (click)="sidenav.close()"
             *ngIf="canManageUsers"
           >
-            <span translate>Utenti</span>
+            <span>Utenti</span>
           </a>
         </mat-list>
       </nav>

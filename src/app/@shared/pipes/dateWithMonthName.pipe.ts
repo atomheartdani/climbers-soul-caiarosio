@@ -9,7 +9,7 @@ export class DateWithMonthNamePipe implements PipeTransform {
     let year = '';
     let month = value;
     if (ISO_STRING_REGEX.test(value) || PARTIAL_ISO_STRING_REGEX.test(value)) {
-      let splitted = value.split('-');
+      const splitted = value.split('-');
       year = ' - ' + splitted[0];
       month = splitted[1];
     }

@@ -14,7 +14,10 @@ import { filter } from 'rxjs/operators';
 export class ShellComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(private breakpoint: BreakpointObserver, private credentialsService: CredentialsService) {}
+  constructor(
+    private breakpoint: BreakpointObserver,
+    private credentialsService: CredentialsService,
+  ) {}
 
   ngOnInit() {
     // Automatically close side menu on screens > small breakpoint
@@ -22,7 +25,7 @@ export class ShellComponent implements OnInit {
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .pipe(
         filter(({ matches }) => !matches),
-        untilDestroyed(this)
+        untilDestroyed(this),
       )
       .subscribe(() => {
         if (this.sidenav) {

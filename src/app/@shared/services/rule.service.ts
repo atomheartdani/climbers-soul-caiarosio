@@ -10,7 +10,7 @@ export class RuleService {
   constructor(private httpClient: HttpClient) {}
 
   getRules(): Observable<Rule[]> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this.httpClient.get<Rule[]>(`/rules/getAll.php`, { headers });
   }

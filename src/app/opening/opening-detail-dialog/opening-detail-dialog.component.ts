@@ -28,7 +28,7 @@ export class OpeningDetailDialogComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<OpeningDetailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: Opening
+    @Inject(MAT_DIALOG_DATA) private data: Opening,
   ) {
     this.opening = data;
     this.detailForm = fb.group({
@@ -41,12 +41,12 @@ export class OpeningDetailDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let userIds = this.opening.reservations.map((r) => r.userId);
+    const userIds = this.opening.reservations.map((r) => r.userId);
     this.userService.getUsersFromIds(userIds).subscribe((result) => {
       userIds.forEach((uid) => {
-        let user = result.find((u) => u.id === uid);
+        const user = result.find((u) => u.id === uid);
         if (user !== undefined) {
-          let reservation = this.opening.reservations.find((r) => r.userId === user?.id);
+          const reservation = this.opening.reservations.find((r) => r.userId === user?.id);
           if (reservation?.reservePartner) {
             user.lastname = user.lastname + ' + 1';
           }
@@ -67,7 +67,7 @@ export class OpeningDetailDialogComponent implements OnInit {
 
   save(): void {
     this.isProgressing = true;
-    let ctrls = this.detailForm.controls;
+    const ctrls = this.detailForm.controls;
     const toSave: Opening = {
       id: this.opening.id,
       date: ctrls['date'].value,

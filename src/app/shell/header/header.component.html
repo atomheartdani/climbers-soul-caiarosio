@@ -1,46 +1,46 @@
 <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
   <div class="flex-hide-gt-sm start-center">
     <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
+      <mat-icon fontIcon="menu"></mat-icon>
     </button>
     <span class="title">{{ title }}</span>
   </div>
   <div class="flex-hide-lt-sm">
-    <a class="brand" href="https://www.caiarosio.it/" translate>APP_NAME</a>
+    <a class="brand" href="https://www.caiarosio.it/">Climber's Soul CAI Arosio</a>
     <button mat-button routerLink="/home" routerLinkActive="active">
-      <mat-icon>home</mat-icon>
-      <span translate>Home</span>
+      <mat-icon fontIcon="home"></mat-icon>
+      <span>Home</span>
     </button>
     <button mat-button routerLink="/scheduler" routerLinkActive="active">
-      <mat-icon>calendar_month</mat-icon>
-      <span translate>Scheduler</span>
+      <mat-icon fontIcon="calendar_month"></mat-icon>
+      <span>Calendario</span>
     </button>
     <button mat-button routerLink="/rules" routerLinkActive="active">
-      <mat-icon>rule</mat-icon>
-      <span translate>Rules</span>
+      <mat-icon fontIcon="rule"></mat-icon>
+      <span>Regolamento</span>
     </button>
     <button mat-button routerLink="/about" routerLinkActive="active">
-      <mat-icon>info</mat-icon>
-      <span translate>About</span>
+      <mat-icon fontIcon="info"></mat-icon>
+      <span>Informazioni</span>
     </button>
     <button mat-button routerLink="/users" routerLinkActive="active" *ngIf="canManageUsers">
-      <mat-icon>person</mat-icon>
-      <span translate>Utenti</span>
+      <mat-icon fontIcon="person"></mat-icon>
+      <span>Utenti</span>
     </button>
   </div>
   <span class="flex-flex"></span>
   <span>{{ firstname }}</span>
   <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="username !== null">
-    <mat-icon>person</mat-icon>
+    <mat-icon fontIcon="person"></mat-icon>
   </button>
   <button mat-button (click)="login()" *ngIf="username === null">Login</button>
   <mat-menu #userMenu="matMenu">
     <mat-list *ngIf="username !== null">
       <mat-list-item>
-        <span translate>Logged in as</span>&nbsp;<b>{{ username }}</b>
+        <span>Autenticato come</span>&nbsp;<b>{{ username }}</b>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
-    <button mat-menu-item (click)="logout()" *ngIf="username !== null" translate>Logout</button>
+    <button mat-menu-item (click)="logout()" *ngIf="username !== null">Uscire</button>
   </mat-menu>
 </mat-toolbar>

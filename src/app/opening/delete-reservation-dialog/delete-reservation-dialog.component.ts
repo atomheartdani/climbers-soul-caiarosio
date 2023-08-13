@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Opening } from '@app/@shared/models/opening.model';
@@ -10,7 +10,7 @@ import { ReservationService } from '@app/@shared/services/reservation.service';
   templateUrl: './delete-reservation-dialog.component.html',
   styleUrls: ['./delete-reservation-dialog.component.scss'],
 })
-export class DeleteReservationDialogComponent implements OnInit {
+export class DeleteReservationDialogComponent {
   isProgressing: boolean = false;
   opening: Opening;
   userId: number;
@@ -19,13 +19,11 @@ export class DeleteReservationDialogComponent implements OnInit {
     private reservationService: ReservationService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<DeleteReservationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { opening: Opening; userId: number }
+    @Inject(MAT_DIALOG_DATA) private data: { opening: Opening; userId: number },
   ) {
     this.opening = data.opening;
     this.userId = data.userId;
   }
-
-  ngOnInit(): void {}
 
   close(): void {
     this.dialogRef.close(1);
