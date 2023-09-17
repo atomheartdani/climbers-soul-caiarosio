@@ -1,3 +1,4 @@
+@use "@angular/material" as mat;
 @import "src/theme/theme-variables";
 
 .container {
@@ -10,12 +11,12 @@
 }
 
 a {
-  color: mat-color($app-primary);
+  color: mat.get-color-from-palette($app-primary);
   text-decoration: none;
 }
 
 b {
-  color: mat-color($app-primary);
+  color: mat.get-color-from-palette($app-primary);
 }
 
 .mat-card-wrapper {

@@ -1,33 +1,33 @@
-<h1 class="mat-h1" *ngIf="user.id === 0">Nuovo utente</h1>
-<h1 class="mat-h1" *ngIf="user.id !== 0">Dettaglio {{ user.username }}</h1>
-<mat-dialog-content>
+<h1 mat-dialog-title *ngIf="user.id === 0">Nuovo utente</h1>
+<h1 mat-dialog-title *ngIf="user.id !== 0">Dettaglio {{ user.username }}</h1>
+<mat-dialog-content class="padding-top-20">
   <form [formGroup]="detailForm">
     <div class="column-layout">
       <div class="row-layout">
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>Nome</mat-label>
           <input matInput id="firstname" formControlName="firstname" />
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>Cognome</mat-label>
           <input matInput id="lastname" formControlName="lastname" />
         </mat-form-field>
       </div>
       <div class="row-layout">
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>Username</mat-label>
           <input matInput id="username" formControlName="username" />
           <mat-error *ngIf="detailForm.get('username')?.hasError('usernameAlreadyExists')">
             Username gia' in uso
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>Email</mat-label>
           <input matInput id="email" formControlName="email" />
         </mat-form-field>
       </div>
       <div class="row-layout">
-        <mat-form-field appearance="outline">
+        <mat-form-field>
           <mat-label>Sezione CAI</mat-label>
           <input matInput id="caiSection" formControlName="caiSection" />
         </mat-form-field>

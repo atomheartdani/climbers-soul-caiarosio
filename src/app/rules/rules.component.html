@@ -1,21 +1,26 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>
-      <p>Regolamento per l’utilizzo della palestra di arrampicata sportiva</p>
-      <p>Climber's Soul - CAI Arosio</p>
-    </mat-card-title>
+    <mat-card-header>
+      <mat-card-title>
+        Regolamento per l'utilizzo della palestra di arrampicata sportiva
+        <br />
+        Climber's Soul - CAI Arosio
+      </mat-card-title>
+    </mat-card-header>
+
     <mat-card-content>
       <div class="rule" *ngFor="let rule of rulesTree; let i = index">
-        <p>
+        <p class="mat-body">
           <strong>{{ i + 1 }}</strong> - {{ rule['data'].content }}
         </p>
         <div class="child-rule" *ngFor="let ruleChild of rule['children']; let j = index">
-          <p>
+          <p class="mat-body">
             <strong>{{ i + 1 }}.{{ j + 1 }}</strong> - {{ ruleChild['data'].content }}
           </p>
         </div>
       </div>
     </mat-card-content>
+
     <mat-card-footer>
       <a
         mat-raised-button

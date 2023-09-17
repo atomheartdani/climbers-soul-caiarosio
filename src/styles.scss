@@ -2,7 +2,7 @@
  * Entry point of global application style.
  * Component-specific style should not go here and be included directly as part of the components.
  */
-
+/*
 // Theme variables, must be included before the libraries to allow overriding defaults
 @import "theme/theme-variables";
 
@@ -24,9 +24,21 @@
 @include angular-material-theme($app-theme);
 
 // Theme customization
-@import "theme/theme";
+@import "theme/theme";*/
 
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
+}
 
 .icon-spin {
   animation-name: rotate;
@@ -65,4 +77,12 @@
 // Disable stepper navigation from headers
 .mat-step-header {
   pointer-events: none !important;
+}
+
+.mdc-button {
+  letter-spacing: normal !important;
+}
+
+.mat-mdc-card-header-text {
+  width: 100%;
 }

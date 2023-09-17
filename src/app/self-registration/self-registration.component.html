@@ -1,23 +1,25 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>
-      <h1 class="mat-h1">Crea il tuo account</h1>
-    </mat-card-title>
+    <mat-card-header>
+      <mat-card-title>
+        <h1 class="mat-h1">Crea il tuo account</h1>
+      </mat-card-title>
+    </mat-card-header>
     <mat-card-content>
       <mat-stepper linear #stepper>
         <mat-step [stepControl]="selfRegistrationForm" label="Inserisci i dati">
           <form [formGroup]="selfRegistrationForm">
-            <mat-form-field appearance="outline">
+            <mat-form-field class="margin-top-16">
               <mat-label>Nome</mat-label>
               <input matInput id="firstname" formControlName="firstname" />
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Cognome</mat-label>
               <input matInput id="lastname" formControlName="lastname" />
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Username</mat-label>
               <input matInput id="username" formControlName="username" />
               <mat-error *ngIf="selfRegistrationForm.get('username')?.hasError('usernameAlreadyExists')">
@@ -25,12 +27,12 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Email</mat-label>
               <input matInput id="email" formControlName="email" />
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Sezione CAI</mat-label>
               <input matInput id="caiSection" formControlName="caiSection" />
             </mat-form-field>
@@ -43,7 +45,7 @@
               </span>
             </div>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Password</mat-label>
               <input matInput id="newPassword1" formControlName="newPassword1" type="password" />
               <mat-error
@@ -56,7 +58,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Conferma Password</mat-label>
               <input matInput id="newPassword2" formControlName="newPassword2" type="password" />
               <mat-error

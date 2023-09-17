@@ -1,3 +1,4 @@
+@use "@angular/material" as mat;
 @import "src/theme/theme-variables";
 
 .container {
@@ -10,7 +11,7 @@
   padding: 2em 1em;
 }
 
-.mat-card {
+mat-card {
   flex-basis: 40%;
   max-width: 700px;
 
@@ -31,11 +32,11 @@
   }
 }
 
-.mat-card-title {
+mat-card-title {
   text-align: center;
 }
 
-.mat-card-content {
+mat-card-content {
   text-align: justify;
 }
 
@@ -52,7 +53,11 @@ form {
   justify-content: center;
 }
 
-mat-form-field,
+mat-form-field {
+  flex-basis: 100%;
+  margin-bottom: 6px;
+}
+
 .full-width {
   flex-basis: 100%;
 }
@@ -61,12 +66,16 @@ mat-form-field,
   margin-top: 30px;
 }
 
+.margin-top-16 {
+  margin-top: 16px;
+}
+
 .password-error {
-  color: mat-color($app-warn);
+  color: mat.get-color-from-palette($app-warn);
 }
 
 a {
-  color: mat-color($app-primary);
+  color: mat.get-color-from-palette($app-primary);
   text-decoration: none;
 }
 

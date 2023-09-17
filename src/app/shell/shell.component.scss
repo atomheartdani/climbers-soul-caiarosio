@@ -1,4 +1,4 @@
-@import "src/theme/theme-variables";
+//@import "src/theme/theme-variables";
 
 :host {
   display: flex;
@@ -43,7 +43,7 @@
   position: absolute;
 }
 
-@media ($mat-xsmall) {
+@media (max-width: 599.98px) {
   .mat-sidenav,
   .mat-drawer-content,
   :host ::ng-deep .mat-drawer-backdrop {

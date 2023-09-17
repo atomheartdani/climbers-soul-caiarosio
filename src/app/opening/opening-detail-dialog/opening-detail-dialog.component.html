@@ -1,9 +1,9 @@
-<h1 class="mat-h1" *ngIf="opening.id === 0">Nuova apertura</h1>
-<h1 class="mat-h1" *ngIf="opening.id !== 0">Dettaglio del {{ opening.date }}</h1>
-<mat-dialog-content>
+<h1 mat-dialog-title *ngIf="opening.id === 0">Nuova apertura</h1>
+<h1 mat-dialog-title *ngIf="opening.id !== 0">Dettaglio del {{ opening.date }}</h1>
+<mat-dialog-content class="padding-top-20">
   <form [formGroup]="detailForm">
     <div>
-      <mat-form-field appearance="outline" *ngIf="opening.id === 0">
+      <mat-form-field *ngIf="opening.id === 0">
         <mat-label>Giorno apertura</mat-label>
         <input
           matInput
@@ -17,29 +17,31 @@
       </mat-form-field>
     </div>
     <div class="multi-field-row">
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Orario apertura</mat-label>
         <input matInput id="from" formControlName="from" />
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Orario chiusura</mat-label>
         <input matInput id="to" formControlName="to" />
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Posti disponibili max</mat-label>
         <input matInput id="maxReservations" formControlName="maxReservations" type="number" />
       </mat-form-field>
     </div>
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Evento speciale</mat-label>
       <input matInput id="special" formControlName="special" />
     </mat-form-field>
-    <mat-form-field appearance="outline" *ngIf="opening.id !== 0">
+    <mat-form-field *ngIf="opening.id !== 0">
       <mat-label>Persone prenotate</mat-label>
-      <input matInput id="fake" disabled *ngIf="opening.reservations.length === 0" />
-      <mat-chip-listbox class="mat-mdc-chip-set-stacked">
-        <mat-chip-option *ngFor="let user of userList"> {{ user.firstname }} {{ user.lastname }} </mat-chip-option>
-      </mat-chip-listbox>
+      <mat-chip-grid #chipGrid>
+        <mat-chip-row *ngFor="let user of userList" [editable]="false">
+          {{ user.firstname }} {{ user.lastname }}
+        </mat-chip-row>
+        <input [matChipInputFor]="chipGrid" />
+      </mat-chip-grid>
     </mat-form-field>
   </form>
 </mat-dialog-content>

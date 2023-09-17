@@ -8,8 +8,8 @@
   <mat-table [dataSource]="dataSource" class="mat-cell users">
     <ng-container matColumnDef="username">
       <mat-header-cell *matHeaderCellDef>
-        <mat-label>Username</mat-label>
         <mat-form-field>
+          <mat-label>Username</mat-label>
           <input matInput placeholder="Filtro..." #filterUsername />
         </mat-form-field>
       </mat-header-cell>
@@ -20,8 +20,8 @@
 
     <ng-container matColumnDef="firstname">
       <mat-header-cell *matHeaderCellDef>
-        <mat-label>Nome</mat-label>
         <mat-form-field>
+          <mat-label>Nome</mat-label>
           <input matInput placeholder="Filtro..." #filterFirstname />
         </mat-form-field>
       </mat-header-cell>
@@ -32,8 +32,8 @@
 
     <ng-container matColumnDef="lastname">
       <mat-header-cell *matHeaderCellDef>
-        <mat-label>Cognome</mat-label>
         <mat-form-field>
+          <mat-label>Cognome</mat-label>
           <input matInput placeholder="Filtro..." #filterLastname />
         </mat-form-field>
       </mat-header-cell>
@@ -44,8 +44,8 @@
 
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef>
-        <mat-label>Email</mat-label>
         <mat-form-field>
+          <mat-label>Email</mat-label>
           <input matInput placeholder="Filtro..." #filterEmail />
         </mat-form-field>
       </mat-header-cell>
@@ -65,8 +65,8 @@
 
     <ng-container matColumnDef="admin">
       <mat-header-cell *matHeaderCellDef>
-        <mat-label>Admin</mat-label>
         <mat-form-field>
+          <mat-label>Admin</mat-label>
           <mat-select multiple [formControl]="filterAdmin">
             <mat-option *ngFor="let adminOption of adminOptions" [value]="adminOption.value">
               {{ adminOption.label }}

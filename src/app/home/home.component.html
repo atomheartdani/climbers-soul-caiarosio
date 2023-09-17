@@ -1,15 +1,17 @@
 <div class="container">
   <mat-card>
-    <p>
+    <p class="mat-body">
       <img class="logo" src="assets/logo-climberssoul.png" alt="Logo Climber's Soul" />
     </p>
-    <mat-card-content>
+    <mat-card-header>
       <mat-card-title>Climber's Soul</mat-card-title>
       <mat-card-subtitle>
         <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
         <q [hidden]="isLoading">La palestra di arrampicata del CAI Arosio</q>
       </mat-card-subtitle>
+    </mat-card-header>
 
+    <mat-card-content>
       <div id="wallWrapper">
         <app-wall imageUrl="assets/parete1.jpg"></app-wall>
         <app-wall imageUrl="assets/parete2.jpg"></app-wall>

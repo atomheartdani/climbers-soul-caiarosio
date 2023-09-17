@@ -9,13 +9,10 @@
 
 .container {
   padding: 1em;
-}
-
-.mat-card-title {
   text-align: center;
 }
 
-.mat-card-content {
+mat-card-content {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -23,7 +20,7 @@
   text-align: justify;
 }
 
-.mat-card-footer {
+mat-card-footer {
   align-items: center;
   display: flex;
   gap: 20px;
