@@ -4,7 +4,7 @@
 <div class="error-message" *ngIf="dataSource.error$ | async">
   <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
 </div>
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 container">
   <mat-table [dataSource]="dataSource" class="mat-cell users">
     <ng-container matColumnDef="username">
       <mat-header-cell *matHeaderCellDef>
