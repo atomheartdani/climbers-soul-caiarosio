@@ -9,7 +9,6 @@ import { UsernameValidator } from '@app/@shared/validators/username.validator';
 import { debounceTime } from 'rxjs';
 
 const passwordMinLength: number = 12;
-const mainCaiSection: string = 'arosio';
 
 @Component({
   selector: 'app-self-registration',
@@ -65,7 +64,6 @@ export class SelfRegistrationComponent implements OnInit {
     caiSectionCtrl?.valueChanges.pipe(debounceTime(500)).subscribe((caiSection: string) => {
       const trimmed = caiSection.trim();
       caiSectionCtrl?.patchValue(this.capitalize(trimmed), { emitEvent: false });
-      this.sectionCheck(trimmed);
     });
   }
 
@@ -114,19 +112,6 @@ export class SelfRegistrationComponent implements OnInit {
       splitted[i] = splitted[i][0].toUpperCase() + splitted[i].substring(1);
     }
     return splitted.join(' ');
-  }
-
-  sectionCheck(caiSection: string) {
-    const lowerCaiSection = caiSection.toLowerCase();
-    if (
-      lowerCaiSection === mainCaiSection ||
-      lowerCaiSection.includes(' ' + mainCaiSection) ||
-      lowerCaiSection.includes(mainCaiSection + ' ')
-    ) {
-      this.showSectionHint = true;
-    } else {
-      this.showSectionHint = false;
-    }
   }
 
   get pwdMinLength(): number {
