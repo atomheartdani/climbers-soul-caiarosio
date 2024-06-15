@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "climbers-soul-cai-arosio:build:production"
+              "buildTarget": "climbers-soul-cai-arosio:build:production"
             },
             "development": {
-              "browserTarget": "climbers-soul-cai-arosio:build:development"
+              "buildTarget": "climbers-soul-cai-arosio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "climbers-soul-cai-arosio:build"
+            "buildTarget": "climbers-soul-cai-arosio:build"
           }
         },
         "test": {
