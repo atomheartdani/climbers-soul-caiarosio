@@ -2,6 +2,7 @@
 <div class="container" *ngIf="!isLoading">
   <div *ngIf="openingsMap.size === 0">
     <h3 class="mat-h3">Al momento non ci sono aperture in programma</h3>
+    <h3 class="mat-h3">Ti ricordiamo che la palestra è aperta solamente nel periodo Ottobre - Aprile</h3>
   </div>
   <div class="group" *ngFor="let group of openingsMap | keyvalue">
     <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
