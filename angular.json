@@ -28,6 +28,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/.htaccess",
               "src/favicon.ico",
               "src/apple-touch-icon.png",
               "src/assets",
@@ -97,6 +98,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/.htaccess",
               "src/favicon.ico",
               "src/apple-touch-icon.png",
               "src/assets",
