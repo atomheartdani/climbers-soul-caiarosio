@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from '@env/environment';
 import { UntilDestroy, untilDestroyed } from '@shared';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
@@ -14,7 +13,6 @@ import { CredentialsService } from '../credentials.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  version: string | null = environment.version;
   error: string | undefined;
   loginForm!: FormGroup;
   isLoading = false;

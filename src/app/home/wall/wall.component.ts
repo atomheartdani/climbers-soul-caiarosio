@@ -7,6 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class WallComponent {
   @Input() imageUrl: string;
-
-  constructor() {}
 }
