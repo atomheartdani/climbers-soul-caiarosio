@@ -1,12 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
 import { Opening } from '@app/@shared/models/opening.model';
 import { User } from '@app/@shared/models/user.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { UserService } from '@app/@shared/services/user.service';
+import { AuthenticationGuard } from '@app/auth';
 import { Moment } from 'moment';
 
 @Component({
@@ -23,6 +26,10 @@ export class OpeningDetailDialogComponent implements OnInit {
   userList: User[] = [];
 
   constructor(
+    private authGuard: AuthenticationGuard,
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
     private openingService: OpeningService,
     private userService: UserService,
     private fb: FormBuilder,
@@ -63,6 +70,39 @@ export class OpeningDetailDialogComponent implements OnInit {
 
   close(): void {
     this.dialogRef.close(1);
+  }
+
+  delete(): void {
+    this.isProgressing = true;
+    if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
+      const action = "Stai per cancellare l'apertura del " + this.opening.date;
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: { confirmAction: action, confirmDetail: 'Confermi?' },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === 0) {
+          this.openingService.delete(this.opening.id).subscribe({
+            next: () => {
+              this.isProgressing = false;
+              this.snackBar.open("Cancellazione dell'apertura completata", 'Chiudi', { duration: 2000 });
+              this.dialogRef.close(0);
+            },
+            error: (e) => {
+              this.isProgressing = false;
+              let error: string = "C'è stato un errore durante la cancellazione. ";
+              if (e['status'] === 401) {
+                error += "Rieseguire l'accesso";
+              } else {
+                error += 'Riprovare più tardi';
+              }
+              this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+            },
+          });
+        } else {
+          this.isProgressing = false;
+        }
+      });
+    }
   }
 
   save(): void {

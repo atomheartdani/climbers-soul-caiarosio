@@ -46,6 +46,10 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" tabindex="-1" (click)="delete()" [disabled]="isProgressing">
+    Elimina
+    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+  </button>
   <button
     mat-raised-button
     color="primary"
