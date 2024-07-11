@@ -4,6 +4,7 @@ import { Opening } from '@app/@shared/models/opening.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { CredentialsService } from '@app/auth';
 import { OpeningDetailDialogComponent } from '@app/opening/opening-detail-dialog/opening-detail-dialog.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-scheduler',
@@ -37,7 +38,7 @@ export class SchedulerComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(OpeningDetailDialogComponent, { data: newOpening });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.refresh();
     });
   }
@@ -51,20 +52,21 @@ export class SchedulerComponent implements OnInit {
     this.isLoading = true;
     this.openingsMap = new Map();
 
-    this.openingService.getNextOpenings(this.loadAll).subscribe((result) => {
-      result.forEach((o) => {
-        const group = o.date.substring(0, 7);
-        if (this.openingsMap.has(group)) {
-          const old = this.openingsMap.get(group)!;
-          old.push(o);
-          this.openingsMap.set(group, old);
-        } else {
-          this.openingsMap.set(group, [o]);
-        }
+    this.openingService
+      .getNextOpenings(this.loadAll)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((result) => {
+        result.forEach((o) => {
+          const group = o.date.substring(0, 7);
+          if (this.openingsMap.has(group)) {
+            const old = this.openingsMap.get(group)!;
+            old.push(o);
+            this.openingsMap.set(group, old);
+          } else {
+            this.openingsMap.set(group, [o]);
+          }
+        });
       });
-
-      this.isLoading = false;
-    });
   }
 
   get canManageOpenings(): boolean {

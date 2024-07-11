@@ -95,8 +95,6 @@ export class OpeningDetailDialogComponent implements OnInit {
                 this.snackBar.open(error, 'Chiudi', { duration: 10000 });
               },
             });
-          } else {
-            this.isProgressing = false;
           }
         });
     }

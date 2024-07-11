@@ -6,7 +6,7 @@ import { UserRegistration } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { UpdatePasswordValidator } from '@app/@shared/validators/update-password.validator';
 import { UsernameValidator } from '@app/@shared/validators/username.validator';
-import { debounceTime } from 'rxjs';
+import { debounceTime, finalize } from 'rxjs';
 
 const passwordMinLength: number = 12;
 
@@ -79,18 +79,19 @@ export class SelfRegistrationComponent implements OnInit {
       password: ctrls['newPassword1'].value,
     };
 
-    this.userService.registerUser(toSave).subscribe({
-      next: () => {
-        this.isProgressing = false;
-        this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
-        stepper.next();
-      },
-      error: (e) => {
-        this.isProgressing = false;
-        const error: string = "C'è stato un errore durante il salvataggio. Riprovare più tardi";
-        this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-      },
-    });
+    this.userService
+      .registerUser(toSave)
+      .pipe(finalize(() => (this.isProgressing = false)))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
+          stepper.next();
+        },
+        error: () => {
+          const error: string = "C'è stato un errore durante il salvataggio. Riprovare più tardi";
+          this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+        },
+      });
   }
 
   updateUsername(firstname: string, lastname: string): void {
