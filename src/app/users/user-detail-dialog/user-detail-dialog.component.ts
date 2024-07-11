@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { UsernameValidator } from '@app/@shared/validators/username.validator';
 import { CredentialsService } from '@app/auth';
-import { debounceTime } from 'rxjs';
+import { debounceTime, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-user-detail-dialog',
@@ -87,24 +87,25 @@ export class UserDetailDialogComponent implements OnInit {
       isVerified: ctrls['isVerified'].value,
     };
 
-    this.userService.saveUser(toSave).subscribe({
-      next: () => {
-        this.isProgressing = false;
-        this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
-        this.dialogRef.close(0);
-      },
-      error: (e) => {
-        this.isProgressing = false;
-        let error: string = "C'è stato un errore durante il salvataggio. ";
-        if (e['status'] === 401) {
-          error += "Rieseguire l'accesso";
+    this.userService
+      .saveUser(toSave)
+      .pipe(finalize(() => (this.isProgressing = false)))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
           this.dialogRef.close(0);
-        } else {
-          error += 'Riprovare più tardi';
-        }
-        this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-      },
-    });
+        },
+        error: (e) => {
+          let error: string = "C'è stato un errore durante il salvataggio. ";
+          if (e['status'] === 401) {
+            error += "Rieseguire l'accesso";
+            this.dialogRef.close(0);
+          } else {
+            error += 'Riprovare più tardi';
+          }
+          this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+        },
+      });
   }
 
   updateUsername(firstname: string, lastname: string): void {

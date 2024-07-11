@@ -11,6 +11,7 @@ import { OpeningService } from '@app/@shared/services/opening.service';
 import { UserService } from '@app/@shared/services/user.service';
 import { AuthenticationGuard } from '@app/auth';
 import { Moment } from 'moment';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-opening-detail-dialog',
@@ -79,29 +80,30 @@ export class OpeningDetailDialogComponent implements OnInit {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: { confirmAction: action, confirmDetail: 'Confermi?' },
       });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result === 0) {
-          this.openingService.delete(this.opening.id).subscribe({
-            next: () => {
-              this.isProgressing = false;
-              this.snackBar.open("Cancellazione dell'apertura completata", 'Chiudi', { duration: 2000 });
-              this.dialogRef.close(0);
-            },
-            error: (e) => {
-              this.isProgressing = false;
-              let error: string = "C'è stato un errore durante la cancellazione. ";
-              if (e['status'] === 401) {
-                error += "Rieseguire l'accesso";
-              } else {
-                error += 'Riprovare più tardi';
-              }
-              this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-            },
-          });
-        } else {
-          this.isProgressing = false;
-        }
-      });
+      dialogRef
+        .afterClosed()
+        .pipe(finalize(() => (this.isProgressing = false)))
+        .subscribe((result) => {
+          if (result === 0) {
+            this.openingService.delete(this.opening.id).subscribe({
+              next: () => {
+                this.snackBar.open("Cancellazione dell'apertura completata", 'Chiudi', { duration: 2000 });
+                this.dialogRef.close(0);
+              },
+              error: (e) => {
+                let error: string = "C'è stato un errore durante la cancellazione. ";
+                if (e['status'] === 401) {
+                  error += "Rieseguire l'accesso";
+                } else {
+                  error += 'Riprovare più tardi';
+                }
+                this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+              },
+            });
+          } else {
+            this.isProgressing = false;
+          }
+        });
     }
   }
 
@@ -118,23 +120,24 @@ export class OpeningDetailDialogComponent implements OnInit {
       reservations: this.opening.reservations,
     };
 
-    this.openingService.saveOpening(toSave).subscribe({
-      next: () => {
-        this.isProgressing = false;
-        this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
-        this.dialogRef.close(0);
-      },
-      error: (e) => {
-        this.isProgressing = false;
-        let error: string = "C'è stato un errore durante il salvataggio. ";
-        if (e['status'] === 401) {
-          error += "Rieseguire l'accesso";
+    this.openingService
+      .saveOpening(toSave)
+      .pipe(finalize(() => (this.isProgressing = false)))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
           this.dialogRef.close(0);
-        } else {
-          error += 'Riprovare più tardi';
-        }
-        this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-      },
-    });
+        },
+        error: (e) => {
+          let error: string = "C'è stato un errore durante il salvataggio. ";
+          if (e['status'] === 401) {
+            error += "Rieseguire l'accesso";
+            this.dialogRef.close(0);
+          } else {
+            error += 'Riprovare più tardi';
+          }
+          this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+        },
+      });
   }
 }

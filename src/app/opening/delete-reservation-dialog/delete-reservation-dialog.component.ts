@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Opening } from '@app/@shared/models/opening.model';
 import { Reservation } from '@app/@shared/models/reservation.model';
 import { ReservationService } from '@app/@shared/services/reservation.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-delete-reservation-dialog',
@@ -38,23 +39,24 @@ export class DeleteReservationDialogComponent {
       reservePartner: false,
     };
 
-    this.reservationService.deleteReservation(toSave).subscribe({
-      next: () => {
-        this.isProgressing = false;
-        this.snackBar.open('Prenotazione cancellata', 'Chiudi', { duration: 2000 });
-        this.dialogRef.close(0);
-      },
-      error: (e) => {
-        this.isProgressing = false;
-        let error: string = "C'è stato un errore durante la cancellazione della prenotazione. ";
-        if (e['status'] === 401) {
-          error += "Rieseguire l'accesso";
+    this.reservationService
+      .deleteReservation(toSave)
+      .pipe(finalize(() => (this.isProgressing = false)))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Prenotazione cancellata', 'Chiudi', { duration: 2000 });
           this.dialogRef.close(0);
-        } else {
-          error += 'Riprovare più tardi';
-        }
-        this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-      },
-    });
+        },
+        error: (e) => {
+          let error: string = "C'è stato un errore durante la cancellazione della prenotazione. ";
+          if (e['status'] === 401) {
+            error += "Rieseguire l'accesso";
+            this.dialogRef.close(0);
+          } else {
+            error += 'Riprovare più tardi';
+          }
+          this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+        },
+      });
   }
 }

@@ -9,7 +9,7 @@ import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { AuthenticationGuard, CredentialsService } from '@app/auth';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, distinctUntilChanged, fromEvent, Observable, tap } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, finalize, fromEvent, tap } from 'rxjs';
 import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
 import { UsersDataSource } from '../users.datasource';
 
@@ -84,7 +84,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   edit(user: User): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
       const dialogRef = this.dialog.open(UserDetailDialogComponent, { data: user });
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogRef.afterClosed().subscribe(() => {
         this.refresh();
       });
     }
@@ -99,23 +99,24 @@ export class UserListComponent implements OnInit, AfterViewInit {
       dialogRef.afterClosed().subscribe((result) => {
         if (result === 0) {
           this.isLoading = true;
-          this.userService.delete(user.id).subscribe({
-            next: () => {
-              this.isLoading = false;
-              this.snackBar.open("Cancellazione dell'utente completata", 'Chiudi', { duration: 2000 });
-              this.refresh();
-            },
-            error: (e) => {
-              this.isLoading = false;
-              let error: string = "C'è stato un errore durante la cancellazione. ";
-              if (e['status'] === 401) {
-                error += "Rieseguire l'accesso";
-              } else {
-                error += 'Riprovare più tardi';
-              }
-              this.snackBar.open(error, 'Chiudi', { duration: 10000 });
-            },
-          });
+          this.userService
+            .delete(user.id)
+            .pipe(finalize(() => (this.isLoading = false)))
+            .subscribe({
+              next: () => {
+                this.snackBar.open("Cancellazione dell'utente completata", 'Chiudi', { duration: 2000 });
+                this.refresh();
+              },
+              error: (e) => {
+                let error: string = "C'è stato un errore durante la cancellazione. ";
+                if (e['status'] === 401) {
+                  error += "Rieseguire l'accesso";
+                } else {
+                  error += 'Riprovare più tardi';
+                }
+                this.snackBar.open(error, 'Chiudi', { duration: 10000 });
+              },
+            });
         }
       });
     }
