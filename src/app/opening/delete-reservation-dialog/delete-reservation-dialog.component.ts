@@ -47,14 +47,8 @@ export class DeleteReservationDialogComponent {
           this.snackBar.open('Prenotazione cancellata', 'Chiudi', { duration: 2000 });
           this.dialogRef.close(0);
         },
-        error: (e) => {
-          let error: string = "C'è stato un errore durante la cancellazione della prenotazione. ";
-          if (e['status'] === 401) {
-            error += "Rieseguire l'accesso";
-            this.dialogRef.close(0);
-          } else {
-            error += 'Riprovare più tardi';
-          }
+        error: () => {
+          const error: string = "C'è stato un errore durante la cancellazione della prenotazione. Riprovare più tardi";
           this.snackBar.open(error, 'Chiudi', { duration: 10000 });
         },
       });

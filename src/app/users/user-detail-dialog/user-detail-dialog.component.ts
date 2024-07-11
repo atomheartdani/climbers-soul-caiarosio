@@ -95,14 +95,8 @@ export class UserDetailDialogComponent implements OnInit {
           this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
           this.dialogRef.close(0);
         },
-        error: (e) => {
-          let error: string = "C'è stato un errore durante il salvataggio. ";
-          if (e['status'] === 401) {
-            error += "Rieseguire l'accesso";
-            this.dialogRef.close(0);
-          } else {
-            error += 'Riprovare più tardi';
-          }
+        error: () => {
+          const error: string = "C'è stato un errore durante il salvataggio. Riprovare più tardi";
           this.snackBar.open(error, 'Chiudi', { duration: 10000 });
         },
       });

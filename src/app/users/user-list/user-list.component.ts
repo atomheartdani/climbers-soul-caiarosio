@@ -107,13 +107,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
                 this.snackBar.open("Cancellazione dell'utente completata", 'Chiudi', { duration: 2000 });
                 this.refresh();
               },
-              error: (e) => {
-                let error: string = "C'è stato un errore durante la cancellazione. ";
-                if (e['status'] === 401) {
-                  error += "Rieseguire l'accesso";
-                } else {
-                  error += 'Riprovare più tardi';
-                }
+              error: () => {
+                const error: string = "C'è stato un errore durante la cancellazione. Riprovare più tardi";
                 this.snackBar.open(error, 'Chiudi', { duration: 10000 });
               },
             });
