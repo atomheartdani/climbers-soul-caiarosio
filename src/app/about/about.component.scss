@@ -1,39 +1,19 @@
-@use "@angular/material" as mat;
-@import "src/theme/theme-variables";
-
 .container {
   text-align: center;
   padding: 1rem;
 }
 
-.mat-icon {
-  vertical-align: middle;
-}
-
-a {
-  color: mat.get-color-from-palette($app-primary);
-  text-decoration: none;
-}
-
-b {
-  color: mat.get-color-from-palette($app-primary);
-}
-
-.mat-card-wrapper {
-  align-content: stretch;
-  align-items: stretch;
-  box-sizing: border-box;
+.wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 16px;
   justify-content: space-between;
   padding-bottom: 16px;
+}
 
-  mat-card {
-    align-items: center;
-    display: flex;
-    flex: 1 1 300px;
-    justify-content: center;
-  }
+.wrapper > * {
+  align-items: stretch;
+  display: flex;
+  flex: 1 1 300px;
 }
