@@ -1,17 +1,7 @@
-.container {
-  text-align: center;
-  padding: 1em;
-}
-
 .logo {
-  margin: 0 auto;
-  max-width: 900px;
+  margin: 1em auto;
+  max-width: 850px;
   width: 50vw;
-}
-
-q {
-  font-style: italic;
-  quotes: "« " " »";
 }
 
 @media (max-width: 599.98px) {
@@ -25,20 +15,22 @@ q {
   }
 }
 
-mat-card-title {
-  padding-top: 8px;
+mat-card {
+  margin: 1em;
+  text-align: center;
 }
 
-mat-card-subtitle {
-  padding-bottom: 8px;
+mat-card-header {
+  font-style: italic;
+  padding: 16px 8px;
 }
 
 #wallWrapper {
+  align-content: stretch;
+  align-items: stretch;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  box-sizing: border-box;
-  align-content: stretch;
-  align-items: stretch;
   justify-content: space-evenly;
 }
