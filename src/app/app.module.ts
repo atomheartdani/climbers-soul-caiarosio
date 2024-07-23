@@ -6,7 +6,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ApiPrefixInterceptor, ErrorHandlerInterceptor, RouteReusableStrategy, SharedModule } from '@shared';
 import { AuthExpiredInterceptor } from './@shared/http/auth-expired.interceptor';
@@ -24,8 +24,6 @@ import { SelfRegistrationModule } from './self-registration/self-registration.mo
 import { ShellModule } from './shell/shell.module';
 import { UsersModule } from './users/users.module';
 
-const routes: Routes = [];
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -38,7 +36,6 @@ const routes: Routes = [];
     }),
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, { useHash: true }),
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
