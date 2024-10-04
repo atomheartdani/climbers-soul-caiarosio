@@ -1,4 +1,12 @@
+@use "@angular/material" as mat;
+@import "src/theme/theme-variables";
+
 mat-card {
   flex-basis: 100%;
   justify-content: center;
+}
+
+a {
+  color: mat.get-color-from-palette($app-primary);
+  text-decoration: none;
 }
