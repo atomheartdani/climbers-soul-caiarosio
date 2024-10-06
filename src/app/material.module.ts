@@ -7,7 +7,6 @@
  */
 
 import { NgModule } from '@angular/core';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,14 +16,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import {
   DateAdapter,
+  MAT_DATE_FORMATS,
   MatCommonModule,
   MatLineModule,
-  MatNativeDateModule,
   MatOptionModule,
   MatPseudoCheckboxModule,
   MatRippleModule,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -52,13 +49,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { IsoDateAdapter } from './@shared/iso-date-adapter';
 
 export const CUSTOM_DATE_FORMATS = {
   parse: {
     dateInput: 'YYYY-MM-DD',
   },
   display: {
-    dateInput: 'YYYY-MM-DD',
+    dateInput: 'input',
     monthYearLabel: 'MMM YY',
     dateA11yLabel: 'YYYY-MM-DD',
     monthYearA11yLabel: 'MM YYYY',
@@ -86,7 +84,6 @@ export const CUSTOM_DATE_FORMATS = {
     MatLineModule,
     MatListModule,
     MatMenuModule,
-    MatNativeDateModule,
     MatOptionModule,
     MatPaginatorModule,
     MatProgressBarModule,
@@ -108,7 +105,7 @@ export const CUSTOM_DATE_FORMATS = {
     MatTreeModule,
   ],
   providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: DateAdapter, useClass: IsoDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
   ],
 })

@@ -10,7 +10,6 @@ import { User } from '@app/@shared/models/user.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { UserService } from '@app/@shared/services/user.service';
 import { AuthenticationGuard } from '@app/auth';
-import { Moment } from 'moment';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -64,9 +63,8 @@ export class OpeningDetailDialogComponent implements OnInit {
     });
   }
 
-  changeData(i: MatDatepickerInputEvent<Moment>) {
-    const newDate: string = i.value!.format('YYYY-MM-DD');
-    this.detailForm.controls['date'].setValue(newDate);
+  changeDate(i: MatDatepickerInputEvent<Date>) {
+    this.detailForm.controls['date'].setValue(i.value);
   }
 
   close(): void {
