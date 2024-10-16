@@ -2,15 +2,12 @@
   margin: 1em auto;
   max-width: 850px;
   width: 50vw;
-}
 
-@media (max-width: 599.98px) {
-  .logo {
-    width: 100vw;
+  @media (max-width: 599.98px) {
+    width: 95%;
   }
-}
-@media (min-width: 600px) and (max-width: 959.98px) {
-  .logo {
+
+  @media (min-width: 600px) and (max-width: 959.98px) {
     width: 70vw;
   }
 }
