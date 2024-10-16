@@ -29,7 +29,7 @@
     </button>
   </div>
   <span class="flex-flex"></span>
-  <span>{{ firstname }}</span>
+  <span class="flex-hide-lt-sm">{{ firstname }}</span>
   <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="username !== null">
     <mat-icon fontIcon="person"></mat-icon>
   </button>
@@ -37,7 +37,7 @@
   <mat-menu #userMenu="matMenu">
     <mat-list *ngIf="username !== null">
       <mat-list-item>
-        <span>Autenticato come</span>&nbsp;<b>{{ username }}</b>
+        <span>Autenticato come</span><br /><b>{{ username }}</b>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
