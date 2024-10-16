@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationGuard, AuthenticationService, CredentialsService } from '@app/auth';
@@ -19,6 +20,7 @@ export class HeaderComponent {
     private credentialsService: CredentialsService,
     private authGuard: AuthenticationGuard,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {}
 
   login() {
@@ -26,7 +28,15 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/'], { replaceUrl: true }));
+    this.authenticationService.logout().subscribe({
+      next: () => {
+        this.snackBar.open('Logout effettuato con successo', 'Chiudi', { duration: 2000 });
+        this.router.navigate(['/'], { replaceUrl: true });
+      },
+      error: () => {
+        this.snackBar.open('Errore durante il logout', 'Chiudi', { duration: 10000 });
+      },
+    });
   }
 
   get firstname(): string | null {
