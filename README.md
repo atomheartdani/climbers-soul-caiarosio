@@ -42,13 +42,12 @@ src/                         project source code
 
 Task automation is based on [NPM scripts](https://docs.npmjs.com/misc/scripts).
 
-| Task                                            | Description                                                              |
-| ----------------------------------------------- | ------------------------------------------------------------------------ |
-| `npm start`                                     | Run development server on `http://localhost:4200/`                       |
-| `npm run build [-- --configuration=production]` | Lint code and build web app for production in `dist/` folder             |
-| `npm test`                                      | Run unit tests via [Karma](https://karma-runner.github.io) in watch mode |
-| `npm run lint`                                  | Lint code                                                                |
-| `npm run prettier`                              | Automatically format all `.ts`, `.js` & `.scss` files                    |
+| Task                                            | Description                                                  |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| `npm start`                                     | Run development server on `http://localhost:4200/`           |
+| `npm run build [-- --configuration=production]` | Lint code and build web app for production in `dist/` folder |
+| `npm run lint`                                  | Lint code                                                    |
+| `npm run prettier`                              | Automatically format all `.ts`, `.js` & `.scss` files        |
 
 When building the application, you can specify the target configuration using the additional flag
 `--configuration <name>` (do not forget to prepend `--` to pass arguments to npm scripts).
@@ -70,8 +69,7 @@ Tasks are mostly based on the `angular-cli` tool. Use `ng help` to get more help
 
 ## Code formatting
 
-All `.ts`, `.js` & `.scss` files in this project are formatted automatically using [Prettier](https://prettier.io),
-and enforced via the `test:ci` script.
+All `.ts`, `.js` & `.scss` files in this project are formatted automatically using [Prettier](https://prettier.io).
 
 A pre-commit git hook has been configured on this project to automatically format staged files, using
 (pretty-quick)[https://github.com/azz/pretty-quick], so you don't have to care for it.
@@ -86,14 +84,6 @@ The app template is based on [HTML5](http://whatwg.org/html), [TypeScript](http:
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 
