@@ -2,10 +2,10 @@
 @import "src/theme/theme-variables";
 
 b {
-  color: mat.get-color-from-palette($app-primary);
+  color: mat.m2-get-color-from-palette($app-primary);
 }
 
 a {
-  color: mat.get-color-from-palette($app-primary);
+  color: mat.m2-get-color-from-palette($app-primary);
   text-decoration: none;
 }

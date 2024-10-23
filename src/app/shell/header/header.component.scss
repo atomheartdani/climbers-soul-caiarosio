@@ -14,7 +14,7 @@
 }
 
 .brand {
-  color: mat.get-color-from-palette($app-primary, "default-contrast");
+  color: mat.m2-get-color-from-palette($app-primary, "default-contrast");
   text-decoration: none;
   padding-right: 1rem;
 }
