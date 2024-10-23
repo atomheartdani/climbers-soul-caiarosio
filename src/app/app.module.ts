@@ -3,18 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
-import { ApiPrefixInterceptor, ErrorHandlerInterceptor, RouteReusableStrategy, SharedModule } from '@shared';
+import { ApiPrefixInterceptor, ErrorHandlerInterceptor, RouteReusableStrategy } from '@shared';
 import { AuthExpiredInterceptor } from './@shared/http/auth-expired.interceptor';
 import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
 import { CacheInterceptor } from './@shared/http/cache.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule, CredentialsService } from './auth';
+import { CredentialsService } from './auth';
 import { HomeModule } from './home/home.module';
-import { RulesModule } from './rules/rules.module';
-import { SelfRegistrationModule } from './self-registration/self-registration.module';
 import { ShellModule } from './shell/shell.module';
-import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,14 +19,8 @@ import { UsersModule } from './users/users.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
     ShellModule,
     HomeModule,
-    AuthModule,
-    SchedulerModule,
-    RulesModule,
-    SelfRegistrationModule,
-    UsersModule,
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   providers: [
