@@ -1,6 +1,3 @@
-@use "@angular/material" as mat;
-@import "src/theme/theme-variables";
-
 :host {
   display: flex;
   flex: 1;
@@ -57,15 +54,6 @@ form {
 
 form > :not(:last-child) {
   margin-bottom: 8px;
-}
-
-.login-error {
-  color: mat.m2-get-color-from-palette($app-warn);
-}
-
-a {
-  color: mat.m2-get-color-from-palette($app-primary);
-  text-decoration: none;
 }
 
 .fake-form-field {

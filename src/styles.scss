@@ -28,6 +28,9 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+@use "@angular/material" as mat;
+@import "src/theme/theme-variables";
+
 * {
   box-sizing: border-box;
 }
@@ -38,6 +41,19 @@ body {
   flex-direction: column;
   margin: 0;
   height: 100%;
+}
+
+a {
+  color: mat.m2-get-color-from-palette($app-primary);
+  text-decoration: none;
+}
+
+b {
+  color: mat.m2-get-color-from-palette($app-primary);
+}
+
+.error-message {
+  color: mat.m2-get-color-from-palette($app-warn);
 }
 
 .icon-spin {

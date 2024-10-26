@@ -74,11 +74,6 @@ mat-form-field {
   color: mat.m2-get-color-from-palette($app-warn);
 }
 
-a {
-  color: mat.m2-get-color-from-palette($app-primary);
-  text-decoration: none;
-}
-
 .fake-form-field {
   padding-bottom: 1.34375em;
 }

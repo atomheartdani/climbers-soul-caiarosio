@@ -5,7 +5,7 @@
   <mat-card>
     <mat-card-content>
       <form (ngSubmit)="login()" [formGroup]="form" novalidate>
-        <div class="login-error" [hidden]="!error || isLoading">Username o password errati.</div>
+        <div class="error-message" [hidden]="!error || isLoading">Username o password errati.</div>
 
         <br />
 
