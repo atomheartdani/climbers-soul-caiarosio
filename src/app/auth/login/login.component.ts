@@ -14,7 +14,7 @@ import { CredentialsService } from '../credentials.service';
 })
 export class LoginComponent {
   error: string | undefined;
-  loginForm!: FormGroup;
+  form!: FormGroup;
   isLoading = false;
 
   constructor(
@@ -29,11 +29,11 @@ export class LoginComponent {
 
   login() {
     this.isLoading = true;
-    const login$ = this.authenticationService.login(this.loginForm.value);
+    const login$ = this.authenticationService.login(this.form.value);
     login$
       .pipe(
         finalize(() => {
-          this.loginForm.markAsPristine();
+          this.form.markAsPristine();
           this.isLoading = false;
         }),
         untilDestroyed(this),
@@ -42,7 +42,7 @@ export class LoginComponent {
         next: (credentials) => {
           console.debug(`${credentials.username} successfully logged in`);
           const redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
-          const remember = this.loginForm.controls['remember'].value;
+          const remember = this.form.controls['remember'].value;
           if (credentials.updatePassword) {
             sessionStorage.setItem('climbers-soul-caiarosio-temp-credentials', JSON.stringify(credentials));
             sessionStorage.setItem('climbers-soul-caiarosio-temp-remember', remember);
@@ -61,7 +61,7 @@ export class LoginComponent {
 
   private createForm() {
     const remember = this.credentialsService.isRemeberActive();
-    this.loginForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       remember: remember,

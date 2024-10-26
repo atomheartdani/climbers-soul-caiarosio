@@ -17,7 +17,7 @@ const passwordMinLength: number = 12;
   styleUrls: ['./update-password.component.scss'],
 })
 export class UpdatePasswordComponent {
-  updatePasswordForm: FormGroup;
+  form: FormGroup;
   isLoading = false;
 
   constructor(
@@ -28,7 +28,7 @@ export class UpdatePasswordComponent {
     private userService: UserService,
     private credentialsService: CredentialsService,
   ) {
-    this.updatePasswordForm = this.formBuilder.group(
+    this.form = this.formBuilder.group(
       {
         oldPassword: ['', Validators.required],
         newPassword1: ['', [Validators.required, Validators.minLength(passwordMinLength)]],
@@ -42,14 +42,14 @@ export class UpdatePasswordComponent {
 
   updatePassword() {
     this.isLoading = true;
-    const ctrls = this.updatePasswordForm.controls;
+    const ctrls = this.form.controls;
     const credentials: Credentials = JSON.parse(sessionStorage.getItem('climbers-soul-caiarosio-temp-credentials')!);
     const remember: boolean = sessionStorage.getItem('climbers-soul-caiarosio-temp-remember')! == 'true';
     this.userService
       .updatePassword(credentials.username, ctrls['oldPassword'].value, ctrls['newPassword1'].value)
       .pipe(
         finalize(() => {
-          this.updatePasswordForm.markAsPristine();
+          this.form.markAsPristine();
           this.isLoading = false;
         }),
         untilDestroyed(this),

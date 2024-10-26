@@ -2,53 +2,56 @@
   <div>
     <h1>Climber's Soul CAI Arosio</h1>
   </div>
-  <div class="login-container">
-    <mat-card class="login-box">
-      <mat-card-content>
-        <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-          <div class="login-error" [hidden]="!error || isLoading">Username o password errati.</div>
-          <br />
-          <div class="login-fields">
-            <mat-form-field [hideRequiredMarker]="true">
-              <input
-                type="text"
-                matInput
-                formControlName="username"
-                autocomplete="username"
-                [placeholder]="'Username'"
-                required
-              />
-              <mat-error *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
-                <span>L'username è obbligatorio</span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field [hideRequiredMarker]="true">
-              <input
-                type="password"
-                matInput
-                formControlName="password"
-                autocomplete="current-password"
-                [placeholder]="'Password'"
-                required
-              />
-              <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
-                <span>La password è obbligatori</span>
-              </mat-error>
-            </mat-form-field>
-            <div class="fake-form-field">
-              <mat-slide-toggle color="primary" formControlName="remember">Ricordami</mat-slide-toggle>
-            </div>
-            <div>
-              <p class="mat-body">Non hai un account? <a href="./#/register">Registrati!</a></p>
-            </div>
-            <br />
-            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
-              <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
-              <span>Entrare</span>
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <mat-card>
+    <mat-card-content>
+      <form (ngSubmit)="login()" [formGroup]="form" novalidate>
+        <div class="login-error" [hidden]="!error || isLoading">Username o password errati.</div>
+
+        <br />
+
+        <mat-form-field [hideRequiredMarker]="true">
+          <input
+            type="text"
+            matInput
+            formControlName="username"
+            autocomplete="username"
+            [placeholder]="'Username'"
+            required
+          />
+          <mat-error *ngIf="form.controls['username'].invalid && form.controls['username'].touched">
+            <span>L'username è obbligatorio</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            autocomplete="current-password"
+            [placeholder]="'Password'"
+            required
+          />
+          <mat-error *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+            <span>La password è obbligatori</span>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="fake-form-field">
+          <mat-slide-toggle color="primary" formControlName="remember">Ricordami</mat-slide-toggle>
+        </div>
+
+        <div>
+          <p class="mat-body">Non hai un account? <a href="./#/register">Registrati!</a></p>
+        </div>
+
+        <br />
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || isLoading">
+          <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+          <span>Entrare</span>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
