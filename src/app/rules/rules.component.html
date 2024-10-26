@@ -9,16 +9,17 @@
     </mat-card-header>
 
     <mat-card-content>
-      <div class="rule" *ngFor="let rule of rulesTree; let i = index">
-        <p class="mat-body">
-          <strong>{{ i + 1 }}</strong> - {{ rule['data'].content }}
-        </p>
-        <div class="child-rule" *ngFor="let ruleChild of rule['children']; let j = index">
+      @for (rule of rules; track rule.id) {
+        @if (rule.parentOrder === null) {
           <p class="mat-body">
-            <strong>{{ i + 1 }}.{{ j + 1 }}</strong> - {{ ruleChild['data'].content }}
+            <strong>{{ rule.order }}</strong> - {{ rule.content }}
           </p>
-        </div>
-      </div>
+        } @else {
+          <p class="mat-body child-rule">
+            <strong>{{ rule.parentOrder }}.{{ rule.order }}</strong> - {{ rule.content }}
+          </p>
+        }
+      }
     </mat-card-content>
 
     <mat-card-footer>
