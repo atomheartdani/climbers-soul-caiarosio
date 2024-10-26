@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@shared';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { CredentialsService } from '../credentials.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,7 +34,6 @@ export class LoginComponent {
           this.form.markAsPristine();
           this.isLoading = false;
         }),
-        untilDestroyed(this),
       )
       .subscribe({
         next: (credentials) => {
