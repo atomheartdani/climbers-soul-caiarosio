@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '@app/@shared';
+import { UserRbacAcronymPipe } from '@app/@shared/pipes/userRbacAcronym.pipe';
 import { MaterialModule } from '@app/material.module';
 import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -10,6 +10,6 @@ import { UsersComponent } from './users.component';
 
 @NgModule({
   declarations: [UsersComponent, UserDetailDialogComponent, UserListComponent],
-  imports: [CommonModule, SharedModule, MaterialModule, FormsModule, ReactiveFormsModule, UsersRoutingModule],
+  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, UserRbacAcronymPipe, UsersRoutingModule],
 })
 export class UsersModule {}

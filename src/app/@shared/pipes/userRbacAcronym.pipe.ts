@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { User } from '../models/user.model';
 
-@Pipe({ name: 'userRbacAcronym' })
+@Pipe({
+  name: 'userRbacAcronym',
+  standalone: true,
+})
 export class UserRbacAcronymPipe implements PipeTransform {
   transform(user: User): string {
     let ret = '';
