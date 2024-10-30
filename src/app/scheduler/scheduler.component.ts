@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Opening } from '@app/@shared/models/opening.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
-import { CredentialsService } from '@app/auth';
+import { CredentialsService } from '@app/auth/credentials.service';
 import { OpeningDetailDialogComponent } from '@app/opening/opening-detail-dialog/opening-detail-dialog.component';
 import { finalize } from 'rxjs';
 

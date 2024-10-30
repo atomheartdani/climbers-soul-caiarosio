@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
 import { UsernameValidator } from '@app/@shared/validators/username.validator';
-import { CredentialsService } from '@app/auth';
+import { CredentialsService } from '@app/auth/credentials.service';
 import { debounceTime, finalize } from 'rxjs';
 
 @Component({

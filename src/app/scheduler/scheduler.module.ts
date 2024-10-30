@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LoaderComponent } from '@app/@shared';
+import { LoaderComponent } from '@app/@shared/loader/loader.component';
 import { DateWithMonthNamePipe } from '@app/@shared/pipes/dateWithMonthName.pipe';
 import { MaterialModule } from '@app/material.module';
 import { OpeningModule } from '@app/opening/opening.module';

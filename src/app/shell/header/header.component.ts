@@ -3,7 +3,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationGuard, AuthenticationService, CredentialsService } from '@app/auth';
+import { AuthenticationGuard } from '@app/auth/authentication.guard';
+import { AuthenticationService } from '@app/auth/authentication.service';
+import { CredentialsService } from '@app/auth/credentials.service';
 
 @Component({
   selector: 'app-header',

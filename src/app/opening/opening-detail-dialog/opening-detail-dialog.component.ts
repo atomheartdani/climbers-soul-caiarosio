@@ -9,7 +9,7 @@ import { Opening } from '@app/@shared/models/opening.model';
 import { User } from '@app/@shared/models/user.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { UserService } from '@app/@shared/services/user.service';
-import { AuthenticationGuard } from '@app/auth';
+import { AuthenticationGuard } from '@app/auth/authentication.guard';
 import { finalize } from 'rxjs';
 
 @Component({

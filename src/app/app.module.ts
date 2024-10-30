@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
-import { ApiPrefixInterceptor, ErrorHandlerInterceptor, RouteReusableStrategy } from '@shared';
+import { ApiPrefixInterceptor } from './@shared/http/api-prefix.interceptor';
 import { AuthExpiredInterceptor } from './@shared/http/auth-expired.interceptor';
 import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
 import { CacheInterceptor } from './@shared/http/cache.interceptor';
+import { ErrorHandlerInterceptor } from './@shared/http/error-handler.interceptor';
+import { RouteReusableStrategy } from './@shared/route-reusable-strategy';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CredentialsService } from './auth';
+import { CredentialsService } from './auth/credentials.service';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 
