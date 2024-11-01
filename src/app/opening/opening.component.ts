@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { Opening } from '@app/@shared/models/opening.model';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
-import { AuthenticationGuard } from '@app/auth/authentication.guard';
 import { DeleteReservationDialogComponent } from './delete-reservation-dialog/delete-reservation-dialog.component';
 import { InsertReservationDialogComponent } from './insert-reservation-dialog/insert-reservation-dialog.component';
 import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-detail-dialog.component';

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SelfRegistrationGuard } from '@app/@shared/guards/self-registration.guard';
 import { SelfRegistrationComponent } from './self-registration.component';
-import { SelfRegistrationGuard } from './self-registration.guard';
 
 const routes: Routes = [
   {

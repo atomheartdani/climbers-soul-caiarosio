@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SelfRegistrationGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private credentialService: CredentialsService,
-  ) {}
+  constructor(private credentialsService: CredentialsService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.credentialService.isAuthenticated()) {
+    if (this.credentialsService.isAuthenticated()) {
       return false;
     }
     return true;

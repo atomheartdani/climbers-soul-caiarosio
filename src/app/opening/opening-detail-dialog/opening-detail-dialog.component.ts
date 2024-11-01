@@ -5,11 +5,11 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
+import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { Opening } from '@app/@shared/models/opening.model';
 import { User } from '@app/@shared/models/user.model';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { UserService } from '@app/@shared/services/user.service';
-import { AuthenticationGuard } from '@app/auth/authentication.guard';
 import { finalize } from 'rxjs';
 
 @Component({

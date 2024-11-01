@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { User } from '@app/@shared/models/user.model';
-import { AuthenticationGuard } from '@app/auth/authentication.guard';
 import { Observable, Subject } from 'rxjs';
 import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
 
