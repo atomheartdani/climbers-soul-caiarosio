@@ -1,17 +1,16 @@
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <div class="operations">
-        <button mat-raised-button color="primary" (click)="create()">
-          Crea utente
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-      <h2 class="mat-h2">Utenti</h2>
-      <app-user-list [columns]="usersColumns" [isVerified]="true" [event]="event"></app-user-list>
-      <div class="spacer"></div>
-      <h2 class="mat-h2">Utenti da verificare</h2>
-      <app-user-list [columns]="usersToVerifyColumns" [isVerified]="false" [event]="event"></app-user-list>
-    </mat-card-content>
-  </mat-card>
+  <div class="operations">
+    <button mat-raised-button color="primary" (click)="create()">
+      Crea utente
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <h2 class="mat-h2">Utenti</h2>
+  <app-user-list [columns]="usersColumns" [isVerified]="true" [event]="event"></app-user-list>
+
+  <div class="spacer"></div>
+
+  <h2 class="mat-h2">Utenti da verificare</h2>
+  <app-user-list [columns]="usersToVerifyColumns" [isVerified]="false" [event]="event"></app-user-list>
 </div>
