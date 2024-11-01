@@ -9,9 +9,9 @@ import { AuthHeaderInterceptor } from './@shared/http/auth-header.interceptor';
 import { CacheInterceptor } from './@shared/http/cache.interceptor';
 import { ErrorHandlerInterceptor } from './@shared/http/error-handler.interceptor';
 import { RouteReusableStrategy } from './@shared/route-reusable-strategy';
+import { CredentialsService } from './@shared/services/credentials.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CredentialsService } from './auth/credentials.service';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 

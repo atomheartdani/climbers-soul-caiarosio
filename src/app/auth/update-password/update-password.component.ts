@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Credentials, CredentialsService } from '@app/@shared/services/credentials.service';
 import { UserService } from '@app/@shared/services/user.service';
 import { UpdatePasswordValidator } from '@app/@shared/validators/update-password.validator';
 import { finalize } from 'rxjs';
-import { Credentials, CredentialsService } from '../credentials.service';
 
 const passwordMinLength: number = 12;
 

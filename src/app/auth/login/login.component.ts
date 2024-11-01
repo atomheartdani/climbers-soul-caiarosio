@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@app/@shared/services/authentication.service';
+import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { finalize } from 'rxjs/operators';
-import { AuthenticationService } from '../authentication.service';
-import { CredentialsService } from '../credentials.service';
 
 @Component({
   selector: 'app-login',
