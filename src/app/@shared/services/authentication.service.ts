@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { UserService } from '@app/@shared/services/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map, Observable, of } from 'rxjs';
-import { Credentials, CredentialsService } from './credentials.service';
+import { Credentials } from '../models/credentials.model';
+import { CredentialsService } from './credentials.service';
 
 export interface LoginContext {
   username: string;

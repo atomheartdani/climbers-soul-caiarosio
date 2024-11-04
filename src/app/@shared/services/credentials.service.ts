@@ -1,16 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface Credentials {
-  id: number;
-  username: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  updatePassword: boolean;
-  canManageOpenings: boolean;
-  canManageUsers: boolean;
-  token: string;
-}
+import { Credentials } from '../models/credentials.model';
 
 const credentialsKey = 'climbers-soul-caiarosio-credentials';
 
