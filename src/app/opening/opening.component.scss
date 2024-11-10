@@ -6,6 +6,10 @@ mat-card-header {
   justify-content: space-between;
 }
 
+:host ::ng-deep .mat-mdc-card-header-text {
+  width: unset;
+}
+
 .check_circle {
   color: green;
 }
