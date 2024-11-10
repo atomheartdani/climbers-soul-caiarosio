@@ -14,7 +14,7 @@
       color="primary"
       [disabled]="spaceFull || isSpecialEvent || !isReservable"
       (click)="insertReservation()"
-      *ngIf="!isLoggedUserAlreadyReserved"
+      *ngIf="!isLoggedUserAlreadyReserved && !isSpecialEvent"
     >
       Prenotati
     </button>
