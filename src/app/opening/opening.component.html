@@ -1,6 +1,6 @@
 <mat-card [ngClass]="{ 'special-event': isSpecialEvent }">
   <mat-card-header>
-    <mat-card-title> {{ opening.date }} </mat-card-title>
+    <mat-card-title> {{ opening.date | dateWithDayName }} </mat-card-title>
     <mat-icon [fontIcon]="icon" [class]="icon" *ngIf="!isAfterCutoff && !isSpecialEvent"></mat-icon>
   </mat-card-header>
   <mat-card-content>
