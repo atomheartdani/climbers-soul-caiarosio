@@ -12,7 +12,6 @@ import { RouteReusableStrategy } from './@shared/route-reusable-strategy';
 import { CredentialsService } from './@shared/services/credentials.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { ShellModule } from './shell/shell.module';
     BrowserModule,
     BrowserAnimationsModule,
     ShellModule,
-    HomeModule,
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   providers: [

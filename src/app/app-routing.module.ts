@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: 'about', loadComponent: () => import('./about/about.component').then((c) => c.AboutComponent) },
+  { path: 'home', loadComponent: () => import('./home/home.component').then((c) => c.HomeComponent) },
   {
     path: 'register',
     loadChildren: () => import('./self-registration/self-registration.module').then((m) => m.SelfRegistrationModule),
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'scheduler', loadChildren: () => import('./scheduler/scheduler.module').then((m) => m.SchedulerModule) },
   { path: 'users', loadChildren: () => import('./users/users.module').then((m) => m.UsersModule) },
   // Fallback when no prior route is matched
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
