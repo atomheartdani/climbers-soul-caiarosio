@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'about', loadChildren: () => import('./about/about.module').then((m) => m.AboutModule) },
+  { path: 'about', loadComponent: () => import('./about/about.component').then((c) => c.AboutComponent) },
   {
     path: 'register',
     loadChildren: () => import('./self-registration/self-registration.module').then((m) => m.SelfRegistrationModule),
