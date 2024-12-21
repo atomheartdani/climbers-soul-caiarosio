@@ -5,6 +5,7 @@
     </button>
     <span class="title">{{ title }}</span>
   </div>
+
   <div class="flex-hide-lt-sm">
     <a class="brand" href="https://www.caiarosio.it/">Climber's Soul CAI Arosio</a>
     <button mat-button routerLink="/home" routerLinkActive="active">
@@ -23,24 +24,36 @@
       <mat-icon fontIcon="info"></mat-icon>
       <span>Informazioni</span>
     </button>
-    <button mat-button routerLink="/users" routerLinkActive="active" *ngIf="canManageUsers">
-      <mat-icon fontIcon="person"></mat-icon>
-      <span>Utenti</span>
-    </button>
+    @if (canManageUsers) {
+      <button mat-button routerLink="/users" routerLinkActive="active">
+        <mat-icon fontIcon="person"></mat-icon>
+        <span>Utenti</span>
+      </button>
+    }
   </div>
+
   <span class="flex-flex"></span>
+
   <span class="flex-hide-lt-sm">{{ firstname }}</span>
-  <button mat-icon-button [matMenuTriggerFor]="userMenu" *ngIf="username !== null">
-    <mat-icon fontIcon="person"></mat-icon>
-  </button>
-  <button mat-button (click)="login()" *ngIf="username === null">Login</button>
+
+  @if (username === null) {
+    <button mat-button (click)="login()">Login</button>
+  } @else {
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon fontIcon="person"></mat-icon>
+    </button>
+  }
+
   <mat-menu #userMenu="matMenu">
-    <mat-list *ngIf="username !== null">
-      <mat-list-item>
-        <span>Autenticato come</span><br /><b>{{ username }}</b>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
-    <button mat-menu-item (click)="logout()" *ngIf="username !== null">Uscire</button>
+    @if (username !== null) {
+      <mat-list>
+        <mat-list-item>
+          <span>Autenticato come</span><br /><b>{{ username }}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+
+      <button mat-menu-item (click)="logout()">Uscire</button>
+    }
   </mat-menu>
 </mat-toolbar>

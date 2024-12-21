@@ -1,8 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { AuthenticationService } from '@app/@shared/services/authentication.service';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
@@ -11,6 +17,16 @@ import { CredentialsService } from '@app/@shared/services/credentials.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatToolbarModule,
+    RouterModule,
+  ],
 })
 export class HeaderComponent {
   @Input() sidenav!: MatSidenav;
