@@ -1,9 +1,15 @@
-<div *ngIf="dataSource.loading$ | async">
-  <mat-spinner></mat-spinner>
-</div>
-<div class="error-message" *ngIf="dataSource.error$ | async">
-  <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
-</div>
+@if (dataSource.loading$ | async) {
+  <div>
+    <mat-spinner></mat-spinner>
+  </div>
+}
+
+@if (dataSource.error$ | async) {
+  <div class="error-message">
+    <h2 class="mat-h2">Errore nel caricamento degli utenti. Riprovare o rieseguire il login</h2>
+  </div>
+}
+
 <div class="mat-elevation-z8 container">
   <mat-table [dataSource]="dataSource" class="mat-cell users">
     <ng-container matColumnDef="username">
@@ -59,7 +65,9 @@
         <mat-label>TOS</mat-label>
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.tosConsent">done</mat-icon>
+        @if (element.tosConsent) {
+          <mat-icon>done</mat-icon>
+        }
       </mat-cell>
     </ng-container>
 
@@ -68,9 +76,9 @@
         <mat-form-field>
           <mat-label>Admin</mat-label>
           <mat-select multiple [formControl]="filterAdmin">
-            <mat-option *ngFor="let adminOption of adminOptions" [value]="adminOption.value">
-              {{ adminOption.label }}
-            </mat-option>
+            @for (adminOption of adminOptions; track adminOption) {
+              <mat-option [value]="adminOption.value">{{ adminOption.label }}</mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </mat-header-cell>
@@ -85,9 +93,11 @@
       </mat-header-cell>
       <mat-cell *matCellDef="let element" class="actions">
         <button mat-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
-        <button mat-button color="primary" (click)="delete(element)" *ngIf="!isMyself(element)">
-          <mat-icon>delete</mat-icon>
-        </button>
+        @if (!isMyself(element)) {
+          <button mat-button color="primary" (click)="delete(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        }
       </mat-cell>
     </ng-container>
 

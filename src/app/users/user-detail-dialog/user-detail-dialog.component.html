@@ -1,5 +1,8 @@
-<h1 mat-dialog-title *ngIf="user.id === 0">Nuovo utente</h1>
-<h1 mat-dialog-title *ngIf="user.id !== 0">Dettaglio {{ user.username }}</h1>
+@if (user.id === 0) {
+  <h1 mat-dialog-title>Nuovo utente</h1>
+} @else {
+  <h1 mat-dialog-title>Dettaglio {{ user.username }}</h1>
+}
 <mat-dialog-content class="padding-top-20">
   <form [formGroup]="detailForm">
     <div class="column-layout">
@@ -17,9 +20,9 @@
         <mat-form-field>
           <mat-label>Username</mat-label>
           <input matInput id="username" formControlName="username" />
-          <mat-error *ngIf="detailForm.get('username')?.hasError('usernameAlreadyExists')">
-            Username gia' in uso
-          </mat-error>
+          @if (detailForm.get('username')?.hasError('usernameAlreadyExists')) {
+            <mat-error>Username gia' in uso</mat-error>
+          }
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>
@@ -38,11 +41,13 @@
             Regolamento accettato
           </mat-slide-toggle>
         </div>
-        <div class="fake-form-field" *ngIf="!this.user.isVerified">
-          <mat-slide-toggle color="primary" labelPosition="before" formControlName="isVerified">
-            Verificato
-          </mat-slide-toggle>
-        </div>
+        @if (!this.user.isVerified) {
+          <div class="fake-form-field">
+            <mat-slide-toggle color="primary" labelPosition="before" formControlName="isVerified">
+              Verificato
+            </mat-slide-toggle>
+          </div>
+        }
       </div>
       <div>
         <h2 class="mat-h2">Amministrazione</h2>
@@ -71,18 +76,25 @@
     [disabled]="detailForm.invalid || detailForm.pristine || isProgressing"
   >
     Salva
-    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+    @if (isProgressing) {
+      <mat-icon class="icon-spin" aria-label="Refresh">refresh</mat-icon>
+    }
   </button>
-  <button
-    mat-raised-button
-    color="primary"
-    tabindex="-1"
-    (click)="setUpdatePassword()"
-    *ngIf="!user.updatePassword"
-    [disabled]="detailForm.invalid || isProgressing"
-  >
-    Forza Aggiornamento Password
-    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
-  </button>
+
+  @if (!user.updatePassword) {
+    <button
+      mat-raised-button
+      color="primary"
+      tabindex="-1"
+      (click)="setUpdatePassword()"
+      [disabled]="detailForm.invalid || isProgressing"
+    >
+      Forza Aggiornamento Password
+      @if (isProgressing) {
+        <mat-icon class="icon-spin" aria-label="Refresh">refresh</mat-icon>
+      }
+    </button>
+  }
+
   <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
 </mat-dialog-actions>

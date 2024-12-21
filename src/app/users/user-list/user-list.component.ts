@@ -1,12 +1,22 @@
+import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
 import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { User } from '@app/@shared/models/user.model';
+import { UserRbacAcronymPipe } from '@app/@shared/pipes/userRbacAcronym.pipe';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { UserService } from '@app/@shared/services/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -19,6 +29,22 @@ import { UsersDataSource } from '../users.datasource';
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    UserRbacAcronymPipe,
+  ],
 })
 export class UserListComponent implements OnInit, AfterViewInit {
   @Input() columns = {};

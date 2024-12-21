@@ -1,6 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@app/@shared/models/user.model';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
@@ -12,6 +17,17 @@ import { debounceTime, finalize } from 'rxjs';
   selector: 'app-user-detail-dialog',
   templateUrl: './user-detail-dialog.component.html',
   styleUrls: ['./user-detail-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+  ],
 })
 export class UserDetailDialogComponent implements OnInit {
   detailForm: FormGroup;

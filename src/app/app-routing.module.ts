@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'scheduler',
     loadComponent: () => import('./scheduler/scheduler.component').then((c) => c.SchedulerComponent),
   },
-  { path: 'users', loadChildren: () => import('./users/users.module').then((m) => m.UsersModule) },
+  { path: 'users', loadComponent: () => import('./users/users.component').then((c) => c.UsersComponent) },
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '/home' },
 ];

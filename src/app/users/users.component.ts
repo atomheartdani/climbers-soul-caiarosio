@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { User } from '@app/@shared/models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { UserDetailDialogComponent } from './user-detail-dialog/user-detail-dialog.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
+  standalone: true,
+  imports: [MatButtonModule, MatIconModule, UserListComponent],
 })
 export class UsersComponent {
   usersColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
