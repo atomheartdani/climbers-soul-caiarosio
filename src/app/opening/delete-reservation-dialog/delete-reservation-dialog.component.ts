@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Opening } from '@app/@shared/models/opening.model';
 import { Reservation } from '@app/@shared/models/reservation.model';
@@ -10,6 +12,8 @@ import { finalize } from 'rxjs';
   selector: 'app-delete-reservation-dialog',
   templateUrl: './delete-reservation-dialog.component.html',
   styleUrls: ['./delete-reservation-dialog.component.scss'],
+  standalone: true,
+  imports: [MatButtonModule, MatDialogModule, MatIconModule],
 })
 export class DeleteReservationDialogComponent {
   isProgressing: boolean = false;

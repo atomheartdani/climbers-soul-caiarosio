@@ -1,25 +1,30 @@
 <mat-card [ngClass]="{ 'special-event': isSpecialEvent }">
   <mat-card-header>
     <mat-card-title> {{ opening.date | dateWithDayName }} </mat-card-title>
-    <mat-icon [fontIcon]="icon" [class]="icon" *ngIf="!isAfterCutoff && !isSpecialEvent"></mat-icon>
+    @if (!isAfterCutoff && !isSpecialEvent) {
+      <mat-icon [fontIcon]="icon" [class]="icon"></mat-icon>
+    }
   </mat-card-header>
   <mat-card-content>
     <p class="mat-body">{{ description1 }}</p>
     <p class="mat-body">{{ description2 }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="manage()" *ngIf="canManageOpenings">Gestisci</button>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="spaceFull || isSpecialEvent || !isReservable"
-      (click)="insertReservation()"
-      *ngIf="!isLoggedUserAlreadyReserved && !isSpecialEvent"
-    >
-      Prenotati
-    </button>
-    <button mat-raised-button color="primary" (click)="removeReservation()" *ngIf="isLoggedUserAlreadyReserved">
-      Annulla prenotazione
-    </button>
+    @if (canManageOpenings) {
+      <button mat-raised-button color="primary" (click)="manage()">Gestisci</button>
+    }
+    @if (!isLoggedUserAlreadyReserved && !isSpecialEvent) {
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="spaceFull || isSpecialEvent || !isReservable"
+        (click)="insertReservation()"
+      >
+        Prenotati
+      </button>
+    }
+    @if (isLoggedUserAlreadyReserved) {
+      <button mat-raised-button color="primary" (click)="removeReservation()">Annulla prenotazione</button>
+    }
   </mat-card-actions>
 </mat-card>

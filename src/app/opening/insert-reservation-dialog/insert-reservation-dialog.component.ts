@@ -1,5 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Opening } from '@app/@shared/models/opening.model';
 import { Reservation } from '@app/@shared/models/reservation.model';
@@ -10,6 +14,8 @@ import { finalize } from 'rxjs';
   selector: 'app-insert-reservation-dialog',
   templateUrl: './insert-reservation-dialog.component.html',
   styleUrls: ['./insert-reservation-dialog.component.scss'],
+  standalone: true,
+  imports: [FormsModule, MatButtonModule, MatDialogModule, MatIconModule, MatRadioModule],
 })
 export class InsertReservationDialogComponent {
   reservePartner: boolean = false;

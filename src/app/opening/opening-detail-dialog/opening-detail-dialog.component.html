@@ -1,20 +1,25 @@
-<h1 mat-dialog-title *ngIf="opening.id === 0">Nuova apertura</h1>
-<h1 mat-dialog-title *ngIf="opening.id !== 0">Dettaglio del {{ opening.date }}</h1>
+@if (opening.id === 0) {
+  <h1 mat-dialog-title>Nuova apertura</h1>
+} @else {
+  <h1 mat-dialog-title>Dettaglio del {{ opening.date }}</h1>
+}
 <mat-dialog-content class="padding-top-20">
   <form [formGroup]="detailForm">
     <div>
-      <mat-form-field *ngIf="opening.id === 0">
-        <mat-label>Giorno apertura</mat-label>
-        <input
-          matInput
-          id="date"
-          formControlName="date"
-          [matDatepicker]="openingDatePicker"
-          (dateChange)="changeDate($event)"
-        />
-        <mat-datepicker-toggle matSuffix [for]="openingDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #openingDatePicker></mat-datepicker>
-      </mat-form-field>
+      @if (opening.id === 0) {
+        <mat-form-field>
+          <mat-label>Giorno apertura</mat-label>
+          <input
+            matInput
+            id="date"
+            formControlName="date"
+            [matDatepicker]="openingDatePicker"
+            (dateChange)="changeDate($event)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="openingDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #openingDatePicker></mat-datepicker>
+        </mat-form-field>
+      }
     </div>
     <div class="multi-field-row">
       <mat-form-field>
@@ -34,21 +39,25 @@
       <mat-label>Evento speciale</mat-label>
       <input matInput id="special" formControlName="special" />
     </mat-form-field>
-    <mat-form-field *ngIf="opening.id !== 0">
-      <mat-label>Persone prenotate</mat-label>
-      <mat-chip-grid #chipGrid>
-        <mat-chip-row *ngFor="let user of userList" [editable]="false">
-          {{ user.firstname }} {{ user.lastname }}
-        </mat-chip-row>
-        <input [matChipInputFor]="chipGrid" />
-      </mat-chip-grid>
-    </mat-form-field>
+    @if (opening.id !== 0) {
+      <mat-form-field>
+        <mat-label>Persone prenotate</mat-label>
+        <mat-chip-grid #chipGrid>
+          @for (user of userList; track user) {
+            <mat-chip-row [editable]="false">{{ user.firstname }} {{ user.lastname }}</mat-chip-row>
+          }
+          <input [matChipInputFor]="chipGrid" />
+        </mat-chip-grid>
+      </mat-form-field>
+    }
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
   <button mat-raised-button color="warn" tabindex="-1" (click)="delete()" [disabled]="isProgressing">
     Elimina
-    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+    @if (isProgressing) {
+      <mat-icon class="icon-spin" aria-label="Refresh">refresh</mat-icon>
+    }
   </button>
   <button
     mat-raised-button
@@ -58,7 +67,9 @@
     [disabled]="detailForm.invalid || detailForm.pristine || isProgressing"
   >
     Ok
-    <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+    @if (isProgressing) {
+      <mat-icon class="icon-spin" aria-label="Refresh">refresh</mat-icon>
+    }
   </button>
   <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
 </mat-dialog-actions>

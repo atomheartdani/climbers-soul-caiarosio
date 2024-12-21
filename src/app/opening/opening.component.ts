@@ -1,8 +1,13 @@
+import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { Opening } from '@app/@shared/models/opening.model';
+import { DateWithDayNamePipe } from '@app/@shared/pipes/dateWithDayName.pipe';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { DeleteReservationDialogComponent } from './delete-reservation-dialog/delete-reservation-dialog.component';
 import { InsertReservationDialogComponent } from './insert-reservation-dialog/insert-reservation-dialog.component';
@@ -12,6 +17,8 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
   selector: 'app-opening',
   templateUrl: './opening.component.html',
   styleUrls: ['./opening.component.scss'],
+  standalone: true,
+  imports: [DateWithDayNamePipe, MatButtonModule, MatCardModule, MatIconModule, NgClass],
 })
 export class OpeningComponent {
   @Input() opening: Opening;

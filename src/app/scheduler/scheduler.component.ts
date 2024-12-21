@@ -10,8 +10,8 @@ import { DateWithMonthNamePipe } from '@app/@shared/pipes/dateWithMonthName.pipe
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { OpeningDetailDialogComponent } from '@app/opening/opening-detail-dialog/opening-detail-dialog.component';
+import { OpeningComponent } from '@app/opening/opening.component';
 import { finalize } from 'rxjs';
-import { OpeningModule } from '../opening/opening.module';
 
 @Component({
   selector: 'app-scheduler',
@@ -25,7 +25,7 @@ import { OpeningModule } from '../opening/opening.module';
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    OpeningModule,
+    OpeningComponent,
   ],
 })
 export class SchedulerComponent implements OnInit {
