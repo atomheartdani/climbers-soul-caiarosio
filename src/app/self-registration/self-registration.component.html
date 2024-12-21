@@ -5,6 +5,7 @@
         <h1 class="mat-h1">Crea il tuo account</h1>
       </mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
       <mat-stepper linear #stepper>
         <mat-step [stepControl]="selfRegistrationForm" label="Inserisci i dati">
@@ -22,9 +23,9 @@
             <mat-form-field>
               <mat-label>Username</mat-label>
               <input matInput id="username" formControlName="username" />
-              <mat-error *ngIf="selfRegistrationForm.get('username')?.hasError('usernameAlreadyExists')">
-                Username gia' in uso
-              </mat-error>
+              @if (selfRegistrationForm.get('username')?.hasError('usernameAlreadyExists')) {
+                <mat-error> Username gia' in uso </mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field>
@@ -40,35 +41,34 @@
             <mat-form-field>
               <mat-label>Password</mat-label>
               <input matInput id="newPassword1" formControlName="newPassword1" type="password" />
-              <mat-error
-                *ngIf="
-                  selfRegistrationForm.controls['newPassword1'].invalid &&
-                  selfRegistrationForm.controls['newPassword1'].touched
-                "
-              >
-                <span>La nuova password è obbligatoria e deve essere lunga almeno {{ pwdMinLength }} caratteri </span>
-              </mat-error>
+              @if (
+                selfRegistrationForm.controls['newPassword1'].invalid &&
+                selfRegistrationForm.controls['newPassword1'].touched
+              ) {
+                <mat-error>
+                  <span>La nuova password è obbligatoria e deve essere lunga almeno {{ pwdMinLength }} caratteri</span>
+                </mat-error>
+              }
             </mat-form-field>
 
             <mat-form-field>
               <mat-label>Conferma Password</mat-label>
               <input matInput id="newPassword2" formControlName="newPassword2" type="password" />
-              <mat-error
-                *ngIf="
-                  selfRegistrationForm.controls['newPassword2'].invalid &&
-                  selfRegistrationForm.controls['newPassword2'].touched
-                "
-              >
-                <span>La nuova password è obbligatoria e deve essere lunga almeno {{ pwdMinLength }} caratteri </span>
-              </mat-error>
+              @if (
+                selfRegistrationForm.controls['newPassword2'].invalid &&
+                selfRegistrationForm.controls['newPassword2'].touched
+              ) {
+                <mat-error>
+                  <span>La nuova password è obbligatoria e deve essere lunga almeno {{ pwdMinLength }} caratteri</span>
+                </mat-error>
+              }
             </mat-form-field>
 
-            <div
-              class="fake-form-field full-width password-error"
-              *ngIf="selfRegistrationForm.errors?.['passwordsDontMatch']"
-            >
-              <span>La nuova password e la password di conferma non corrispondono</span>
-            </div>
+            @if (selfRegistrationForm.errors?.['passwordsDontMatch']) {
+              <div class="fake-form-field full-width password-error">
+                <span>La nuova password e la password di conferma non corrispondono</span>
+              </div>
+            }
 
             <button
               mat-raised-button
@@ -77,7 +77,9 @@
               (click)="save(stepper)"
             >
               Avanti
-              <mat-icon class="icon-spin" aria-label="Refresh" *ngIf="isProgressing">refresh</mat-icon>
+              @if (isProgressing) {
+                <mat-icon class="icon-spin" aria-label="Refresh">refresh</mat-icon>
+              }
             </button>
           </form>
         </mat-step>

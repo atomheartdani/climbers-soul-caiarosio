@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SelfRegistrationGuard } from './@shared/guards/self-registration.guard';
 
 const routes: Routes = [
   { path: 'about', loadComponent: () => import('./about/about.component').then((c) => c.AboutComponent) },
@@ -7,7 +8,9 @@ const routes: Routes = [
   { path: 'login', loadComponent: () => import('./auth/login/login.component').then((c) => c.LoginComponent) },
   {
     path: 'register',
-    loadChildren: () => import('./self-registration/self-registration.module').then((m) => m.SelfRegistrationModule),
+    loadComponent: () =>
+      import('./self-registration/self-registration.component').then((c) => c.SelfRegistrationComponent),
+    canActivate: [SelfRegistrationGuard],
   },
   { path: 'rules', loadComponent: () => import('./rules/rules.component').then((c) => c.RulesComponent) },
   {

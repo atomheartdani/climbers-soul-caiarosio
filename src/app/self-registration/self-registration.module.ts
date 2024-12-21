@@ -1,12 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@app/material.module';
 import { SelfRegistrationRoutingModule } from './self-registration-routing.module';
-import { SelfRegistrationComponent } from './self-registration.component';
 
 @NgModule({
-  declarations: [SelfRegistrationComponent],
-  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, SelfRegistrationRoutingModule],
+  imports: [SelfRegistrationRoutingModule],
 })
 export class SelfRegistrationModule {}
