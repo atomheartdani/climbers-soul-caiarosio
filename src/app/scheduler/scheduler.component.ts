@@ -1,15 +1,32 @@
+import { KeyValuePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { LoaderComponent } from '@app/@shared/loader/loader.component';
 import { Opening } from '@app/@shared/models/opening.model';
+import { DateWithMonthNamePipe } from '@app/@shared/pipes/dateWithMonthName.pipe';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { OpeningService } from '@app/@shared/services/opening.service';
 import { OpeningDetailDialogComponent } from '@app/opening/opening-detail-dialog/opening-detail-dialog.component';
 import { finalize } from 'rxjs';
+import { OpeningModule } from '../opening/opening.module';
 
 @Component({
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.scss'],
+  standalone: true,
+  imports: [
+    DateWithMonthNamePipe,
+    LoaderComponent,
+    KeyValuePipe,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    OpeningModule,
+  ],
 })
 export class SchedulerComponent implements OnInit {
   openingsMap: Map<string, Opening[]> = new Map();

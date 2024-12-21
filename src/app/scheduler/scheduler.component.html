@@ -1,25 +1,42 @@
 <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
-<div class="container" *ngIf="!isLoading">
-  <div *ngIf="openingsMap.size === 0">
-    <h3 class="mat-h3">Al momento non ci sono aperture in programma</h3>
-    <h3 class="mat-h3">Ti ricordiamo che la palestra è aperta solamente nel periodo Ottobre - Aprile</h3>
-  </div>
-  <div class="group" *ngFor="let group of openingsMap | keyvalue">
-    <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
-    <mat-divider></mat-divider>
-    <div class="openings">
-      <div class="opening-wrapper" *ngFor="let opening of group.value">
-        <app-opening [opening]="opening" (refreshEvent)="refresh()"></app-opening>
+@if (!isLoading) {
+  <div class="container">
+    @if (openingsMap.size === 0) {
+      <div>
+        <h3 class="mat-h3">Al momento non ci sono aperture in programma</h3>
+        <h3 class="mat-h3">Ti ricordiamo che la palestra è aperta solamente nel periodo Ottobre - Aprile</h3>
       </div>
-    </div>
+    }
+
+    @for (group of openingsMap | keyvalue; track group) {
+      <div class="group">
+        <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
+        <mat-divider></mat-divider>
+        <div class="openings">
+          @for (opening of group.value; track opening) {
+            <div class="opening-wrapper">
+              <app-opening [opening]="opening" (refreshEvent)="refresh()"></app-opening>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (openingsMap.size !== 0) {
+      <div class="load-all">
+        @if (!loadAll) {
+          <button mat-raised-button color="primary" (click)="loadAllOpenings()">
+            Carica tutto
+            <mat-icon>refresh</mat-icon>
+          </button>
+        }
+      </div>
+    }
+
+    @if (canManageOpenings) {
+      <button mat-fab color="primary" (click)="insertOpening()">
+        <mat-icon>add</mat-icon>
+      </button>
+    }
   </div>
-  <div class="load-all" *ngIf="openingsMap.size !== 0">
-    <button mat-raised-button color="primary" (click)="loadAllOpenings()" *ngIf="!loadAll">
-      Carica tutto
-      <mat-icon>refresh</mat-icon>
-    </button>
-  </div>
-  <button mat-fab color="primary" (click)="insertOpening()" *ngIf="canManageOpenings">
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
+}

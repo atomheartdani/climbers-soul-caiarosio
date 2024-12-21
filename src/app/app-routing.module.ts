@@ -9,7 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('./self-registration/self-registration.module').then((m) => m.SelfRegistrationModule),
   },
   { path: 'rules', loadComponent: () => import('./rules/rules.component').then((c) => c.RulesComponent) },
-  { path: 'scheduler', loadChildren: () => import('./scheduler/scheduler.module').then((m) => m.SchedulerModule) },
+  {
+    path: 'scheduler',
+    loadComponent: () => import('./scheduler/scheduler.component').then((c) => c.SchedulerComponent),
+  },
   { path: 'users', loadChildren: () => import('./users/users.module').then((m) => m.UsersModule) },
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '/home' },
