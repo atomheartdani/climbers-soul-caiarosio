@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoaderComponent } from '@app/@shared/loader/loader.component';
 import { AuthenticationService } from '@app/@shared/services/authentication.service';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { finalize } from 'rxjs/operators';
@@ -9,6 +15,17 @@ import { finalize } from 'rxjs/operators';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    LoaderComponent,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+  ],
 })
 export class LoginComponent {
   error: string | undefined;

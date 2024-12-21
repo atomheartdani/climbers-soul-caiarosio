@@ -18,9 +18,11 @@
             [placeholder]="'Username'"
             required
           />
-          <mat-error *ngIf="form.controls['username'].invalid && form.controls['username'].touched">
-            <span>L'username è obbligatorio</span>
-          </mat-error>
+          @if (form.controls['username'].invalid && form.controls['username'].touched) {
+            <mat-error>
+              <span>L'username è obbligatorio</span>
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field [hideRequiredMarker]="true">
@@ -32,9 +34,11 @@
             [placeholder]="'Password'"
             required
           />
-          <mat-error *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
-            <span>La password è obbligatori</span>
-          </mat-error>
+          @if (form.controls['password'].invalid && form.controls['password'].touched) {
+            <mat-error>
+              <span>La password è obbligatori</span>
+            </mat-error>
+          }
         </mat-form-field>
 
         <div class="fake-form-field">
