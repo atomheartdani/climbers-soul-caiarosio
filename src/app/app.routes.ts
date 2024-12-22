@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { SelfRegistrationGuard } from './@shared/guards/self-registration.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'about', loadComponent: () => import('./about/about.component').then((c) => c.AboutComponent) },
   { path: 'home', loadComponent: () => import('./home/home.component').then((c) => c.HomeComponent) },
   { path: 'login', loadComponent: () => import('./auth/login/login.component').then((c) => c.LoginComponent) },
@@ -26,10 +25,3 @@ const routes: Routes = [
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '/home' },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true })],
-  exports: [RouterModule],
-  providers: [],
-})
-export class AppRoutingModule {}
