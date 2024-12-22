@@ -1,9 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
-import { environment } from '@env/environment';
 
 /**
  * Adds a default error handler to all requests.
