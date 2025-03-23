@@ -21,7 +21,6 @@ import { finalize } from 'rxjs';
   selector: 'app-opening-detail-dialog',
   templateUrl: './opening-detail-dialog.component.html',
   styleUrls: ['./opening-detail-dialog.component.scss'],
-  standalone: true,
   imports: [
     FormsModule,
     MatButtonModule,

@@ -19,7 +19,6 @@ const passwordMinLength: number = 12;
   selector: 'app-update-password',
   templateUrl: './update-password.component.html',
   styleUrls: ['./update-password.component.scss'],
-  standalone: true,
   imports: [
     FormsModule,
     LoaderComponent,

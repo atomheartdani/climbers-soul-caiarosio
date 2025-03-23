@@ -6,7 +6,6 @@ import { WallComponent } from './wall/wall.component';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  standalone: true,
   imports: [MatCardModule, WallComponent],
 })
 export class HomeComponent {}

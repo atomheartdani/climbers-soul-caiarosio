@@ -14,7 +14,6 @@ import { finalize } from 'rxjs';
   selector: 'app-insert-reservation-dialog',
   templateUrl: './insert-reservation-dialog.component.html',
   styleUrls: ['./insert-reservation-dialog.component.scss'],
-  standalone: true,
   imports: [FormsModule, MatButtonModule, MatDialogModule, MatIconModule, MatRadioModule],
 })
 export class InsertReservationDialogComponent {

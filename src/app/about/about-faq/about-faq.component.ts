@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-about-faq',
   templateUrl: './about-faq.component.html',
   styleUrl: './about-faq.component.scss',
-  standalone: true,
   imports: [MatCardModule, MatIconModule],
 })
 export class AboutFaqComponent {

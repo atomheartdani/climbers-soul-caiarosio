@@ -29,7 +29,6 @@ import { UsersDataSource } from '../users.datasource';
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
-  standalone: true,
   imports: [
     AsyncPipe,
     FormsModule,

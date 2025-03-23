@@ -13,7 +13,6 @@ import { UserListComponent } from './user-list/user-list.component';
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
-  standalone: true,
   imports: [MatButtonModule, MatIconModule, UserListComponent],
 })
 export class UsersComponent {

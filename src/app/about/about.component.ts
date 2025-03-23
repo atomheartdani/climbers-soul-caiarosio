@@ -8,7 +8,6 @@ import { AboutFaqComponent } from './about-faq/about-faq.component';
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
-  standalone: true,
   imports: [AboutLocationComponent, AboutTimeComponent, AboutSocialComponent, AboutFaqComponent],
 })
 export class AboutComponent {}

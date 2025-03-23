@@ -17,7 +17,6 @@ import { finalize } from 'rxjs';
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.scss'],
-  standalone: true,
   imports: [
     DateWithMonthNamePipe,
     LoaderComponent,

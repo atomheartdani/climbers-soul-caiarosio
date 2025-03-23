@@ -19,7 +19,6 @@ const passwordMinLength: number = 12;
   selector: 'app-self-registration',
   templateUrl: './self-registration.component.html',
   styleUrls: ['./self-registration.component.scss'],
-  standalone: true,
   imports: [
     FormsModule,
     MatButtonModule,

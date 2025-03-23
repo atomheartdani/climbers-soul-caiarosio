@@ -17,7 +17,6 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
   selector: 'app-opening',
   templateUrl: './opening.component.html',
   styleUrls: ['./opening.component.scss'],
-  standalone: true,
   imports: [DateWithDayNamePipe, MatButtonModule, MatCardModule, MatIconModule, NgClass],
 })
 export class OpeningComponent {

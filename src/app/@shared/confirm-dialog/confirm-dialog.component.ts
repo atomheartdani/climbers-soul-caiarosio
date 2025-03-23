@@ -12,7 +12,6 @@ import {
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.scss'],
-  standalone: true,
   imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatButton],
 })
 export class ConfirmDialogComponent {

@@ -17,7 +17,6 @@ import { debounceTime, finalize } from 'rxjs';
   selector: 'app-user-detail-dialog',
   templateUrl: './user-detail-dialog.component.html',
   styleUrls: ['./user-detail-dialog.component.scss'],
-  standalone: true,
   imports: [
     FormsModule,
     MatButtonModule,

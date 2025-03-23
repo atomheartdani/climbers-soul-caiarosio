@@ -12,7 +12,6 @@ import { finalize } from 'rxjs';
   selector: 'app-delete-reservation-dialog',
   templateUrl: './delete-reservation-dialog.component.html',
   styleUrls: ['./delete-reservation-dialog.component.scss'],
-  standalone: true,
   imports: [MatButtonModule, MatDialogModule, MatIconModule],
 })
 export class DeleteReservationDialogComponent {
