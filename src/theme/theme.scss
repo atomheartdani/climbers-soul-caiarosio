@@ -1,16 +1,16 @@
 @use "@angular/material" as mat;
 
-@import "theme-variables";
+@use "theme-variables";
 
 @import "material-design-icons-iconfont/src/material-design-icons";
 
 @include mat.core();
 
 // Emit theme-dependent styles for common features used across multiple components.
-@include mat.core-theme($app-theme);
+@include mat.core-theme(theme-variables.$app-theme);
 
 // Emit styles for all material components based on '$app-theme'
-@include mat.all-component-themes($app-theme);
+@include mat.all-component-themes(theme-variables.$app-theme);
 
 // Emit typography styles
-@include mat.typography-hierarchy($app-typography);
+@include mat.typography-hierarchy(theme-variables.$app-typography);

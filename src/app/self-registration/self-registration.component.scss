@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@import "src/theme/theme-variables";
+@use "src/theme/theme-variables";
 
 .container {
   align-items: center;
@@ -71,7 +71,7 @@ mat-form-field {
 }
 
 .password-error {
-  color: mat.m2-get-color-from-palette($app-warn);
+  color: mat.m2-get-color-from-palette(theme-variables.$app-warn);
 }
 
 .fake-form-field {

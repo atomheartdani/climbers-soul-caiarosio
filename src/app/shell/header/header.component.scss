@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@import "src/theme/theme-variables";
+@use "src/theme/theme-variables";
 
 .navbar {
   position: fixed;
@@ -14,7 +14,7 @@
 }
 
 .brand {
-  color: mat.m2-get-color-from-palette($app-primary, "default-contrast");
+  color: mat.m2-get-color-from-palette(theme-variables.$app-primary, "default-contrast");
   text-decoration: none;
   padding-right: 1rem;
 }

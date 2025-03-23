@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@import "src/theme/theme-variables";
+@use "src/theme/theme-variables";
 
 .container {
   padding: 16px;
@@ -57,7 +57,7 @@
 }
 
 .mat-divider {
-  border-color: mat.m2-get-color-from-palette($app-primary);
+  border-color: mat.m2-get-color-from-palette(theme-variables.$app-primary);
   border-width: 2px 0;
   width: 100%;
 }
