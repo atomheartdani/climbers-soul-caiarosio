@@ -1,13 +1,13 @@
 <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
-  <div class="flex-hide-gt-sm start-center">
+  <div class="flex-hide-gt-sm">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon fontIcon="menu"></mat-icon>
     </button>
-    <span class="title">{{ title }}</span>
   </div>
 
+  <a class="brand" routerLink="/home">Climber's Soul CAI Arosio</a>
+
   <div class="flex-hide-lt-sm">
-    <a class="brand" href="https://www.caiarosio.it/">Climber's Soul CAI Arosio</a>
     <button mat-button routerLink="/home" routerLinkActive="active">
       <mat-icon fontIcon="home"></mat-icon>
       <span>Home</span>
