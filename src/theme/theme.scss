@@ -2,8 +2,6 @@
 
 @use "theme-variables";
 
-@import "material-design-icons-iconfont/src/material-design-icons";
-
 @include mat.core();
 
 // Emit theme-dependent styles for common features used across multiple components.
