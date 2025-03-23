@@ -6,10 +6,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "watch": "ng build --watch --configuration development",
-    "lint": "ng lint && stylelint \"src/**/*.scss\"",
+    "analyze": "ng build --configuration development --stats-json",
     "prettier": "prettier --write \"./src/**/*.{ts,js,html,scss}\"",
-    "prettier:check": "prettier --list-different \"./src/**/*.{ts,js,html,scss}\""
+    "prettier:check": "prettier --list-different \"./src/**/*.{ts,js,html,scss}\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "@angular/animations": "^19.2.3",
