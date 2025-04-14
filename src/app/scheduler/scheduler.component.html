@@ -27,7 +27,7 @@
         @if (!loadAll) {
           <button mat-raised-button color="primary" (click)="loadAllOpenings()">
             Carica tutto
-            <mat-icon>refresh</mat-icon>
+            <mat-icon fontIcon="refresh" />
           </button>
         }
       </div>
@@ -35,7 +35,7 @@
 
     @if (canManageOpenings) {
       <button mat-fab color="primary" (click)="insertOpening()">
-        <mat-icon>add</mat-icon>
+        <mat-icon fontIcon="add" />
       </button>
     }
   </div>

@@ -92,10 +92,12 @@
         <mat-label />
       </mat-header-cell>
       <mat-cell *matCellDef="let element" class="actions">
-        <button mat-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
+        <button mat-button color="primary" (click)="edit(element)">
+          <mat-icon fontIcon="edit" />
+        </button>
         @if (!isMyself(element)) {
           <button mat-button color="primary" (click)="delete(element)">
-            <mat-icon>delete</mat-icon>
+            <mat-icon fontIcon="delete" />
           </button>
         }
       </mat-cell>
