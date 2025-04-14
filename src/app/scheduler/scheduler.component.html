@@ -1,4 +1,4 @@
-<app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
+<app-loader [isLoading]="isLoading" [size]="1.5" />
 @if (!isLoading) {
   <div class="container">
     @if (openingsMap.size === 0) {
@@ -11,11 +11,11 @@
     @for (group of openingsMap | keyvalue; track group) {
       <div class="group">
         <h2 class="mat-h2">{{ group.key | dateWithMonthName }}</h2>
-        <mat-divider></mat-divider>
+        <mat-divider />
         <div class="openings">
           @for (opening of group.value; track opening) {
             <div class="opening-wrapper">
-              <app-opening [opening]="opening" (refreshEvent)="refresh()"></app-opening>
+              <app-opening [opening]="opening" (refreshEvent)="refresh()" />
             </div>
           }
         </div>

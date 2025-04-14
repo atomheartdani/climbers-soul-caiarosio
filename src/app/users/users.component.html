@@ -1,11 +1,11 @@
 <div class="container">
   <h2 class="mat-h2">Utenti</h2>
 
-  <app-user-list [columns]="usersColumns" [isVerified]="true" [event]="event"></app-user-list>
+  <app-user-list [columns]="usersColumns" [isVerified]="true" [event]="event" />
 
   <h2 class="mat-h2">Utenti da verificare</h2>
 
-  <app-user-list [columns]="usersToVerifyColumns" [isVerified]="false" [event]="event"></app-user-list>
+  <app-user-list [columns]="usersToVerifyColumns" [isVerified]="false" [event]="event" />
 
   <button mat-fab color="primary" (click)="create()">
     <mat-icon>add</mat-icon>

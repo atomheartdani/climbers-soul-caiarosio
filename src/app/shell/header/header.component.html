@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
   <div class="flex-hide-gt-sm">
     <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon fontIcon="menu"></mat-icon>
+      <mat-icon fontIcon="menu" />
     </button>
   </div>
 
@@ -9,24 +9,24 @@
 
   <div class="flex-hide-lt-sm">
     <button mat-button routerLink="/home" routerLinkActive="active">
-      <mat-icon fontIcon="home"></mat-icon>
+      <mat-icon fontIcon="home" />
       <span>Home</span>
     </button>
     <button mat-button routerLink="/scheduler" routerLinkActive="active">
-      <mat-icon fontIcon="calendar_month"></mat-icon>
+      <mat-icon fontIcon="calendar_month" />
       <span>Calendario</span>
     </button>
     <button mat-button routerLink="/rules" routerLinkActive="active">
-      <mat-icon fontIcon="rule"></mat-icon>
+      <mat-icon fontIcon="rule" />
       <span>Regolamento</span>
     </button>
     <button mat-button routerLink="/about" routerLinkActive="active">
-      <mat-icon fontIcon="info"></mat-icon>
+      <mat-icon fontIcon="info" />
       <span>Informazioni</span>
     </button>
     @if (canManageUsers) {
       <button mat-button routerLink="/users" routerLinkActive="active">
-        <mat-icon fontIcon="person"></mat-icon>
+        <mat-icon fontIcon="person" />
         <span>Utenti</span>
       </button>
     }
@@ -40,7 +40,7 @@
     <button mat-button (click)="login()">Login</button>
   } @else {
     <button mat-icon-button [matMenuTriggerFor]="userMenu">
-      <mat-icon fontIcon="person"></mat-icon>
+      <mat-icon fontIcon="person" />
     </button>
   }
 
@@ -50,7 +50,7 @@
         <mat-list-item>
           <span>Autenticato come</span><br /><b>{{ username }}</b>
         </mat-list-item>
-        <mat-divider></mat-divider>
+        <mat-divider />
       </mat-list>
 
       <button mat-menu-item (click)="logout()">Uscire</button>

@@ -1,27 +1,27 @@
 <div class="flex-flex">
-  <app-header [sidenav]="sidenav"></app-header>
+  <app-header [sidenav]="sidenav" />
 
   <mat-sidenav-container class="flex-fill">
     <mat-sidenav #sidenav mode="over" ngClass.gt-sm="has-border">
       <nav>
         <mat-list>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">
             <span>Home</span>
           </a>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <a mat-list-item routerLink="/scheduler" routerLinkActive="active" (click)="sidenav.close()">
             <span>Calendario</span>
           </a>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <a mat-list-item routerLink="/rules" routerLinkActive="active" (click)="sidenav.close()">
             <span>Regolamento</span>
           </a>
-          <mat-divider></mat-divider>
+          <mat-divider />
           <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">
             <span>Informazioni</span>
           </a>
-          <mat-divider></mat-divider>
+          <mat-divider />
           @if (canManageUsers) {
             <a mat-list-item routerLink="/users" routerLinkActive="active" (click)="sidenav.close()">
               <span>Utenti</span>
