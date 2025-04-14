@@ -6,6 +6,10 @@ mat-card-header {
   justify-content: space-between;
 }
 
+mat-card-actions {
+  gap: 4px;
+}
+
 :host ::ng-deep .mat-mdc-card-header-text {
   width: unset;
 }
