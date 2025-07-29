@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "browser": "src/main.ts",
             "baseHref": "/climberssoul/",
             "outputPath": {
               "base": "dist",
@@ -38,8 +39,6 @@
               "src/robots.txt"
             ],
             "styles": ["src/theme/theme.scss", "src/styles.scss"],
-            "scripts": [],
-            "browser": "src/main.ts",
             "stylePreprocessorOptions": {
               "includePaths": ["."]
             }
@@ -49,13 +48,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "100kb",
-                  "maximumError": "500kb"
+                  "maximumWarning": "64kb",
+                  "maximumError": "128kb"
                 }
               ],
               "fileReplacements": [
@@ -103,7 +102,6 @@
     }
   },
   "cli": {
-    "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "analytics": false
   }
 }

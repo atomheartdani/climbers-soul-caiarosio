@@ -53,7 +53,7 @@ When you generate the `stats.json` file you can analyze the results with https:/
 
 ## Development server
 
-Run `npm start` for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files
 
 ## Code scaffolding
 
