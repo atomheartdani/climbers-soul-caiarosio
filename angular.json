@@ -38,7 +38,7 @@
               "src/manifest.webmanifest",
               "src/robots.txt"
             ],
-            "styles": ["src/theme/theme.scss", "src/styles.scss"],
+            "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["."]
             }

@@ -10,107 +10,105 @@
   </div>
 }
 
-<div class="mat-elevation-z8 container">
-  <mat-table [dataSource]="dataSource" class="mat-cell users">
-    <ng-container matColumnDef="username">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-form-field>
-          <mat-label>Username</mat-label>
-          <input matInput placeholder="Filtro..." #filterUsername />
-        </mat-form-field>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.username }}
-      </mat-cell>
-    </ng-container>
+<mat-table [dataSource]="dataSource" class="fake-mat-card">
+  <ng-container matColumnDef="username">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Filtro..." #filterUsername />
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.username }}
+    </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="firstname">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-form-field>
-          <mat-label>Nome</mat-label>
-          <input matInput placeholder="Filtro..." #filterFirstname />
-        </mat-form-field>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.firstname }}
-      </mat-cell>
-    </ng-container>
+  <ng-container matColumnDef="firstname">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="Filtro..." #filterFirstname />
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.firstname }}
+    </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="lastname">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-form-field>
-          <mat-label>Cognome</mat-label>
-          <input matInput placeholder="Filtro..." #filterLastname />
-        </mat-form-field>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.lastname }}
-      </mat-cell>
-    </ng-container>
+  <ng-container matColumnDef="lastname">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <mat-label>Cognome</mat-label>
+        <input matInput placeholder="Filtro..." #filterLastname />
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.lastname }}
+    </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Filtro..." #filterEmail />
-        </mat-form-field>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.email }}
-      </mat-cell>
-    </ng-container>
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Filtro..." #filterEmail />
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.email }}
+    </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="tosConsent">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-label>TOS</mat-label>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        @if (element.tosConsent) {
-          <mat-icon>done</mat-icon>
-        }
-      </mat-cell>
-    </ng-container>
+  <ng-container matColumnDef="tosConsent">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-label>TOS</mat-label>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      @if (element.tosConsent) {
+        <mat-icon>done</mat-icon>
+      }
+    </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="admin">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-form-field>
-          <mat-label>Admin</mat-label>
-          <mat-select multiple [formControl]="filterAdmin">
-            @for (adminOption of adminOptions; track adminOption) {
-              <mat-option [value]="adminOption.value">{{ adminOption.label }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element | userRbacAcronym }}
-      </mat-cell>
-    </ng-container>
+  <ng-container matColumnDef="admin">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <mat-label>Admin</mat-label>
+        <mat-select multiple [formControl]="filterAdmin">
+          @for (adminOption of adminOptions; track adminOption) {
+            <mat-option [value]="adminOption.value">{{ adminOption.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element | userRbacAcronym }}
+    </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-label />
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element" class="actions">
-        <button mat-button color="primary" (click)="edit(element)">
-          <mat-icon fontIcon="edit" />
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-label />
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element" class="actions">
+      <button matIconButton (click)="edit(element)">
+        <mat-icon fontIcon="edit" />
+      </button>
+      @if (!isMyself(element)) {
+        <button matIconButton (click)="delete(element)">
+          <mat-icon fontIcon="delete" />
         </button>
-        @if (!isMyself(element)) {
-          <button mat-button color="primary" (click)="delete(element)">
-            <mat-icon fontIcon="delete" />
-          </button>
-        }
-      </mat-cell>
-    </ng-container>
+      }
+    </mat-cell>
+  </ng-container>
 
-    <mat-header-row *matHeaderRowDef="columns" />
-    <mat-row *matRowDef="let row; columns: columns" />
-  </mat-table>
+  <mat-header-row *matHeaderRowDef="columns" />
+  <mat-row *matRowDef="let row; columns: columns" />
+</mat-table>
 
-  <mat-paginator
-    [length]="dataSource.totalElements"
-    [pageSize]="25"
-    [pageSizeOptions]="[10, 25, 50, 100]"
-    showFirstLastButtons
-  />
-</div>
+<mat-paginator
+  [length]="dataSource.totalElements"
+  [pageSize]="25"
+  [pageSizeOptions]="[10, 25, 50, 100]"
+  showFirstLastButtons
+/>

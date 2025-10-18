@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,7 +16,7 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
   selector: 'app-opening',
   templateUrl: './opening.component.html',
   styleUrls: ['./opening.component.scss'],
-  imports: [DateWithDayNamePipe, MatButtonModule, MatCardModule, MatIconModule, NgClass],
+  imports: [DateWithDayNamePipe, MatButtonModule, MatCardModule, MatIconModule],
 })
 export class OpeningComponent {
   @Input() opening: Opening;

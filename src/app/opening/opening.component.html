@@ -1,4 +1,4 @@
-<mat-card [ngClass]="{ 'special-event': isSpecialEvent }">
+<mat-card>
   <mat-card-header>
     <mat-card-title> {{ opening.date | dateWithDayName }} </mat-card-title>
     @if (!isAfterCutoff && !isSpecialEvent) {
@@ -6,25 +6,20 @@
     }
   </mat-card-header>
   <mat-card-content>
-    <p class="mat-body">{{ description1 }}</p>
-    <p class="mat-body">{{ description2 }}</p>
+    <p>{{ description1 }}</p>
+    <p>{{ description2 }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
     @if (canManageOpenings) {
-      <button mat-raised-button color="primary" (click)="manage()">Gestisci</button>
+      <button matButton="tonal" (click)="manage()">Gestisci</button>
     }
     @if (!isLoggedUserAlreadyReserved && !isSpecialEvent) {
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="spaceFull || isSpecialEvent || !isReservable"
-        (click)="insertReservation()"
-      >
+      <button matButton="tonal" [disabled]="spaceFull || isSpecialEvent || !isReservable" (click)="insertReservation()">
         Prenotati
       </button>
     }
     @if (isLoggedUserAlreadyReserved) {
-      <button mat-raised-button color="primary" (click)="removeReservation()">Annulla prenotazione</button>
+      <button matButton="tonal" (click)="removeReservation()">Annulla prenotazione</button>
     }
   </mat-card-actions>
 </mat-card>

@@ -1,9 +1,9 @@
 <h1 mat-dialog-title>Attenzione</h1>
 <mat-dialog-content>
-  <p class="mat-body">{{ confirmAction }}</p>
-  <p class="mat-body">{{ confirmDetail }}</p>
+  <p>{{ confirmAction }}</p>
+  <p>{{ confirmDetail }}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" tabindex="-1" (click)="ok()">Ok</button>
-  <button mat-raised-button color="primary" tabindex="-1" (click)="close()">Annulla</button>
+  <button matButton="tonal" tabindex="-1" (click)="ok()">Ok</button>
+  <button matButton="tonal" tabindex="-1" (click)="close()">Annulla</button>
 </mat-dialog-actions>

@@ -11,7 +11,7 @@
     <mat-card-content>
       @for (rule of rules; track rule.id) {
         @if (rule.parentOrder === null) {
-          <p class="mat-body">
+          <p>
             <strong>{{ rule.order }}</strong> - {{ rule.content }}
           </p>
         } @else {
@@ -23,13 +23,7 @@
     </mat-card-content>
 
     <mat-card-footer>
-      <a
-        mat-raised-button
-        color="primary"
-        href="assets/regolamento.pdf"
-        target="_blank"
-        download="ClimbersSoul-Regolamento.pdf"
-      >
+      <a matButton="tonal" href="assets/regolamento.pdf" target="_blank" download="ClimbersSoul-Regolamento.pdf">
         <mat-icon fontIcon="download" /> Scarica regolamento
       </a>
     </mat-card-footer>

@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z6 navbar" color="primary">
+<mat-toolbar class="mat-elevation-z6 navbar">
   <div class="flex-hide-gt-sm">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon fontIcon="menu" />
@@ -8,24 +8,24 @@
   <a class="brand" routerLink="/home">Climber's Soul CAI Arosio</a>
 
   <div class="flex-hide-lt-sm">
-    <button mat-button routerLink="/home" routerLinkActive="active">
+    <button matButton routerLink="/home" routerLinkActive="active">
       <mat-icon fontIcon="home" />
       <span>Home</span>
     </button>
-    <button mat-button routerLink="/scheduler" routerLinkActive="active">
+    <button matButton routerLink="/scheduler" routerLinkActive="active">
       <mat-icon fontIcon="calendar_month" />
       <span>Calendario</span>
     </button>
-    <button mat-button routerLink="/rules" routerLinkActive="active">
+    <button matButton routerLink="/rules" routerLinkActive="active">
       <mat-icon fontIcon="rule" />
       <span>Regolamento</span>
     </button>
-    <button mat-button routerLink="/about" routerLinkActive="active">
+    <button matButton routerLink="/about" routerLinkActive="active">
       <mat-icon fontIcon="info" />
       <span>Informazioni</span>
     </button>
     @if (canManageUsers) {
-      <button mat-button routerLink="/users" routerLinkActive="active">
+      <button matButton routerLink="/users" routerLinkActive="active">
         <mat-icon fontIcon="person" />
         <span>Utenti</span>
       </button>
@@ -37,21 +37,20 @@
   <span class="flex-hide-lt-sm">{{ firstname }}</span>
 
   @if (username === null) {
-    <button mat-button (click)="login()">Login</button>
+    <button matButton (click)="login()">Login</button>
   } @else {
-    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <button matIconButton [matMenuTriggerFor]="userMenu">
       <mat-icon fontIcon="person" />
     </button>
   }
 
   <mat-menu #userMenu="matMenu">
     @if (username !== null) {
-      <mat-list>
-        <mat-list-item>
-          <span>Autenticato come</span><br /><b>{{ username }}</b>
-        </mat-list-item>
-        <mat-divider />
-      </mat-list>
+      <div mat-menu-item class="unclickable">
+        <span>Autenticato come</span><br /><b>{{ username }}</b>
+      </div>
+
+      <mat-divider />
 
       <button mat-menu-item (click)="logout()">Uscire</button>
     }

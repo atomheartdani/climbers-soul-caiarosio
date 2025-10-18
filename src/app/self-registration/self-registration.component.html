@@ -71,8 +71,7 @@
             }
 
             <button
-              mat-raised-button
-              color="primary"
+              matButton="tonal"
               [disabled]="selfRegistrationForm.invalid || isProgressing"
               (click)="save(stepper)"
             >
@@ -86,19 +85,19 @@
 
         <mat-step label="Fine" state="done">
           <h2 class="mat-h2">Finito!</h2>
-          <p class="mat-body">Il tuo account è stato creato con successo</p>
-          <p class="mat-body">
+          <p>Il tuo account è stato creato con successo</p>
+          <p>
             Potrai inserire le tue prenotazioni non appena riceverai l'email che conferma l'attivazione del tuo profilo
           </p>
-          <p class="mat-body">
+          <p>
             L'attivazione del profilo è gestita manualmente dai nostri amministratori, potrebbe passare qualche ora
             prima che ti arrivi l'email di conferma
           </p>
-          <p class="mat-body">
-            Ricordati di leggere il <a color="primary" href="./#/rules">regolamento</a> e di consegnarlo compilato la
-            prima volta che verrai a trovarci
+          <p>
+            Ricordati di leggere il <a href="./#/rules">regolamento</a> e di consegnarlo compilato la prima volta che
+            verrai a trovarci
           </p>
-          <p class="mat-body">Per qualsiasi problema non esitare a contattarci!</p>
+          <p>Per qualsiasi problema non esitare a contattarci!</p>
         </mat-step>
       </mat-stepper>
     </mat-card-content>
