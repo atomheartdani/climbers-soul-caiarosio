@@ -23,7 +23,6 @@
     "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
     "typeRoots": ["node_modules/@types"],
-    "lib": ["ES2022", "dom"],
     "paths": {
       "@app/*": ["src/app/*"],
       "@shared": ["src/app/@shared"],
