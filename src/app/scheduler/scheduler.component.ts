@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -28,8 +28,8 @@ import { finalize } from 'rxjs';
   ],
 })
 export class SchedulerComponent implements OnInit {
-  openingsMap: Map<string, Opening[]> = new Map();
-  isLoading: boolean = true;
+  openingsMap = signal<Map<string, Opening[]>>(new Map());
+  isLoading = signal<boolean>(true);
   loadAll: boolean = false;
 
   constructor(
@@ -65,23 +65,31 @@ export class SchedulerComponent implements OnInit {
   }
 
   refresh(): void {
-    this.isLoading = true;
-    this.openingsMap = new Map();
+    this.isLoading.set(true);
 
     this.openingService
       .getNextOpenings(this.loadAll)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe((result) => {
+        const newMap = new Map<string, Opening[]>();
+
         result.forEach((o) => {
           const group = o.date.substring(0, 7);
-          if (this.openingsMap.has(group)) {
-            const old = this.openingsMap.get(group)!;
+
+          const openings = newMap.get(group) ?? [];
+          openings.push(o);
+
+          newMap.set(group, openings);
+
+          /*if (this.openingsMap().has(group)) {
+            const old = this.openingsMap().get(group)!;
             old.push(o);
-            this.openingsMap.set(group, old);
+            this.openingsMap().set(group, old);
           } else {
-            this.openingsMap.set(group, [o]);
-          }
+            this.openingsMap().set(group, [o]);
+          }*/
         });
+        this.openingsMap.set(newMap);
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ const passwordMinLength: number = 12;
 })
 export class UpdatePasswordComponent {
   form: FormGroup;
-  isLoading = false;
+  isLoading = signal<boolean>(false);
 
   constructor(
     private router: Router,
@@ -54,7 +54,7 @@ export class UpdatePasswordComponent {
   }
 
   updatePassword() {
-    this.isLoading = true;
+    this.isLoading.set(true);
     const ctrls = this.form.controls;
     const credentials: Credentials = JSON.parse(sessionStorage.getItem('climbers-soul-caiarosio-temp-credentials')!);
     const remember: boolean = sessionStorage.getItem('climbers-soul-caiarosio-temp-remember')! == 'true';
@@ -63,7 +63,7 @@ export class UpdatePasswordComponent {
       .pipe(
         finalize(() => {
           this.form.markAsPristine();
-          this.isLoading = false;
+          this.isLoading.set(false);
         }),
       )
       .subscribe({

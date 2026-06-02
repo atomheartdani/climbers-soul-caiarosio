@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -37,7 +37,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   readonly TIME_PATTERN: string = '([01]?[0-9]|2[0-3]):[0-5][0-9]';
 
   detailForm: FormGroup;
-  isProgressing: boolean = false;
+  isProgressing = signal<boolean>(false);
   opening: Opening;
   userList: User[] = [];
 
@@ -88,7 +88,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   }
 
   delete(): void {
-    this.isProgressing = true;
+    this.isProgressing.set(true);
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
       const action = "Stai per cancellare l'apertura del " + this.opening.date;
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -96,7 +96,7 @@ export class OpeningDetailDialogComponent implements OnInit {
       });
       dialogRef
         .afterClosed()
-        .pipe(finalize(() => (this.isProgressing = false)))
+        .pipe(finalize(() => this.isProgressing.set(false)))
         .subscribe((result) => {
           if (result === 0) {
             this.openingService.delete(this.opening.id).subscribe({
@@ -115,7 +115,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   }
 
   save(): void {
-    this.isProgressing = true;
+    this.isProgressing.set(true);
     const ctrls = this.detailForm.controls;
     const toSave: Opening = {
       id: this.opening.id,
@@ -129,7 +129,7 @@ export class OpeningDetailDialogComponent implements OnInit {
 
     this.openingService
       .saveOpening(toSave)
-      .pipe(finalize(() => (this.isProgressing = false)))
+      .pipe(finalize(() => this.isProgressing.set(false)))
       .subscribe({
         next: () => {
           this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });

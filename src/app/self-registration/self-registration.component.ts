@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -32,8 +32,7 @@ const passwordMinLength: number = 12;
 })
 export class SelfRegistrationComponent implements OnInit {
   selfRegistrationForm: FormGroup;
-  isProgressing: boolean = false;
-  showSectionHint: boolean = false;
+  isProgressing = signal(false);
 
   constructor(
     private usernameValidator: UsernameValidator,
@@ -83,7 +82,7 @@ export class SelfRegistrationComponent implements OnInit {
   }
 
   save(stepper: MatStepper): void {
-    this.isProgressing = true;
+    this.isProgressing.set(true);
     const ctrls = this.selfRegistrationForm.controls;
     const toSave: UserRegistration = {
       username: ctrls['username'].value,
@@ -96,7 +95,7 @@ export class SelfRegistrationComponent implements OnInit {
 
     this.userService
       .registerUser(toSave)
-      .pipe(finalize(() => (this.isProgressing = false)))
+      .pipe(finalize(() => this.isProgressing.set(false)))
       .subscribe({
         next: () => {
           this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });

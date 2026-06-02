@@ -1,24 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { Rule } from '@app/@shared/models/rule.model';
 import { RuleService } from '@app/@shared/services/rule.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rules',
   templateUrl: './rules.component.html',
   styleUrls: ['./rules.component.scss'],
-  imports: [MatCardModule, MatAnchor, MatIcon],
+  imports: [AsyncPipe, MatCardModule, MatAnchor, MatIcon],
 })
-export class RulesComponent implements OnInit {
-  rules: Rule[] = [];
+export class RulesComponent {
+  rules$!: Observable<Rule[]>;
 
-  constructor(private ruleService: RuleService) {}
-
-  ngOnInit(): void {
-    this.ruleService.getRules().subscribe((result) => {
-      this.rules = result;
-    });
+  constructor(private ruleService: RuleService) {
+    this.rules$ = this.ruleService.getRules();
   }
 }

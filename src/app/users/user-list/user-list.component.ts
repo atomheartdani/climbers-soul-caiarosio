@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, signal, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -20,7 +20,7 @@ import { UserRbacAcronymPipe } from '@app/@shared/pipes/userRbacAcronym.pipe';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { UserService } from '@app/@shared/services/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, debounceTime, distinctUntilChanged, finalize, fromEvent, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, fromEvent, Observable, tap } from 'rxjs';
 import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
 import { UsersDataSource } from '../users.datasource';
 
@@ -51,7 +51,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   @Input() event: Observable<void>;
   private filter = {};
   dataSource: UsersDataSource;
-  isLoading: boolean = false;
+  isLoading = signal<boolean>(false);
 
   adminOptions = [
     { label: 'Calendario', value: 'canManageOpenings' },
@@ -124,10 +124,10 @@ export class UserListComponent implements OnInit, AfterViewInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result === 0) {
-          this.isLoading = true;
+          this.isLoading.set(true);
           this.userService
             .delete(user.id)
-            .pipe(finalize(() => (this.isLoading = false)))
+            .pipe(finalize(() => this.isLoading.set(false)))
             .subscribe({
               next: () => {
                 this.snackBar.open("Cancellazione dell'utente completata", 'Chiudi', { duration: 2000 });

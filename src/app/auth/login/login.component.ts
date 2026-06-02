@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderComponent } from '@app/@shared/loader/loader.component';
+import { Credentials } from '@app/@shared/models/credentials.model';
 import { AuthenticationService } from '@app/@shared/services/authentication.service';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { finalize } from 'rxjs/operators';
@@ -27,9 +28,9 @@ import { finalize } from 'rxjs/operators';
   ],
 })
 export class LoginComponent {
-  error: string | undefined;
   form!: FormGroup;
-  isLoading = false;
+  hasError = signal<boolean>(false);
+  isLoading = signal<boolean>(false);
 
   constructor(
     private router: Router,
@@ -42,42 +43,49 @@ export class LoginComponent {
   }
 
   login() {
-    this.isLoading = true;
-    const login$ = this.authenticationService.login(this.form.value);
-    login$
+    this.isLoading.set(true);
+
+    this.authenticationService
+      .login(this.form.value)
       .pipe(
         finalize(() => {
           this.form.markAsPristine();
-          this.isLoading = false;
+          this.isLoading.set(false);
         }),
       )
       .subscribe({
         next: (credentials) => {
-          console.debug(`${credentials.username} successfully logged in`);
-          const redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
-          const remember = this.form.controls['remember'].value;
-          if (credentials.updatePassword) {
-            sessionStorage.setItem('climbers-soul-caiarosio-temp-credentials', JSON.stringify(credentials));
-            sessionStorage.setItem('climbers-soul-caiarosio-temp-remember', remember);
-            this.router.navigate(['/updatePassword'], { queryParams: { redirect: redirectUrl }, replaceUrl: true });
-          } else {
-            this.credentialsService.setCredentials(credentials, remember);
-            this.router.navigate([redirectUrl], { replaceUrl: true });
-          }
+          this.redirect(credentials);
         },
-        error: (e) => {
-          console.debug(`Login error: ${e}`, e);
-          this.error = e;
+        error: () => {
+          this.hasError.set(true);
         },
       });
   }
 
   private createForm() {
     const remember = this.credentialsService.isRemeberActive();
+
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       remember: remember,
     });
+  }
+
+  private redirect(credentials: Credentials) {
+    const redirectUrl: string = this.route.snapshot.queryParams['redirect'] || '/';
+    const remember = this.form.controls['remember'].value;
+
+    if (credentials.updatePassword) {
+      sessionStorage.setItem('climbers-soul-caiarosio-temp-credentials', JSON.stringify(credentials));
+      sessionStorage.setItem('climbers-soul-caiarosio-temp-remember', remember);
+
+      this.router.navigate(['/updatePassword'], { queryParams: { redirect: redirectUrl }, replaceUrl: true });
+    } else {
+      this.credentialsService.setCredentials(credentials, remember);
+
+      this.router.navigate([redirectUrl], { replaceUrl: true });
+    }
   }
 }

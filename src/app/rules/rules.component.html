@@ -9,7 +9,7 @@
     </mat-card-header>
 
     <mat-card-content>
-      @for (rule of rules; track rule.id) {
+      @for (rule of rules$ | async; track rule.id) {
         @if (rule.parentOrder === null) {
           <p>
             <strong>{{ rule.order }}</strong> - {{ rule.content }}

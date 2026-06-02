@@ -72,11 +72,11 @@
 
             <button
               matButton="tonal"
-              [disabled]="selfRegistrationForm.invalid || isProgressing"
+              [disabled]="selfRegistrationForm.invalid || isProgressing()"
               (click)="save(stepper)"
             >
               Avanti
-              @if (isProgressing) {
+              @if (isProgressing()) {
                 <mat-icon class="icon-spin" fontIcon="refresh" />
               }
             </button>

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,7 @@ import { finalize } from 'rxjs';
   imports: [MatButtonModule, MatDialogModule, MatIconModule],
 })
 export class DeleteReservationDialogComponent {
-  isProgressing: boolean = false;
+  isProgressing = signal<boolean>(false);
   opening: Opening;
   userId: number;
 
@@ -34,7 +34,7 @@ export class DeleteReservationDialogComponent {
   }
 
   save(): void {
-    this.isProgressing = true;
+    this.isProgressing.set(true);
     const toSave: Reservation = {
       id: 0,
       openingId: this.opening.id,
@@ -44,7 +44,7 @@ export class DeleteReservationDialogComponent {
 
     this.reservationService
       .deleteReservation(toSave)
-      .pipe(finalize(() => (this.isProgressing = false)))
+      .pipe(finalize(() => this.isProgressing.set(false)))
       .subscribe({
         next: () => {
           this.snackBar.open('Prenotazione cancellata', 'Chiudi', { duration: 2000 });

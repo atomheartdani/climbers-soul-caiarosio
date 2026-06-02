@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ import { finalize } from 'rxjs';
 })
 export class InsertReservationDialogComponent {
   reservePartner: boolean = false;
-  isProgressing: boolean = false;
+  isProgressing = signal(false);
   opening: Opening;
   userId: number;
 
@@ -37,7 +37,7 @@ export class InsertReservationDialogComponent {
   }
 
   save(): void {
-    this.isProgressing = true;
+    this.isProgressing.set(true);
     const toSave: Reservation = {
       id: 0,
       openingId: this.opening.id,
@@ -47,7 +47,7 @@ export class InsertReservationDialogComponent {
 
     this.reservationService
       .saveReservation(toSave)
-      .pipe(finalize(() => (this.isProgressing = false)))
+      .pipe(finalize(() => this.isProgressing.set(false)))
       .subscribe({
         next: () => {
           this.snackBar.open('Salvataggio completato', 'Chiudi', { duration: 2000 });
