@@ -2,7 +2,7 @@
 
 This is the frontend code for [CAI Arosio](https://www.caiarosio.it/)'s climbing gym "[Climber's Soul](https://caiarosio.it/climberssoul/)"
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.2.x
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.x and is now on version 21.x
 
 # Getting started
 
