@@ -4,7 +4,6 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, RouteReuseStrategy, withHashLocation } from '@angular/router';
 import { ApiPrefixInterceptor } from './@shared/http/api-prefix.interceptor';
 import { AuthExpiredInterceptor } from './@shared/http/auth-expired.interceptor';
@@ -31,7 +30,6 @@ export const CUSTOM_DATE_FORMATS = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes, withHashLocation()),
     provideZonelessChangeDetection(),
