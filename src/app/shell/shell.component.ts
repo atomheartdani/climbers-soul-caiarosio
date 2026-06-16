@@ -1,36 +1,36 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './header/header.component';
 
-@UntilDestroy()
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
   imports: [HeaderComponent, MatDividerModule, MatListModule, MatSidenavModule, RouterModule],
 })
-export class ShellComponent implements OnInit {
+export class ShellComponent {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
   constructor(
     private breakpoint: BreakpointObserver,
     private credentialsService: CredentialsService,
-  ) {}
+  ) {
+    this.toggleSidenavListener();
+  }
 
-  ngOnInit() {
-    // Automatically close side menu on screens > small breakpoint
+  private toggleSidenavListener() {
     this.breakpoint
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .pipe(
         filter(({ matches }) => !matches),
-        untilDestroyed(this),
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         if (this.sidenav) {

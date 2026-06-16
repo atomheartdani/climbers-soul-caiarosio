@@ -1,5 +1,16 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  Input,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -19,12 +30,10 @@ import { User } from '@app/@shared/models/user.model';
 import { UserRbacAcronymPipe } from '@app/@shared/pipes/userRbacAcronym.pipe';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { UserService } from '@app/@shared/services/user.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, distinctUntilChanged, finalize, fromEvent, Observable, tap } from 'rxjs';
 import { UserDetailDialogComponent } from '../user-detail-dialog/user-detail-dialog.component';
 import { UsersDataSource } from '../users.datasource';
 
-@UntilDestroy()
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -65,6 +74,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
   @ViewChild('filterEmail') filterEmail: ElementRef;
   filterAdmin: FormControl = new FormControl();
 
+  private destroyRef = inject(DestroyRef);
+
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -78,7 +89,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.filter = { isVerified: this.isVerified };
     this.dataSource = new UsersDataSource(this.userService);
-    this.event.pipe(untilDestroyed(this)).subscribe(() => this.refresh());
+    this.event.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.refresh());
     this.refresh();
   }
 
