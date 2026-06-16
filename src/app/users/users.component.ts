@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,16 +16,14 @@ import { UserListComponent } from './user-list/user-list.component';
   imports: [MatButtonModule, MatIconModule, UserListComponent],
 })
 export class UsersComponent {
+  private dialog = inject(MatDialog);
+  private authGuard = inject(AuthenticationGuard);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   usersColumns = ['username', 'firstname', 'lastname', 'email', 'tosConsent', 'admin', 'actions'];
   usersToVerifyColumns = ['username', 'firstname', 'lastname', 'email', 'actions'];
   refreshSubject: Subject<void> = new Subject<void>();
-
-  constructor(
-    private dialog: MatDialog,
-    private authGuard: AuthenticationGuard,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {}
 
   create(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {

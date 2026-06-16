@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -31,18 +31,18 @@ const passwordMinLength: number = 12;
   ],
 })
 export class SelfRegistrationComponent implements OnInit {
+  private usernameValidator = inject(UsernameValidator);
+  private userService = inject(UserService);
+  private fb = inject(FormBuilder);
+  private snackBar = inject(MatSnackBar);
+
   selfRegistrationForm: FormGroup;
   isProgressing = signal(false);
 
-  constructor(
-    private usernameValidator: UsernameValidator,
-    private userService: UserService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-  ) {
-    this.selfRegistrationForm = fb.group(
+  constructor() {
+    this.selfRegistrationForm = this.fb.group(
       {
-        username: ['', [Validators.required], [usernameValidator]],
+        username: ['', [Validators.required], [this.usernameValidator]],
         firstname: ['', [Validators.required]],
         lastname: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],

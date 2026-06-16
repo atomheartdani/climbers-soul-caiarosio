@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -29,22 +29,22 @@ import { debounceTime, finalize } from 'rxjs';
   ],
 })
 export class UserDetailDialogComponent implements OnInit {
+  private credentialsService = inject(CredentialsService);
+  private usernameValidator = inject(UsernameValidator);
+  private userService = inject(UserService);
+  private fb = inject(FormBuilder);
+  private snackBar = inject(MatSnackBar);
+  private dialogRef = inject<MatDialogRef<UserDetailDialogComponent>>(MatDialogRef);
+  private data = inject<User>(MAT_DIALOG_DATA);
+
   detailForm: FormGroup;
   isProgressing: boolean = false;
   user: User;
 
-  constructor(
-    private credentialsService: CredentialsService,
-    private usernameValidator: UsernameValidator,
-    private userService: UserService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<UserDetailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: User,
-  ) {
-    this.user = data;
-    this.detailForm = fb.group({
-      username: [this.data.username, [Validators.required], [usernameValidator]],
+  constructor() {
+    this.user = this.data;
+    this.detailForm = this.fb.group({
+      username: [this.data.username, [Validators.required], [this.usernameValidator]],
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],

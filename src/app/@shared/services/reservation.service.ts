@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reservation } from '../models/reservation.model';
 
@@ -7,7 +7,7 @@ import { Reservation } from '../models/reservation.model';
   providedIn: 'root',
 })
 export class ReservationService {
-  constructor(private httpClient: HttpClient) {}
+  private httpClient = inject(HttpClient);
 
   deleteReservation(reservation: Reservation): Observable<void> {
     return this.httpClient.post<void>(`/reservations/delete.php`, reservation);

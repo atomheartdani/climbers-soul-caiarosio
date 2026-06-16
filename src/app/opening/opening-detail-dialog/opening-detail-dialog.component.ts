@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -34,6 +34,17 @@ import { finalize } from 'rxjs';
   ],
 })
 export class OpeningDetailDialogComponent implements OnInit {
+  private authGuard = inject(AuthenticationGuard);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private openingService = inject(OpeningService);
+  private userService = inject(UserService);
+  private fb = inject(FormBuilder);
+  private snackBar = inject(MatSnackBar);
+  private dialogRef = inject<MatDialogRef<OpeningDetailDialogComponent>>(MatDialogRef);
+  private data = inject<Opening>(MAT_DIALOG_DATA);
+
   readonly TIME_PATTERN: string = '([01]?[0-9]|2[0-3]):[0-5][0-9]';
 
   detailForm: FormGroup;
@@ -41,20 +52,9 @@ export class OpeningDetailDialogComponent implements OnInit {
   opening: Opening;
   userList: User[] = [];
 
-  constructor(
-    private authGuard: AuthenticationGuard,
-    private dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private openingService: OpeningService,
-    private userService: UserService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<OpeningDetailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: Opening,
-  ) {
-    this.opening = data;
-    this.detailForm = fb.group({
+  constructor() {
+    this.opening = this.data;
+    this.detailForm = this.fb.group({
       date: [this.data.date, [Validators.required]],
       from: [this.data.from, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],
       to: [this.data.to, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],

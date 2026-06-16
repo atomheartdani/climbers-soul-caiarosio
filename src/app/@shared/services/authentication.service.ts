@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { UserService } from '@app/@shared/services/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map, Observable, of } from 'rxjs';
@@ -19,12 +19,9 @@ export interface LoginContext {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  helper = new JwtHelperService();
-
-  constructor(
-    private credentialsService: CredentialsService,
-    private userService: UserService,
-  ) {}
+  private credentialsService = inject(CredentialsService);
+  private userService = inject(UserService);
+  private helper = new JwtHelperService();
 
   /**
    * Authenticates the user.

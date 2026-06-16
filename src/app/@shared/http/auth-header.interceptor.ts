@@ -1,5 +1,5 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CredentialsService } from '../services/credentials.service';
 
@@ -10,7 +10,7 @@ import { CredentialsService } from '../services/credentials.service';
   providedIn: 'root',
 })
 export class AuthHeaderInterceptor implements HttpInterceptor {
-  constructor(private credentialService: CredentialsService) {}
+  private credentialService = inject(CredentialsService);
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const creds = this.credentialService.credentials;

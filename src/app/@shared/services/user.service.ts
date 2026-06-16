@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from '../models/page.model';
 import { User, UserRegistration } from '../models/user.model';
@@ -8,7 +8,7 @@ import { User, UserRegistration } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private httpClient: HttpClient) {}
+  private httpClient = inject(HttpClient);
 
   getAll(filter: string, pageIndex: number, pageSize: number): Observable<Page<User>> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

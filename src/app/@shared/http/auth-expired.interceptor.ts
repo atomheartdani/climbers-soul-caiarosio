@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -12,11 +12,9 @@ import { EMPTY, Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthExpiredInterceptor implements HttpInterceptor {
-  constructor(
-    private dialog: MatDialog,
-    private router: Router,
-    private snackBar: MatSnackBar,
-  ) {}
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(

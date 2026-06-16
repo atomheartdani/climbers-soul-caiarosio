@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rule } from '../models/rule.model';
 
@@ -7,7 +7,7 @@ import { Rule } from '../models/rule.model';
   providedIn: 'root',
 })
 export class RuleService {
-  constructor(private httpClient: HttpClient) {}
+  private httpClient = inject(HttpClient);
 
   getRules(): Observable<Rule[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

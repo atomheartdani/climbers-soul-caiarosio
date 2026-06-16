@@ -55,6 +55,14 @@ import { UsersDataSource } from '../users.datasource';
   ],
 })
 export class UserListComponent implements OnInit, AfterViewInit {
+  private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+  private authGuard = inject(AuthenticationGuard);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private credentialsService = inject(CredentialsService);
+  private userService = inject(UserService);
+
   @Input() columns = {};
   @Input() isVerified: boolean;
   @Input() event: Observable<void>;
@@ -75,16 +83,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   filterAdmin: FormControl = new FormControl();
 
   private destroyRef = inject(DestroyRef);
-
-  constructor(
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private authGuard: AuthenticationGuard,
-    private router: Router,
-    private route: ActivatedRoute,
-    private credentialsService: CredentialsService,
-    private userService: UserService,
-  ) {}
 
   ngOnInit(): void {
     this.filter = { isVerified: this.isVerified };

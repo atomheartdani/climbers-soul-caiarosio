@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -30,17 +30,17 @@ const passwordMinLength: number = 12;
   ],
 })
 export class UpdatePasswordComponent {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private formBuilder = inject(FormBuilder);
+  private snackBar = inject(MatSnackBar);
+  private userService = inject(UserService);
+  private credentialsService = inject(CredentialsService);
+
   form: FormGroup;
   isLoading = signal<boolean>(false);
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
-    private userService: UserService,
-    private credentialsService: CredentialsService,
-  ) {
+  constructor() {
     this.form = this.formBuilder.group(
       {
         oldPassword: ['', Validators.required],

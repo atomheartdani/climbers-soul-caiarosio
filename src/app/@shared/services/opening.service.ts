@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Opening } from '../models/opening.model';
 
@@ -7,7 +7,7 @@ import { Opening } from '../models/opening.model';
   providedIn: 'root',
 })
 export class OpeningService {
-  constructor(private httpClient: HttpClient) {}
+  private httpClient = inject(HttpClient);
 
   getNextOpenings(loadAll: boolean): Observable<Opening[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,16 +19,14 @@ import { OpeningDetailDialogComponent } from './opening-detail-dialog/opening-de
   imports: [DateWithDayNamePipe, MatButtonModule, MatCardModule, MatIconModule],
 })
 export class OpeningComponent {
+  private dialog = inject(MatDialog);
+  private authGuard = inject(AuthenticationGuard);
+  private credentialsService = inject(CredentialsService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   @Input() opening: Opening;
   @Output() refreshEvent: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(
-    private dialog: MatDialog,
-    private authGuard: AuthenticationGuard,
-    private credentialsService: CredentialsService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {}
 
   insertReservation(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {

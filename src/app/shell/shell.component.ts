@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
@@ -16,12 +16,12 @@ import { HeaderComponent } from './header/header.component';
   imports: [HeaderComponent, MatDividerModule, MatListModule, MatSidenavModule, RouterModule],
 })
 export class ShellComponent {
+  private breakpoint = inject(BreakpointObserver);
+  private credentialsService = inject(CredentialsService);
+
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(
-    private breakpoint: BreakpointObserver,
-    private credentialsService: CredentialsService,
-  ) {
+  constructor() {
     this.toggleSidenavListener();
   }
 

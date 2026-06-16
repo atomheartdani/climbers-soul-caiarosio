@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,17 +28,15 @@ import { CredentialsService } from '@app/@shared/services/credentials.service';
   ],
 })
 export class HeaderComponent {
-  @Input() sidenav!: MatSidenav;
+  private router = inject(Router);
+  private titleService = inject(Title);
+  private authenticationService = inject(AuthenticationService);
+  private credentialsService = inject(CredentialsService);
+  private authGuard = inject(AuthenticationGuard);
+  private route = inject(ActivatedRoute);
+  private snackBar = inject(MatSnackBar);
 
-  constructor(
-    private router: Router,
-    private titleService: Title,
-    private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService,
-    private authGuard: AuthenticationGuard,
-    private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-  ) {}
+  @Input() sidenav!: MatSidenav;
 
   login() {
     this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot);

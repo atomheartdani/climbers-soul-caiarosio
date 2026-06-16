@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -28,15 +28,13 @@ import { finalize } from 'rxjs';
   ],
 })
 export class SchedulerComponent implements OnInit {
+  private dialog = inject(MatDialog);
+  private openingService = inject(OpeningService);
+  private credentialsService = inject(CredentialsService);
+
   openingsMap = signal<Map<string, Opening[]>>(new Map());
   isLoading = signal<boolean>(true);
   loadAll: boolean = false;
-
-  constructor(
-    private dialog: MatDialog,
-    private openingService: OpeningService,
-    private credentialsService: CredentialsService,
-  ) {}
 
   ngOnInit(): void {
     this.refresh();

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -14,9 +14,11 @@ import { Observable } from 'rxjs';
   imports: [AsyncPipe, MatCardModule, MatAnchor, MatIcon],
 })
 export class RulesComponent {
+  private ruleService = inject(RuleService);
+
   rules$!: Observable<Rule[]>;
 
-  constructor(private ruleService: RuleService) {
+  constructor() {
     this.rules$ = this.ruleService.getRules();
   }
 }

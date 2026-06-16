@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -28,17 +28,17 @@ import { finalize } from 'rxjs/operators';
   ],
 })
 export class LoginComponent {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private formBuilder = inject(FormBuilder);
+  private authenticationService = inject(AuthenticationService);
+  private credentialsService = inject(CredentialsService);
+
   form!: FormGroup;
   hasError = signal<boolean>(false);
   isLoading = signal<boolean>(false);
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService,
-  ) {
+  constructor() {
     this.createForm();
   }
 

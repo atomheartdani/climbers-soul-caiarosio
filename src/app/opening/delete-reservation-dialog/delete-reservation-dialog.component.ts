@@ -1,4 +1,4 @@
-import { Component, Inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,18 +15,18 @@ import { finalize } from 'rxjs';
   imports: [MatButtonModule, MatDialogModule, MatIconModule],
 })
 export class DeleteReservationDialogComponent {
+  private reservationService = inject(ReservationService);
+  private snackBar = inject(MatSnackBar);
+  private dialogRef = inject<MatDialogRef<DeleteReservationDialogComponent>>(MatDialogRef);
+  private data = inject<{ opening: Opening; userId: number }>(MAT_DIALOG_DATA);
+
   isProgressing = signal<boolean>(false);
   opening: Opening;
   userId: number;
 
-  constructor(
-    private reservationService: ReservationService,
-    private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<DeleteReservationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { opening: Opening; userId: number },
-  ) {
-    this.opening = data.opening;
-    this.userId = data.userId;
+  constructor() {
+    this.opening = this.data.opening;
+    this.userId = this.data.userId;
   }
 
   close(): void {
