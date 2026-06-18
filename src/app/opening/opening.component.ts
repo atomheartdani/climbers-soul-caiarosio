@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { Opening } from '@app/@shared/models/opening.model';
+import { ReservationAction } from '@app/@shared/models/reservation.model';
 import { DateWithDayNamePipe } from '@app/@shared/pipes/dateWithDayName.pipe';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { DeleteReservationDialogComponent } from './delete-reservation-dialog/delete-reservation-dialog.component';
@@ -30,10 +31,14 @@ export class OpeningComponent {
 
   insertReservation(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
-      const dialogRef = this.dialog.open(InsertReservationDialogComponent, {
-        data: { opening: this.opening, userId: this.credentialsService.credentials?.id },
-      });
-      dialogRef.afterClosed().subscribe((result) => {
+      const data = {
+        opening: this.opening,
+        userId: this.credentialsService.credentials!.id,
+      } satisfies ReservationAction;
+
+      const dialogRef = this.dialog.open(InsertReservationDialogComponent, { data });
+
+      dialogRef.afterClosed().subscribe(() => {
         this.refreshEvent.emit('refresh');
       });
     }
@@ -41,10 +46,14 @@ export class OpeningComponent {
 
   removeReservation(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
-      const dialogRef = this.dialog.open(DeleteReservationDialogComponent, {
-        data: { opening: this.opening, userId: this.credentialsService.credentials?.id },
-      });
-      dialogRef.afterClosed().subscribe((result) => {
+      const data = {
+        opening: this.opening,
+        userId: this.credentialsService.credentials!.id,
+      } satisfies ReservationAction;
+
+      const dialogRef = this.dialog.open(DeleteReservationDialogComponent, { data });
+
+      dialogRef.afterClosed().subscribe(() => {
         this.refreshEvent.emit('refresh');
       });
     }
@@ -53,7 +62,7 @@ export class OpeningComponent {
   manage(): void {
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
       const dialogRef = this.dialog.open(OpeningDetailDialogComponent, { data: this.opening });
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogRef.afterClosed().subscribe(() => {
         this.refreshEvent.emit('refresh');
       });
     }

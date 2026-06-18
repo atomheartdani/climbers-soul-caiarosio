@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Opening } from '@app/@shared/models/opening.model';
-import { Reservation } from '@app/@shared/models/reservation.model';
+import { Reservation, ReservationAction } from '@app/@shared/models/reservation.model';
 import { ReservationService } from '@app/@shared/services/reservation.service';
 import { finalize } from 'rxjs';
 
@@ -18,16 +18,9 @@ export class DeleteReservationDialogComponent {
   private reservationService = inject(ReservationService);
   private snackBar = inject(MatSnackBar);
   private dialogRef = inject<MatDialogRef<DeleteReservationDialogComponent>>(MatDialogRef);
-  private data = inject<{ opening: Opening; userId: number }>(MAT_DIALOG_DATA);
+  private data = inject<ReservationAction>(MAT_DIALOG_DATA);
 
   isProgressing = signal<boolean>(false);
-  opening: Opening;
-  userId: number;
-
-  constructor() {
-    this.opening = this.data.opening;
-    this.userId = this.data.userId;
-  }
 
   close(): void {
     this.dialogRef.close(1);
@@ -37,8 +30,8 @@ export class DeleteReservationDialogComponent {
     this.isProgressing.set(true);
     const toSave: Reservation = {
       id: 0,
-      openingId: this.opening.id,
-      userId: this.userId,
+      openingId: this.data.opening.id,
+      userId: this.data.userId,
       reservePartner: false,
     };
 
@@ -55,5 +48,9 @@ export class DeleteReservationDialogComponent {
           this.snackBar.open(error, 'Chiudi', { duration: 10000 });
         },
       });
+  }
+
+  get opening(): Opening {
+    return this.data.opening;
   }
 }
