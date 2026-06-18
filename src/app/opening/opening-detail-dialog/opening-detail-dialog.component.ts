@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@app/@shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmData } from '@app/@shared/confirm-dialog/confirm-dialog.model';
 import { AuthenticationGuard } from '@app/@shared/guards/authentication.guard';
 import { Opening } from '@app/@shared/models/opening.model';
 import { User } from '@app/@shared/models/user.model';
@@ -90,10 +91,13 @@ export class OpeningDetailDialogComponent implements OnInit {
   delete(): void {
     this.isProgressing.set(true);
     if (this.authGuard.canActivate(this.route.snapshot, this.router.routerState.snapshot)) {
-      const action = "Stai per cancellare l'apertura del " + this.opening.date;
-      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        data: { confirmAction: action, confirmDetail: 'Confermi?' },
-      });
+      const data = {
+        confirmAction: "Stai per cancellare l'apertura del " + this.opening.date,
+        confirmDetail: 'Confermi?',
+      } satisfies ConfirmData;
+
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, { data });
+
       dialogRef
         .afterClosed()
         .pipe(finalize(() => this.isProgressing.set(false)))
