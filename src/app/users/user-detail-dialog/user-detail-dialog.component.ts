@@ -32,7 +32,7 @@ export class UserDetailDialogComponent implements OnInit {
   private credentialsService = inject(CredentialsService);
   private usernameValidator = inject(UsernameValidator);
   private userService = inject(UserService);
-  private fb = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
   private dialogRef = inject<MatDialogRef<UserDetailDialogComponent>>(MatDialogRef);
   private data = inject<User>(MAT_DIALOG_DATA);
@@ -43,7 +43,7 @@ export class UserDetailDialogComponent implements OnInit {
 
   constructor() {
     this.user = this.data;
-    this.detailForm = this.fb.group({
+    this.detailForm = this.formBuilder.group({
       username: [this.data.username, [Validators.required], [this.usernameValidator]],
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],

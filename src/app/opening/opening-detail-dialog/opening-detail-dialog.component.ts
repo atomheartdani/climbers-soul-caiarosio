@@ -41,7 +41,7 @@ export class OpeningDetailDialogComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private openingService = inject(OpeningService);
   private userService = inject(UserService);
-  private fb = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
   private dialogRef = inject<MatDialogRef<OpeningDetailDialogComponent>>(MatDialogRef);
   private data = inject<Opening>(MAT_DIALOG_DATA);
@@ -55,7 +55,7 @@ export class OpeningDetailDialogComponent implements OnInit {
 
   constructor() {
     this.opening = this.data;
-    this.detailForm = this.fb.group({
+    this.detailForm = this.formBuilder.group({
       date: [this.data.date, [Validators.required]],
       from: [this.data.from, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],
       to: [this.data.to, [Validators.required, Validators.pattern(this.TIME_PATTERN)]],

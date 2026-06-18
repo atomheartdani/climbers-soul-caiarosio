@@ -48,7 +48,7 @@ export class UpdatePasswordComponent {
         newPassword2: ['', [Validators.required, Validators.minLength(passwordMinLength)]],
       },
       {
-        validator: UpdatePasswordValidator.matchNewPasswords,
+        validators: UpdatePasswordValidator.matchNewPasswords,
       },
     );
   }

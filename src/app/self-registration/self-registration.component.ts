@@ -33,14 +33,14 @@ const passwordMinLength: number = 12;
 export class SelfRegistrationComponent implements OnInit {
   private usernameValidator = inject(UsernameValidator);
   private userService = inject(UserService);
-  private fb = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
 
   selfRegistrationForm: FormGroup;
   isProgressing = signal(false);
 
   constructor() {
-    this.selfRegistrationForm = this.fb.group(
+    this.selfRegistrationForm = this.formBuilder.group(
       {
         username: ['', [Validators.required], [this.usernameValidator]],
         firstname: ['', [Validators.required]],
@@ -51,7 +51,7 @@ export class SelfRegistrationComponent implements OnInit {
         newPassword2: ['', [Validators.required, Validators.minLength(passwordMinLength)]],
       },
       {
-        validator: UpdatePasswordValidator.matchNewPasswords,
+        validators: UpdatePasswordValidator.matchNewPasswords,
       },
     );
   }
