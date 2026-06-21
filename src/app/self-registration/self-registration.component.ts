@@ -9,8 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { UserRegistration } from '@app/@shared/models/user.model';
 import { UserService } from '@app/@shared/services/user.service';
-import { UpdatePasswordValidator } from '@app/@shared/validators/update-password.validator';
-import { UsernameValidator } from '@app/@shared/validators/username.validator';
+import { matchNewPasswordsValidator } from '@app/@shared/validators/update-password.validator';
+import { usernameValidator } from '@app/@shared/validators/username.validator';
 import { debounceTime, finalize } from 'rxjs';
 
 const passwordMinLength: number = 12;
@@ -31,7 +31,6 @@ const passwordMinLength: number = 12;
   ],
 })
 export class SelfRegistrationComponent implements OnInit {
-  private usernameValidator = inject(UsernameValidator);
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
@@ -42,7 +41,7 @@ export class SelfRegistrationComponent implements OnInit {
   constructor() {
     this.selfRegistrationForm = this.formBuilder.group(
       {
-        username: ['', [Validators.required], [this.usernameValidator]],
+        username: ['', [Validators.required], [usernameValidator()]],
         firstname: ['', [Validators.required]],
         lastname: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
@@ -51,7 +50,7 @@ export class SelfRegistrationComponent implements OnInit {
         newPassword2: ['', [Validators.required, Validators.minLength(passwordMinLength)]],
       },
       {
-        validators: UpdatePasswordValidator.matchNewPasswords,
+        validators: matchNewPasswordsValidator(),
       },
     );
   }

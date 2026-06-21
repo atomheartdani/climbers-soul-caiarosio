@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@app/@shared/models/user.model';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { UserService } from '@app/@shared/services/user.service';
-import { UsernameValidator } from '@app/@shared/validators/username.validator';
+import { usernameValidator } from '@app/@shared/validators/username.validator';
 import { debounceTime, finalize } from 'rxjs';
 
 @Component({
@@ -30,7 +30,6 @@ import { debounceTime, finalize } from 'rxjs';
 })
 export class UserDetailDialogComponent implements OnInit {
   private credentialsService = inject(CredentialsService);
-  private usernameValidator = inject(UsernameValidator);
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
@@ -44,7 +43,7 @@ export class UserDetailDialogComponent implements OnInit {
   constructor() {
     this.user = this.data;
     this.detailForm = this.formBuilder.group({
-      username: [this.data.username, [Validators.required], [this.usernameValidator]],
+      username: [this.data.username, [Validators.required], [usernameValidator()]],
       firstname: [this.data.firstname, [Validators.required]],
       lastname: [this.data.lastname, [Validators.required]],
       email: [this.data.email, [Validators.required, Validators.email]],

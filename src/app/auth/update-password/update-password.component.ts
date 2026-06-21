@@ -10,7 +10,7 @@ import { LoaderComponent } from '@app/@shared/loader/loader.component';
 import { Credentials } from '@app/@shared/models/credentials.model';
 import { CredentialsService } from '@app/@shared/services/credentials.service';
 import { UserService } from '@app/@shared/services/user.service';
-import { UpdatePasswordValidator } from '@app/@shared/validators/update-password.validator';
+import { matchNewPasswordsValidator } from '@app/@shared/validators/update-password.validator';
 import { finalize } from 'rxjs';
 
 const passwordMinLength: number = 12;
@@ -48,7 +48,7 @@ export class UpdatePasswordComponent {
         newPassword2: ['', [Validators.required, Validators.minLength(passwordMinLength)]],
       },
       {
-        validators: UpdatePasswordValidator.matchNewPasswords,
+        validators: matchNewPasswordsValidator(),
       },
     );
   }
