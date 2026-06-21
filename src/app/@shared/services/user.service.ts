@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from '../models/page.model';
@@ -11,25 +11,21 @@ export class UserService {
   private httpClient = inject(HttpClient);
 
   getAll(filter: string, pageIndex: number, pageSize: number): Observable<Page<User>> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
     let params = new HttpParams();
     params = params.append('filter', filter);
     params = params.append('pageIndex', pageIndex);
     params = params.append('pageSize', pageSize);
 
-    return this.httpClient.get<Page<User>>(`/users/getAll.php`, { headers, params });
+    return this.httpClient.get<Page<User>>(`/users/getAll.php`, { params });
   }
 
   getUsersFromIds(userIds: number[]): Observable<User[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
     let params = new HttpParams();
     userIds.forEach((id) => {
       params = params.append('id[]', id);
     });
 
-    return this.httpClient.get<User[]>(`/users/getAllById.php`, { headers, params });
+    return this.httpClient.get<User[]>(`/users/getAllById.php`, { params });
   }
 
   checkUsername(username: string): Observable<boolean> {
@@ -48,12 +44,10 @@ export class UserService {
   }
 
   delete(id: number) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
     let params = new HttpParams();
     params = params.append('id', id);
 
-    return this.httpClient.get<void>(`/users/delete.php`, { headers, params });
+    return this.httpClient.get<void>(`/users/delete.php`, { params });
   }
 
   login(username: string, password: string): Observable<string> {

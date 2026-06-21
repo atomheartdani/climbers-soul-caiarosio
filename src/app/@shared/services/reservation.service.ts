@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reservation } from '../models/reservation.model';
@@ -14,8 +14,7 @@ export class ReservationService {
   }
 
   getReservations(): Observable<Reservation[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.get<Reservation[]>(`/reservations/getAll.php`, { headers });
+    return this.httpClient.get<Reservation[]>(`/reservations/getAll.php`);
   }
 
   saveReservation(reservation: Reservation): Observable<void> {
