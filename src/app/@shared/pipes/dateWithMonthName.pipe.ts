@@ -2,21 +2,36 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'dateWithMonthName',
-  standalone: true,
 })
 export class DateWithMonthNamePipe implements PipeTransform {
   transform(value: string): string {
-    const ISO_STRING_REGEX = new RegExp('^\\d{4}-\\d{2}-\\d{2}$');
-    const PARTIAL_ISO_STRING_REGEX = new RegExp('^\\d{4}-\\d{2}$');
+    let year: string = '';
+    let month: string = value;
 
-    let year = '';
-    let month = value;
-    if (ISO_STRING_REGEX.test(value) || PARTIAL_ISO_STRING_REGEX.test(value)) {
-      const splitted = value.split('-');
+    if (DateWithMonthNamePipe.isValidDate(value)) {
+      const splitted: string[] = value.split('-');
       year = ' - ' + splitted[0];
       month = splitted[1];
     }
 
+    return DateWithMonthNamePipe.toMonthNameDate(year, month);
+  }
+
+  private static isValidDate(value: string): boolean {
+    // check if it's a date in the yyyy-mm-dd format
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      return true;
+    }
+
+    // check if it's a date in the yyyy-mm format
+    if (/^\d{4}-\d{2}$/.test(value)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private static toMonthNameDate(year: string, month: string): string {
     switch (month) {
       case '01': {
         return 'Gennaio' + year;

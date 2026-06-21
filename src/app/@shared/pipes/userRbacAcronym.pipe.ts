@@ -3,7 +3,6 @@ import { User } from '../models/user.model';
 
 @Pipe({
   name: 'userRbacAcronym',
-  standalone: true,
 })
 export class UserRbacAcronymPipe implements PipeTransform {
   transform(user: User): string {

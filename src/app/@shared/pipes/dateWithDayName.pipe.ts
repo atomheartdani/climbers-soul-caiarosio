@@ -2,20 +2,31 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'dateWithDayName',
-  standalone: true,
 })
 export class DateWithDayNamePipe implements PipeTransform {
   transform(value: string): string {
-    const ISO_STRING_REGEX = new RegExp('^\\d{4}-\\d{2}-\\d{2}$');
-
     let weekday: number = -1;
     let day: number = 0;
-    if (ISO_STRING_REGEX.test(value)) {
-      const date = new Date(value);
+
+    if (DateWithDayNamePipe.isValidDate(value)) {
+      const date: Date = new Date(value);
       weekday = date.getDay();
       day = date.getDate();
     }
 
+    return DateWithDayNamePipe.toDayNameDate(weekday, day, value);
+  }
+
+  private static isValidDate(value: string): boolean {
+    // check if it's a date in the yyyy-mm-dd format
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private static toDayNameDate(weekday: number, day: number, originalValue: string): string {
     switch (weekday) {
       case 0: {
         return 'Domenica ' + day;
@@ -39,7 +50,7 @@ export class DateWithDayNamePipe implements PipeTransform {
         return 'Sabato ' + day;
       }
       default: {
-        return value;
+        return originalValue;
       }
     }
   }
